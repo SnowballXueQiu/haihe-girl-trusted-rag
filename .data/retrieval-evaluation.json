@@ -1,12 +1,12 @@
 {
-  "evaluated_at": "2026-09-13T13:16:16+08:00",
+  "evaluated_at": "2026-09-13T15:13:49+08:00",
   "embedding_provider": "dashscope",
   "embedding_model": "qwen3.7-text-embedding",
   "index_metadata": {
     "embedding_provider": "dashscope",
     "embedding_model": "qwen3.7-text-embedding",
-    "chunk_count": "323",
-    "source_count": "12"
+    "chunk_count": "347",
+    "source_count": "22"
   },
   "supported_recall_at_6": 1.0,
   "refusal_accuracy": 1.0,
@@ -26,10 +26,10 @@
       "sources": [
         "official-nirenzhang",
         "official-nirenzhang",
-        "official-kite-wei",
+        "visual-vcg-clay-figurine",
+        "media-thepaper-nirenzhang",
         "paper-kite-wei",
-        "paper-nirenzhang-art",
-        "paper-nirenzhang-symbols"
+        "official-kite-wei"
       ],
       "reason": null
     },
@@ -41,9 +41,9 @@
         "official-nirenzhang",
         "official-nirenzhang",
         "paper-nirenzhang-art",
-        "paper-nirenzhang-art",
-        "paper-tianjin-three-arts",
-        "paper-nirenzhang-symbols"
+        "media-thepaper-nirenzhang",
+        "visual-vcg-clay-figurine",
+        "paper-nirenzhang-art"
       ],
       "reason": null
     },
@@ -54,10 +54,10 @@
       "sources": [
         "official-nirenzhang",
         "paper-tianjin-three-arts",
+        "media-thepaper-nirenzhang",
         "paper-nirenzhang-art",
         "paper-nirenzhang-art",
-        "official-nirenzhang",
-        "paper-tianjin-three-arts"
+        "official-nirenzhang"
       ],
       "reason": null
     },
@@ -67,11 +67,11 @@
       "sufficient": true,
       "sources": [
         "official-nirenzhang",
+        "media-thepaper-nirenzhang",
         "paper-nirenzhang-art",
         "paper-nirenzhang-art",
         "official-nirenzhang",
-        "paper-tianjin-three-arts",
-        "official-kite-wei"
+        "visual-vcg-clay-figurine"
       ],
       "reason": null
     },
@@ -83,9 +83,9 @@
         "official-nirenzhang",
         "official-nirenzhang",
         "paper-nirenzhang-art",
+        "media-thepaper-nirenzhang",
         "paper-nirenzhang-art",
-        "paper-nirenzhang-symbols",
-        "paper-tianjin-three-arts"
+        "visual-vcg-clay-figurine"
       ],
       "reason": null
     },
@@ -95,8 +95,8 @@
       "sufficient": true,
       "sources": [
         "role-profile",
-        "role-profile",
         "role-design",
+        "role-profile",
         "role-design"
       ],
       "reason": null
@@ -146,8 +146,8 @@
         "official-nirenzhang",
         "paper-tianjin-three-arts",
         "paper-nirenzhang-art",
-        "paper-nirenzhang-art",
-        "paper-tianjin-three-arts"
+        "paper-tianjin-three-arts",
+        "paper-nirenzhang-art"
       ],
       "reason": null
     },
@@ -158,10 +158,10 @@
       "sources": [
         "official-kite-wei",
         "official-kite-wei",
+        "paper-kite-heritage-sheet",
         "paper-kite-wei",
         "paper-kite-wei",
-        "official-nirenzhang",
-        "paper-tianjin-three-arts"
+        "official-nirenzhang"
       ],
       "reason": null
     },
@@ -170,10 +170,10 @@
       "passed": true,
       "sufficient": true,
       "sources": [
+        "paper-kite-heritage-sheet",
         "paper-kite-wei",
         "official-kite-wei",
         "paper-kite-wei",
-        "paper-tianjin-three-arts",
         "official-kite-wei",
         "paper-tianjin-three-arts"
       ],
@@ -186,10 +186,10 @@
       "sources": [
         "official-kite-wei",
         "paper-kite-wei",
+        "paper-kite-heritage-sheet",
         "paper-kite-wei",
         "official-kite-wei",
-        "paper-tianjin-three-arts",
-        "paper-tianjin-three-arts"
+        "paper-kite-semiotics-2024"
       ],
       "reason": null
     },
@@ -200,10 +200,10 @@
       "sources": [
         "official-kite-wei",
         "official-kite-wei",
+        "paper-kite-heritage-sheet",
         "paper-tianjin-three-arts",
         "paper-kite-wei",
-        "paper-kite-wei",
-        "paper-vroid-design"
+        "paper-kite-wei"
       ],
       "reason": null
     },
@@ -214,9 +214,9 @@
       "sources": [
         "role-design",
         "role-profile",
+        "paper-kite-semiotics-2024",
         "paper-kite-wei",
         "role-profile",
-        "paper-kite-wei",
         "official-kite-wei"
       ],
       "reason": null
@@ -242,10 +242,10 @@
       "sources": [
         "official-kite-wei",
         "paper-kite-wei",
+        "paper-kite-heritage-sheet",
         "paper-kite-wei",
         "official-kite-wei",
-        "official-nirenzhang",
-        "paper-nirenzhang-art"
+        "paper-kite-gene-map"
       ],
       "reason": null
     },
@@ -257,9 +257,9 @@
         "official-kite-wei",
         "paper-kite-wei",
         "paper-kite-wei",
+        "paper-kite-heritage-sheet",
         "official-kite-wei",
-        "paper-nirenzhang-art",
-        "paper-tianjin-three-arts"
+        "paper-nirenzhang-art"
       ],
       "reason": null
     },
@@ -269,11 +269,11 @@
       "sufficient": true,
       "sources": [
         "official-haihe",
+        "web-zhihu-tianjin-geography",
+        "web-zhihu-tianjin-geography",
         "official-haihe",
-        "paper-tianjin-three-arts",
-        "paper-tianjin-three-arts",
-        "role-profile",
-        "official-begonia"
+        "web-baidu-haihe",
+        "paper-tianjin-three-arts"
       ],
       "reason": null
     },
@@ -283,11 +283,11 @@
       "sufficient": true,
       "sources": [
         "official-haihe",
-        "paper-tianjin-three-arts",
-        "paper-nirenzhang-art",
+        "web-zhihu-tianjin-city",
+        "official-tjrd-history",
         "official-haihe",
-        "paper-nirenzhang-art",
-        "paper-tianjin-three-arts"
+        "paper-tianjin-three-arts",
+        "paper-nirenzhang-art"
       ],
       "reason": null
     },
@@ -298,10 +298,10 @@
       "sources": [
         "official-haihe",
         "official-haihe",
-        "official-begonia",
-        "role-profile",
-        "role-profile",
-        "role-design"
+        "paper-haihe-environment",
+        "web-zhihu-tianjin-geography",
+        "web-zhihu-tianjin-city",
+        "web-baidu-haihe"
       ],
       "reason": null
     },
@@ -341,7 +341,7 @@
         "role-profile",
         "role-profile",
         "role-design",
-        "official-begonia"
+        "web-zhihu-tianjin-geography"
       ],
       "reason": null
     },
@@ -381,7 +381,7 @@
         "role-profile",
         "official-haihe",
         "role-profile",
-        "paper-tianjin-three-arts"
+        "paper-nirenzhang-art"
       ],
       "reason": null
     },
@@ -394,8 +394,8 @@
         "official-begonia",
         "role-profile",
         "role-profile",
-        "paper-nirenzhang-art",
-        "role-design"
+        "official-haihe",
+        "paper-haihe-environment"
       ],
       "reason": null
     },
@@ -433,9 +433,9 @@
         "official-begonia",
         "official-begonia",
         "official-haihe",
+        "web-zhihu-tianjin-city",
         "official-haihe",
-        "role-profile",
-        "official-kite-wei"
+        "official-tjrd-history"
       ],
       "reason": null
     },

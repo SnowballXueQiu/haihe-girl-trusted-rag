@@ -27,7 +27,7 @@ def _settings() -> Settings:
         dashscope_region="ap-southeast-1",
         dashscope_native_base_url="https://ws-test.ap-southeast-1.maas.aliyuncs.com/api/v1",
         dashscope_tts_model="qwen3-tts-flash-2025-11-27",
-        dashscope_tts_voice="Serena",
+        dashscope_tts_voice="Momo",
         dashscope_tts_language="Chinese",
     )
 
@@ -49,7 +49,7 @@ def test_workspace_http_tts_downloads_audio(monkeypatch) -> None:  # type: ignor
                 "model": "qwen3-tts-flash-2025-11-27",
                 "input": {
                     "text": "大家好，我是海河少女。",
-                    "voice": "Serena",
+                    "voice": "Momo",
                     "language_type": "Chinese",
                 },
             }

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 
 from docx import Document
@@ -22,6 +23,11 @@ def load_corpus(manifest_path: Path) -> tuple[list[SourceRecord], list[ChunkReco
         path = (project_root / item["path"]).resolve()
         if not path.exists():
             raise FileNotFoundError(f"知识源不存在: {path}")
+        extraction_path = None
+        if item.get("text_path"):
+            extraction_path = (project_root / item["text_path"]).resolve()
+            if not extraction_path.exists():
+                raise FileNotFoundError(f"审核文本不存在: {extraction_path}")
         source = SourceRecord(
             source_id=item["id"],
             title=item["title"],
@@ -34,12 +40,17 @@ def load_corpus(manifest_path: Path) -> tuple[list[SourceRecord], list[ChunkReco
             sha256=_sha256(path),
         )
         sources.append(source)
-        chunks.extend(_extract_source(source))
+        chunks.extend(_extract_source(source, extraction_path))
     return sources, chunks
 
 
-def _extract_source(source: SourceRecord) -> list[ChunkRecord]:
-    if source.source_type == "pdf":
+def _extract_source(
+    source: SourceRecord,
+    extraction_path: Path | None = None,
+) -> list[ChunkRecord]:
+    if extraction_path is not None:
+        units = _extract_markdown(extraction_path)
+    elif source.source_type == "pdf":
         units = _extract_pdf(source.path)
     elif source.source_type == "docx":
         units = _extract_docx(source.path)
@@ -103,17 +114,21 @@ def _extract_docx(path: Path) -> list[tuple[int | None, str | None, str]]:
 def _extract_markdown(path: Path) -> list[tuple[int | None, str | None, str]]:
     units: list[tuple[int | None, str | None, str]] = []
     section = "正文"
+    page: int | None = None
     buffer: list[str] = []
     for line in path.read_text(encoding="utf-8").splitlines():
         if line.startswith("#"):
             if buffer:
-                units.append((None, section, "\n".join(buffer)))
+                units.append((page, section, "\n".join(buffer)))
                 buffer = []
             section = line.lstrip("# ").strip()
+            page_match = re.fullmatch(r"第\s*(\d+)\s*页", section)
+            if page_match:
+                page = int(page_match.group(1))
         elif line.strip():
             buffer.append(line.strip())
     if buffer:
-        units.append((None, section, "\n".join(buffer)))
+        units.append((page, section, "\n".join(buffer)))
     return units
 
 

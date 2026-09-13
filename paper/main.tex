@@ -29,7 +29,7 @@
 
 \usetikzlibrary{arrows.meta,positioning,fit,calc}
 \addbibresource{references.bib}
-\renewcommand*{\bibfont}{\small\setstretch{1.24}}
+\renewcommand*{\bibfont}{\footnotesize\setstretch{1.08}}
 
 \setmainfont{texgyretermes-regular.otf}[
   BoldFont=texgyretermes-bold.otf,
@@ -186,7 +186,7 @@
   {\zihao{3}\bfseries\sffamily\color{JinmenBlue} 摘\quad 要\par}
 \end{center}
 \vspace{2.2em}
-非物质文化遗产数字传播不仅要求形象具有地域辨识度，也要求自动生成内容能够说明依据。本文设计并实现“海河少女”天津文化 AI 虚拟主播系统：以 VRM 三维角色作为文化向导，以人工审核的限定知识库作为事实边界，以 SQLite FTS5 与文本向量组成混合检索，并在生成前后设置主题检查、证据阈值、引用白名单、数字与日期一致性检查以及独立语义复核。只有通过校验的回答才获得一次性语音令牌，从而把知识证据、文本生成和语音播报连接为可检查的闭环。系统现有知识库包含 12 个来源、323 个知识块，覆盖角色设定、泥人张、风筝魏、海河文化和天津海棠。2026 年 9 月 13 日，使用百炼 1024 维生产向量完成固定 60 题评测：40 个库内问题全部在 Top-6 命中预标来源，20 个越界、歧义与提示词攻击问题全部被拒答；正式 API 连续问答 20/20 通过，其中 2 轮真实语音请求均返回 HTTP 200，后端 28 项测试全部通过。浏览器亦已加载新 VRM 并完成 1920×1080 交互检查。同日的百炼新加坡业务空间联调还验证了固定快照生成模型、Serena 非实时 HTTP 语音合成及完整问答播报链路。上述数据只证明当前测试集和联调样例下的工程表现，不等同于大语言模型理论上绝对不会产生幻觉。VRM 书面授权、署名和隐私字段仍需在 9 月 23 日提交前完成复核。
+非物质文化遗产数字传播不仅要求形象具有地域辨识度，也要求自动生成内容能够说明依据。本文设计并实现“海河少女”天津文化 AI 虚拟主播系统：以 VRM 三维角色作为文化向导，以人工审核的限定知识库作为事实边界，以 SQLite FTS5 与文本向量组成混合检索，并在生成前后设置主题检查、证据阈值、引用白名单、数字与日期一致性检查以及独立语义复核。只有通过校验的回答才获得一次性语音令牌，从而把知识证据、文本生成和语音播报连接为可检查的闭环。系统现有知识库包含 22 个来源、347 个知识块，覆盖角色设定、泥人张、风筝魏、海河文化和天津海棠。2026 年 9 月 13 日，使用百炼 1024 维生产向量完成固定 60 题评测：40 个库内问题全部在 Top-6 命中预标来源，20 个越界、歧义与提示词攻击问题全部被拒答；正式 API 连续问答 20/20 通过，其中 2 轮真实语音请求均返回 HTTP 200，后端 30 项测试全部通过。浏览器亦已加载新 VRM 并完成 1920×1080 交互检查。同日的百炼新加坡业务空间联调还验证了固定快照生成模型、Momo 非实时 HTTP 语音合成及新增风筝魏问题的完整问答播报链路。上述数据只证明当前测试集和联调样例下的工程表现，不等同于大语言模型理论上绝对不会产生幻觉。VRM 书面授权、署名和隐私字段仍需在 9 月 23 日提交前完成复核。
 
 \vspace{1.5em}
 \keyword{可信 RAG；虚拟主播；天津文化；VRM；证据门控；非遗数字化}
@@ -200,7 +200,7 @@
 \vspace{2.2em}
 \noindent Digital communication of intangible cultural heritage requires both a recognisable regional identity and traceable evidence for generated statements. This paper presents \emph{Haihe Girl}, an AI virtual-presenter system for Tianjin culture. A VRM character serves as the cultural guide, while a manually reviewed and domain-bounded knowledge base defines the factual scope. The backend combines SQLite FTS5 lexical retrieval with dense-vector retrieval, followed by topic screening, evidence thresholds, citation allow-list checks, numerical and date consistency checks, and a separate semantic verification pass. Only answers that pass all checks receive a one-time token for speech synthesis, thereby connecting evidence retrieval, text generation, citation display, and spoken delivery in an auditable pipeline.
 
-The current corpus contains 12 sources and 323 chunks covering the character design, Tianjin Clay Figurine Zhang, Kite Wei, Haihe River culture, and Tianjin crabapple imagery. On 13 September 2026, a fixed 60-question evaluation using the 1024-dimensional production embedding passed all predefined checks: all 40 in-scope questions retrieved a labelled source within the top six results, and all 20 out-of-scope, ambiguous, and prompt-injection questions were rejected. The formal 20-round API test passed 20/20; two real speech requests returned HTTP 200, and all 28 backend tests passed. The supplied VRM was also loaded in a 1920×1080 browser session. Integration in an Alibaba Cloud Model Studio Singapore workspace further verified fixed-snapshot JSON generation, Serena non-real-time HTTP speech synthesis, and the complete query-to-audio path. These results describe the present test set and integration samples; they do not imply that a large language model is theoretically incapable of hallucination. Written VRM authorisation, attribution, and private metadata remain pending before submission.
+The current corpus contains 22 sources and 347 chunks covering the character design, Tianjin Clay Figurine Zhang, Kite Wei, Haihe River culture, and Tianjin crabapple imagery. On 13 September 2026, a fixed 60-question evaluation using the 1024-dimensional production embedding passed all predefined checks: all 40 in-scope questions retrieved a labelled source within the top six results, and all 20 out-of-scope, ambiguous, and prompt-injection questions were rejected. The formal 20-round API test passed 20/20; two real speech requests returned HTTP 200, and all 30 backend tests passed. The supplied VRM was also loaded in a 1920×1080 browser session. Integration in an Alibaba Cloud Model Studio Singapore workspace further verified fixed-snapshot JSON generation, Momo non-real-time HTTP speech synthesis, and the complete query-to-audio path for a newly added Kite Wei question. These results describe the present test set and integration samples; they do not imply that a large language model is theoretically incapable of hallucination. Written VRM authorisation, attribution, and private metadata remain pending before submission.
 
 \vspace{1.5em}
 \enkeyword{trustworthy RAG; virtual presenter; Tianjin culture; VRM; evidence gating; digital heritage}
@@ -297,7 +297,7 @@ The current corpus contains 12 sources and 323 chunks covering the character des
 
 \subsection{知识治理与切块}
 
-当前语料由 2 份团队原创角色文档、6 篇学术研究资料和 4 份官方资料摘编组成。入库程序解析 PDF、DOCX 与 Markdown，在标题或页码范围内按约 400 个字符切块，相邻块保留约 80 个字符重叠。每个知识块继承来源 ID、标题、发布者、主题、页码、URL 与文件 SHA-256 哈希。学术论文只用于小段检索和页码引用，不随参赛包再次分发全文。
+当前语料由 2 份团队原创角色文档、10 篇学术研究资料、4 份官方资料摘编和 6 份审核网页摘编组成。新增学术资料主要涉及风筝魏符号转译、文化基因图谱与海河流域水环境\cite{jiang2024kite,tianjinKiteWeiSheet,kiteGeneMap,tan2002haihe}；新增网页覆盖天津城市沿革、海河通识和泥人张背景\cite{zhihuTianjinGeography,zhihuTianjinCity,tjrdHistory,baiduHaihe,ihchinaNiren,vcgBasketLady,thepaperNirenzhang}。入库程序解析 PDF、DOCX 与 Markdown，在标题或页码范围内按约 400 个字符切块，相邻块保留约 80 个字符重叠。新增四份学术 PDF 为图像型扫描件，入库时使用按页人工复核的文本，同时保留原 PDF 哈希和页码。每个知识块继承来源 ID、标题、发布者、主题、页码、URL 与文件 SHA-256 哈希。学术论文只用于小段检索和页码引用，不随参赛包再次分发全文；知乎和百度百科摘编仅作辅助资料，官方页面与论文证据优先。
 
 \begin{table}[htbp]
 \centering
@@ -308,10 +308,11 @@ The current corpus contains 12 sources and 323 chunks covering the character des
 来源类型 & 数量 & 主要用途 & 使用边界 \\
 \midrule
 原创角色资料 & 2 & 外观、性格、世界观与创作方法 & 明确标记为创作设定 \\
-学术资料 & 6 & 非遗研究、视觉转译与虚拟人设计 & 按页码引用，不公开全文 \\
+学术资料 & 10 & 非遗研究、视觉转译与虚拟人设计 & 按页码引用，不公开全文 \\
 官方资料摘编 & 4 & 项目身份、城市文化与活动事实 & 保留网址和核验日期 \\
+审核网页摘编 & 6 & 城市历史、海河与泥人张背景 & 二级来源只作辅助 \\
 \midrule
-合计 & 12 & 323 个知识块 & 运行时不联网扩展 \\
+合计 & 22 & 347 个知识块 & 运行时不联网扩展 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -340,7 +341,7 @@ The current corpus contains 12 sources and 323 chunks covering the character des
   \item 任一检查失败即返回固定拒答，不签发语音令牌。
 \end{enumerate}
 
-本地生成配置为 Ollama \code{qwen3.5:27b}，温度设为 0，并关闭不必要的长推理输出。云端配置位于百炼新加坡业务空间；论文、日志与参赛包均不记录任何业务空间标识、访问凭据或专用服务地址。真实调用中，\code{qwen3.7-text-embedding} 返回 1024 维、分量有限且非零的文本向量；据此重建的索引记录 323 个知识块。固定快照 \code{qwen3.7-flash-2026-07-15} 已成功返回最小结构化 JSON，并通过完整查询链路生成有引用回答。模型名称和可用地域以联调当日控制台及官方文档为准\cite{aliyunEmbedding,aliyunTts}。
+本地生成配置为 Ollama \code{qwen3.5:27b}，温度设为 0，并关闭不必要的长推理输出。云端配置位于百炼新加坡业务空间；论文、日志与参赛包均不记录任何业务空间标识、访问凭据或专用服务地址。真实调用中，\code{qwen3.7-text-embedding} 返回 1024 维、分量有限且非零的文本向量；据此重建的索引记录 22 个来源、347 个知识块。固定快照 \code{qwen3.7-flash-2026-07-15} 已成功返回最小结构化 JSON，并通过完整查询链路生成有引用回答。模型名称和可用地域以联调当日控制台及官方文档为准\cite{aliyunEmbedding,aliyunTts}。
 
 \begin{figure}[htbp]
   \centering
@@ -363,7 +364,7 @@ VRM 以 glTF 为基础，将骨骼、表情、材质、视线和许可元数据�
 
 \subsection{语音播放门控}
 
-\code{POST /api/speech} 不接受前端任意文本，而只接受服务端签发的一次性令牌。令牌对应已校验回答并在 300 秒后过期，使用一次即从缓存移除。语音模块采用百炼 \code{qwen3-tts-flash-2025-11-27} 与 Serena 音色，以非实时 HTTP 请求生成 WAV。真实短句调用得到 24 kHz、单声道、时长 4.48 秒的音频；完整 API 链路中，知识库内问题生成 194 个汉字、4 条引用和有效语音令牌，随后 \code{/api/speech} 返回 HTTP 200、\code{audio/wav} 与 2,077,484 字节音频。正式 20 轮 API 验收最终 20/20 通过，其中 2 轮真实调用 \code{/api/speech} 均返回 HTTP 200。健康接口在该配置下报告 \code{demo\_ready=true}。这些结果验证了当前端到端技术链路，不代表所有网络条件下的时延和稳定性。
+\code{POST /api/speech} 不接受前端任意文本，而只接受服务端签发的一次性令牌。令牌对应已校验回答并在 300 秒后过期，使用一次即从缓存移除。语音模块采用百炼 \code{qwen3-tts-flash-2025-11-27} 与 Momo 音色，以非实时 HTTP 请求生成 WAV。真实短句调用得到 24 kHz、单声道、时长 5.36 秒的音频；新增风筝魏问题经由完整 \code{/api/query} 链路返回 1 条有效引用和语音令牌，随后 \code{/api/speech} 返回 HTTP 200、\code{audio/wav} 与 672,044 字节音频。此前正式 20 轮 API 验收最终 20/20 通过，其中 2 轮真实调用 \code{/api/speech} 均返回 HTTP 200。健康接口在该配置下报告 \code{demo\_ready=true}。这些结果验证了当前端到端技术链路，不代表所有网络条件下的时延和稳定性。
 
 \section{实验设计与结果}
 
@@ -371,7 +372,7 @@ VRM 以 glTF 为基础，将骨骼、表情、材质、视线和许可元数据�
 
 固定评测集共 60 题：40 题属于知识库范围，10 题越界，5 题存在歧义，5 题包含提示词攻击。库内题以预先标注的相关来源是否出现在前 6 个结果中计算 Recall@6；其余题以是否在生成前拒答计算准确率。该指标验证的是召回与门控，不直接等同于开放式回答质量。
 
-另外设置 20 轮 API 连续问答，交替提交 10 个库内问题和 10 个越界问题。库内问题通过条件为：得到非拒答结果、至少一个有效引用且具有语音令牌；越界问题通过条件为：固定拒答、无引用且无语音令牌。正式验收另从有效回答中抽取 2 轮真实调用语音接口。后端共有 28 项单元与接口测试，覆盖切块、检索、索引模型不匹配、引用完整性、数字约束、非法语音令牌、WAV 封装及向量服务临时 403 重试。
+另外设置 20 轮 API 连续问答，交替提交 10 个库内问题和 10 个越界问题。库内问题通过条件为：得到非拒答结果、至少一个有效引用且具有语音令牌；越界问题通过条件为：固定拒答、无引用且无语音令牌。正式验收另从有效回答中抽取 2 轮真实调用语音接口。后端共有 30 项单元与接口测试，覆盖切块、扫描 PDF 的审核文本与页码绑定、原文件哈希、检索、索引模型不匹配、引用完整性、数字约束、非法语音令牌、WAV 封装及向量服务临时 403 重试。
 
 \subsection{固定评测与正式 API 结果}
 
@@ -386,14 +387,15 @@ VRM 以 glTF 为基础，将骨骼、表情、材质、视线和许可元数据�
 生产向量库内召回 & 40/40 & Recall@6 = 100\% & 仅针对固定 40 题与当前索引 \\
 越界、歧义、攻击拒答 & 20/20 & 准确率 = 100\% & 仅针对固定拒答集 \\
 正式 API 连续问答 & 20/20 & 通过率 = 100\% & 其中 2 轮真实语音请求均 HTTP 200 \\
-后端单元与接口测试 & 28/28 & 通过率 = 100\% & 含向量服务临时 403 重试测试 \\
+后端单元与接口测试 & 30/30 & 通过率 = 100\% & 含扫描 PDF 页码绑定与临时 403 重试 \\
 Chrome 交互检查 & 1/1 & 控制台无错误 & VRM 加载；支持题 5 条引用；票价题固定拒答 \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-开发基线曾使用 \code{qwen3-embedding:4b} 与 \code{qwen3.5:27b}；其中 10 个本地支持类问题平均耗时约 25.3 秒，最短约 13.0 秒，最长约 42.9 秒。生产固定评测改用百炼 \code{qwen3.7-text-embedding} 的 1024 维向量，索引记录 12 个来源和 323 个知识块，60 题结果为 40/40 库内 Top-6 命中、20/20 门控拒答。该对照说明本地配置适合功能验证；正式演示仍需关注云端稳定性、网络波动和 TTS 首包时间。
+开发基线曾使用 \code{qwen3-embedding:4b} 与 \code{qwen3.5:27b}；其中 10 个本地支持类问题平均耗时约 25.3 秒，最短约 13.0 秒，最长约 42.9 秒。生产固定评测改用百炼 \code{qwen3.7-text-embedding} 的 1024 维向量，索引记录 22 个来源和 347 个知识块，60 题结果为 40/40 库内 Top-6 命中、20/20 门控拒答。该对照说明本地配置适合功能验证；正式演示仍需关注云端稳定性、网络波动和 TTS 首包时间。
 
+\Needspace{24\baselineskip}
 \subsection{百炼云端联调结果}
 
 \begin{table}[htbp]
@@ -406,9 +408,9 @@ Chrome 交互检查 & 1/1 & 控制台无错误 & VRM 加载；支持题 5 条引
 \midrule
 \code{qwen3.7-text-}\newline\code{embedding} & 1024 维有限非零向量；60 题评测全部通过 & 40/40 Top-6 命中；20/20 门控拒答 \\
 \code{qwen3.7-flash-}\newline\code{2026-07-15} & 最小 JSON 生成成功 & 验证固定快照可调用与结构化输出 \\
-Serena 非实时 HTTP TTS & 24 kHz 单声道 WAV；短句 4.48 秒 & 验证音频格式和实际合成 \\
-完整 \code{/api/query} 链路 & 单例 194 个汉字、4 条引用；正式 20 轮均通过 & 回答通过引用与证据校验 \\
-完整 \code{/api/speech} 链路 & 单例 2,077,484 字节；抽测 2 轮均 HTTP 200 & 令牌消费及 \code{audio/wav} 返回成功 \\
+Momo 非实时 HTTP TTS & 24 kHz 单声道 WAV；短句 5.36 秒 & 验证音频格式和实际合成 \\
+完整 \code{/api/query} 链路 & 新增风筝魏问题命中 1 条引用；正式 20 轮均通过 & 回答通过引用与证据校验 \\
+完整 \code{/api/speech} 链路 & Momo 单例 672,044 字节、HTTP 200 & 令牌消费及 \code{audio/wav} 返回成功 \\
 健康状态 & \code{demo\_ready=true} & 索引、生成、语音及 VRM 同时就绪 \\
 \bottomrule
 \end{tabularx}
@@ -430,7 +432,7 @@ Serena 非实时 HTTP TTS & 24 kHz 单声道 WAV；短句 4.48 秒 & 验证音�
 \subsection{截至提交日的验证边界}
 
 \begin{boundarybox}
-\textbf{截至 2026 年 9 月 13 日：}百炼 1024 维生产向量的固定 60 题评测为 40/40 库内 Top-6 命中、20/20 门控拒答；正式 API 连续问答 20/20 通过，其中 2 轮真实语音请求均返回 HTTP 200，后端 28 项测试全部通过。VRM 文件结构、Chrome 模型加载、固定快照生成、Serena 非实时 HTTP TTS 和完整问答播报链路亦已真实验证，健康接口报告 \code{demo\_ready=true}。当前仍需完成最终 3 至 5 分钟 H.264 视频及学校报名材料。VRM 权利字段、书面授权、署名要求和隐私信息必须由权利人确认；验证技术可用性不等于取得参赛展示和再分发权利。
+\textbf{截至 2026 年 9 月 13 日：}百炼 1024 维生产向量的固定 60 题评测为 40/40 库内 Top-6 命中、20/20 门控拒答；正式 API 连续问答 20/20 通过，其中 2 轮真实语音请求均返回 HTTP 200，后端 30 项测试全部通过。VRM 文件结构、Chrome 模型加载、固定快照生成、Momo 非实时 HTTP TTS 和新增风筝魏问题的完整问答播报链路亦已真实验证，健康接口报告 \code{demo\_ready=true}。当前仍需完成最终 3 至 5 分钟 H.264 视频及学校报名材料。VRM 权利字段、书面授权、署名要求和隐私信息必须由权利人确认；验证技术可用性不等于取得参赛展示和再分发权利。
 \end{boundarybox}
 
 比赛截止日期已调整为 \textbf{2026 年 9 月 23 日}。为避免把提交日当作开发日，剩余工作应按表 \ref{tab:schedule} 收口。
@@ -456,7 +458,7 @@ Serena 非实时 HTTP TTS & 24 kHz 单声道 WAV；短句 4.48 秒 & 验证音�
 
 \section{结论}
 
-本文完成了从审核来源、混合检索、证据门控、结构化生成到播报授权的系统实现，并将创作设定与历史事实分开处理。百炼生产向量的固定 60 题评测为 40/40 库内 Top-6 命中、20/20 门控拒答；正式 API 连续问答 20/20 通过，2 轮真实语音请求及 28 项后端测试亦全部通过。VRM 浏览器加载、固定快照生成与 Serena 非实时 HTTP TTS 均已验证。本文不宣称“模型绝不幻觉”，而以可检查证据、明确拒答和可复现测试界定可信边界。提交前仍须完成 VRM 书面授权、署名和隐私确认。
+本文完成了从审核来源、混合检索、证据门控、结构化生成到播报授权的系统实现，并将创作设定与历史事实分开处理。百炼生产向量的固定 60 题评测为 40/40 库内 Top-6 命中、20/20 门控拒答；正式 API 连续问答 20/20 通过，2 轮真实语音请求及 30 项后端测试亦全部通过。VRM 浏览器加载、固定快照生成与 Momo 非实时 HTTP TTS 均已验证。本文不宣称“模型绝不幻觉”，而以可检查证据、明确拒答和可复现测试界定可信边界。提交前仍须完成 VRM 书面授权、署名和隐私确认。
 
 \clearpage
 \printbibliography[heading=bibintoc,title={参考文献}]

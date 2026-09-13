@@ -74,13 +74,53 @@
       "license_note": "仅进行小段事实检索和页码引用，不对外再分发全文"
     },
     {
+      "id": "paper-kite-semiotics-2024",
+      "title": "基于符号学视角下的天津风筝魏文创产品开发与研究",
+      "publisher": "《艺术与设计（理论）》2024年第5期",
+      "topic": "风筝魏",
+      "type": "pdf",
+      "path": "海河少女/人物设计参考文献/基于符号学视角下的天津风筝魏文创产品开发.pdf",
+      "text_path": "knowledge/reviewed/风筝魏符号学文创研究摘编.md",
+      "license_note": "扫描版经页面渲染和人工摘编，仅用于小段事实检索与页码引用，不对外再分发全文"
+    },
+    {
+      "id": "paper-kite-heritage-sheet",
+      "title": "天津市“风筝魏”风筝",
+      "publisher": "天津非物质文化遗产资料页",
+      "topic": "风筝魏",
+      "type": "pdf",
+      "path": "海河少女/人物设计参考文献/天津市“风筝魏”风筝.pdf",
+      "text_path": "knowledge/reviewed/天津市风筝魏资料页摘编.md",
+      "license_note": "单页扫描资料经页面渲染和人工摘编，仅用于事实检索与页码引用，不对外再分发全文"
+    },
+    {
+      "id": "paper-kite-gene-map",
+      "title": "风筝魏文化基因图谱构建及创新设计作品",
+      "publisher": "天津科技大学艺术设计学院研究成果",
+      "topic": "风筝魏",
+      "type": "pdf",
+      "path": "海河少女/人物设计参考文献/《风筝魏文化基因图谱构建及创新设计作品》.pdf",
+      "text_path": "knowledge/reviewed/风筝魏文化基因图谱作品摘编.md",
+      "license_note": "单页设计成果经页面渲染和人工摘编，仅用于方法与图样检索，不对外再分发全文"
+    },
+    {
+      "id": "paper-haihe-environment",
+      "title": "海河流域水环境的历史演变及其主要影响因素研究",
+      "publisher": "《水利发展研究》2002年第12期",
+      "topic": "海河文化",
+      "type": "pdf",
+      "path": "海河少女/人物设计参考文献/海河流域水环境的历史演变及其主要影响因素.pdf",
+      "text_path": "knowledge/reviewed/海河流域水环境历史演变研究摘编.md",
+      "license_note": "扫描论文经页面渲染和人工摘编，仅用于小段事实检索与页码引用，不对外再分发全文"
+    },
+    {
       "id": "official-nirenzhang",
       "title": "泥塑 天津泥人张",
       "publisher": "中国非物质文化遗产网 中国非物质文化遗产数字博物馆",
       "topic": "泥人张",
       "type": "markdown",
       "path": "knowledge/official/泥人张.md",
-      "url": "https://www.ihchina.cn/project_details/14039.html",
+      "url": "https://www.ihchina.cn/project_details/14039/",
       "license_note": "依据官方公开资料人工摘编并保留原始链接"
     },
     {
@@ -112,6 +152,66 @@
       "path": "knowledge/official/天津海棠.md",
       "url": "https://whly.tj.gov.cn/TJSWHHLYJ/gabsycs/mtjjgh/202504/t20250414_6906537.html",
       "license_note": "依据政府公开资料人工摘编并保留原始链接"
+    },
+    {
+      "id": "web-zhihu-tianjin-geography",
+      "title": "天津地理变迁史 从沧海桑田到国际都会",
+      "publisher": "知乎专栏（辅助来源）",
+      "topic": "海河文化",
+      "type": "markdown",
+      "path": "knowledge/web/知乎天津地理变迁史摘编.md",
+      "url": "https://zhuanlan.zhihu.com/p/26849891240",
+      "license_note": "依据用户指定网页人工核验并摘要，仅保留可与权威来源互证的背景信息"
+    },
+    {
+      "id": "web-zhihu-tianjin-city",
+      "title": "中国名城 天津市",
+      "publisher": "知乎文章（辅助来源）",
+      "topic": "海河文化",
+      "type": "markdown",
+      "path": "knowledge/web/知乎中国名城天津市摘编.md",
+      "url": "https://www.zhihu.com/tardis/zm/art/15807266478?source_id=1005",
+      "license_note": "依据用户指定网页人工核验并摘要，实时数据和未交叉验证内容不得作为单一依据"
+    },
+    {
+      "id": "official-tjrd-history",
+      "title": "天津历史沿革",
+      "publisher": "天津市人民代表大会常务委员会",
+      "topic": "海河文化",
+      "type": "markdown",
+      "path": "knowledge/web/天津人大历史沿革摘编.md",
+      "url": "https://www.tjrd.gov.cn/tjfq/system/2019/04/24/030012411.shtml",
+      "license_note": "依据政府公开页面人工摘编并保留原始链接"
+    },
+    {
+      "id": "web-baidu-haihe",
+      "title": "天津海河",
+      "publisher": "百度百科（辅助来源）",
+      "topic": "海河文化",
+      "type": "markdown",
+      "path": "knowledge/web/百度百科天津海河摘编.md",
+      "url": "https://baike.baidu.com/item/%E5%A4%A9%E6%B4%A5%E6%B5%B7%E6%B2%B3/668474",
+      "license_note": "依据用户指定词条人工摘要，不下载图片，精确数据需与专业资料交叉核验"
+    },
+    {
+      "id": "visual-vcg-clay-figurine",
+      "title": "张玉亭制彩塑提篮仕女图像元数据",
+      "publisher": "视觉中国 VCG（视觉参考）",
+      "topic": "泥人张",
+      "type": "markdown",
+      "path": "knowledge/web/视觉中国提篮仕女图像元数据.md",
+      "url": "https://www.vcg.com/creative/1359466020.html",
+      "license_note": "仅登记页面题名和版权边界，未下载图片，使用图片须另行取得授权"
+    },
+    {
+      "id": "media-thepaper-nirenzhang",
+      "title": "抟泥塑人间 天津泥人张的俗世传奇",
+      "publisher": "澎湃新闻 艺术评论",
+      "topic": "泥人张",
+      "type": "markdown",
+      "path": "knowledge/web/澎湃泥人张俗世传奇摘编.md",
+      "url": "https://www.thepaper.cn/newsDetail_forward_16389348",
+      "license_note": "依据公开媒体文章人工摘要，传说性内容不作为已证实史实"
     }
   ]
 }

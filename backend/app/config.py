@@ -38,7 +38,7 @@ class Settings(BaseSettings):
 
     tts_provider: str = "dashscope"
     dashscope_tts_model: str = "qwen3-tts-flash-2025-11-27"
-    dashscope_tts_voice: str = "Serena"
+    dashscope_tts_voice: str = "Momo"
     dashscope_tts_language: str = "Chinese"
 
     knowledge_manifest: Path = Path("knowledge/sources.json")
