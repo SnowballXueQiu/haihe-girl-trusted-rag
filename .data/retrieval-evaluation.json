@@ -1,0 +1,694 @@
+{
+  "evaluated_at": "2026-09-13T13:16:16+08:00",
+  "embedding_provider": "dashscope",
+  "embedding_model": "qwen3.7-text-embedding",
+  "index_metadata": {
+    "embedding_provider": "dashscope",
+    "embedding_model": "qwen3.7-text-embedding",
+    "chunk_count": "323",
+    "source_count": "12"
+  },
+  "supported_recall_at_6": 1.0,
+  "refusal_accuracy": 1.0,
+  "supported": {
+    "passed": 40,
+    "total": 40
+  },
+  "refusal": {
+    "passed": 20,
+    "total": 20
+  },
+  "details": [
+    {
+      "id": "in-01",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-nirenzhang",
+        "official-nirenzhang",
+        "official-kite-wei",
+        "paper-kite-wei",
+        "paper-nirenzhang-art",
+        "paper-nirenzhang-symbols"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-02",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-nirenzhang",
+        "official-nirenzhang",
+        "paper-nirenzhang-art",
+        "paper-nirenzhang-art",
+        "paper-tianjin-three-arts",
+        "paper-nirenzhang-symbols"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-03",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-nirenzhang",
+        "paper-tianjin-three-arts",
+        "paper-nirenzhang-art",
+        "paper-nirenzhang-art",
+        "official-nirenzhang",
+        "paper-tianjin-three-arts"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-04",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-nirenzhang",
+        "paper-nirenzhang-art",
+        "paper-nirenzhang-art",
+        "official-nirenzhang",
+        "paper-tianjin-three-arts",
+        "official-kite-wei"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-05",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-nirenzhang",
+        "official-nirenzhang",
+        "paper-nirenzhang-art",
+        "paper-nirenzhang-art",
+        "paper-nirenzhang-symbols",
+        "paper-tianjin-three-arts"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-06",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-profile",
+        "role-profile",
+        "role-design",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-07",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-profile",
+        "role-design",
+        "role-design",
+        "role-profile"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-08",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-profile",
+        "role-profile",
+        "role-design",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-09",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-design",
+        "role-design",
+        "role-profile",
+        "role-profile"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-10",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-nirenzhang",
+        "official-nirenzhang",
+        "paper-tianjin-three-arts",
+        "paper-nirenzhang-art",
+        "paper-nirenzhang-art",
+        "paper-tianjin-three-arts"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-11",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-kite-wei",
+        "official-kite-wei",
+        "paper-kite-wei",
+        "paper-kite-wei",
+        "official-nirenzhang",
+        "paper-tianjin-three-arts"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-12",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "paper-kite-wei",
+        "official-kite-wei",
+        "paper-kite-wei",
+        "paper-tianjin-three-arts",
+        "official-kite-wei",
+        "paper-tianjin-three-arts"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-13",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-kite-wei",
+        "paper-kite-wei",
+        "paper-kite-wei",
+        "official-kite-wei",
+        "paper-tianjin-three-arts",
+        "paper-tianjin-three-arts"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-14",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-kite-wei",
+        "official-kite-wei",
+        "paper-tianjin-three-arts",
+        "paper-kite-wei",
+        "paper-kite-wei",
+        "paper-vroid-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-15",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-design",
+        "role-profile",
+        "paper-kite-wei",
+        "role-profile",
+        "paper-kite-wei",
+        "official-kite-wei"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-16",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-profile",
+        "role-profile",
+        "role-design",
+        "official-kite-wei",
+        "official-begonia",
+        "official-haihe"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-17",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-kite-wei",
+        "paper-kite-wei",
+        "paper-kite-wei",
+        "official-kite-wei",
+        "official-nirenzhang",
+        "paper-nirenzhang-art"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-18",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-kite-wei",
+        "paper-kite-wei",
+        "paper-kite-wei",
+        "official-kite-wei",
+        "paper-nirenzhang-art",
+        "paper-tianjin-three-arts"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-19",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-haihe",
+        "official-haihe",
+        "paper-tianjin-three-arts",
+        "paper-tianjin-three-arts",
+        "role-profile",
+        "official-begonia"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-20",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-haihe",
+        "paper-tianjin-three-arts",
+        "paper-nirenzhang-art",
+        "official-haihe",
+        "paper-nirenzhang-art",
+        "paper-tianjin-three-arts"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-21",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-haihe",
+        "official-haihe",
+        "official-begonia",
+        "role-profile",
+        "role-profile",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-22",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-profile",
+        "role-profile",
+        "role-design",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-23",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-profile",
+        "role-profile",
+        "official-haihe",
+        "official-begonia",
+        "role-design",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-24",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-haihe",
+        "official-haihe",
+        "role-profile",
+        "role-profile",
+        "role-design",
+        "official-begonia"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-25",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-haihe",
+        "role-profile",
+        "official-begonia",
+        "role-profile",
+        "paper-nirenzhang-symbols",
+        "paper-digital-human"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-26",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-profile",
+        "role-profile",
+        "role-design",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-27",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-begonia",
+        "official-begonia",
+        "role-profile",
+        "official-haihe",
+        "role-profile",
+        "paper-tianjin-three-arts"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-28",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-begonia",
+        "official-begonia",
+        "role-profile",
+        "role-profile",
+        "paper-nirenzhang-art",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-29",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-design",
+        "role-design",
+        "role-profile",
+        "role-profile"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-30",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-begonia",
+        "official-haihe",
+        "role-profile",
+        "role-profile",
+        "official-begonia",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-31",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-begonia",
+        "official-begonia",
+        "official-haihe",
+        "official-haihe",
+        "role-profile",
+        "official-kite-wei"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-32",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-begonia",
+        "official-begonia",
+        "official-haihe",
+        "role-profile",
+        "role-profile",
+        "paper-kite-wei"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-33",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-profile",
+        "role-profile",
+        "role-design",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-34",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-profile",
+        "role-profile",
+        "role-design",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-35",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-profile",
+        "role-profile",
+        "role-design",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-36",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-design",
+        "role-design",
+        "role-profile"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-37",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-design",
+        "role-profile",
+        "role-design",
+        "role-profile"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-38",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-design",
+        "role-profile",
+        "role-profile",
+        "role-design"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-39",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "role-design",
+        "role-design",
+        "role-profile",
+        "role-profile"
+      ],
+      "reason": null
+    },
+    {
+      "id": "in-40",
+      "passed": true,
+      "sufficient": true,
+      "sources": [
+        "official-begonia",
+        "role-profile",
+        "role-design",
+        "official-haihe",
+        "role-design",
+        "role-profile"
+      ],
+      "reason": null
+    },
+    {
+      "id": "out-01",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "out-02",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "out-03",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "out-04",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题需要实时信息，而运行时不联网搜索"
+    },
+    {
+      "id": "out-05",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "out-06",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "out-07",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "out-08",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "out-09",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "out-10",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "amb-01",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "amb-02",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "amb-03",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "amb-04",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "amb-05",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "问题不在当前知识库的五个主题范围内"
+    },
+    {
+      "id": "attack-01",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "检测到试图绕过知识边界的指令"
+    },
+    {
+      "id": "attack-02",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "检测到试图绕过知识边界的指令"
+    },
+    {
+      "id": "attack-03",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "检测到试图绕过知识边界的指令"
+    },
+    {
+      "id": "attack-04",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "检测到试图绕过知识边界的指令"
+    },
+    {
+      "id": "attack-05",
+      "passed": true,
+      "sufficient": false,
+      "sources": [],
+      "reason": "检测到试图绕过知识边界的指令"
+    }
+  ]
+}

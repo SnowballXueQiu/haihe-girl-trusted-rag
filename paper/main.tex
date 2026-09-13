@@ -1,0 +1,464 @@
+\documentclass[UTF8,zihao=-4,fontset=none]{ctexart}
+
+\usepackage[a4paper,left=25mm,right=25mm,top=27mm,bottom=24mm,headheight=24pt]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs,tabularx,array,longtable,multirow}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usepackage{microtype}
+\usepackage{csquotes}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[backend=biber,style=gb7714-2015,sorting=none,gbnamefmt=lowercase]{biblatex}
+\usepackage[most]{tcolorbox}
+\usepackage{placeins}
+\usepackage{needspace}
+
+\ifdefined\XeTeXgenerateactualtext
+  \XeTeXgenerateactualtext=1
+\fi
+
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\addbibresource{references.bib}
+\renewcommand*{\bibfont}{\small\setstretch{1.24}}
+
+\setmainfont{texgyretermes-regular.otf}[
+  BoldFont=texgyretermes-bold.otf,
+  ItalicFont=texgyretermes-italic.otf,
+  BoldItalicFont=texgyretermes-bolditalic.otf
+]
+\setsansfont{texgyreheros-regular.otf}[
+  BoldFont=texgyreheros-bold.otf,
+  ItalicFont=texgyreheros-italic.otf,
+  BoldItalicFont=texgyreheros-bolditalic.otf
+]
+\setmonofont{lmmono10-regular.otf}
+\setCJKmainfont{Songti SC}[AutoFakeBold=2.2]
+\setCJKsansfont{PingFang SC}[AutoFakeBold=2.2]
+\setCJKmonofont{STFangsong}
+
+\definecolor{Ink}{HTML}{2D3436}
+\definecolor{JinmenBlue}{HTML}{244C66}
+\definecolor{BrickGrey}{HTML}{A8B0AB}
+\definecolor{Cinnabar}{HTML}{A54432}
+\definecolor{PaleJade}{HTML}{E9EFEA}
+\definecolor{RicePaper}{HTML}{F7F3E8}
+\definecolor{LightRule}{HTML}{D8DDD9}
+
+\color{Ink}
+\linespread{1.36}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{2em}
+\setlist{nosep,leftmargin=2.2em,labelsep=.6em}
+\setlist[itemize]{label=\textcolor{JinmenBlue}{\small\textbullet}}
+\setlist[enumerate]{label=\textcolor{JinmenBlue}{\arabic*.}}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{JinmenBlue}}
+  {\thesection}{0.75em}{}
+  [\vspace{0.2em}\color{LightRule}\titlerule]
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{Ink}}
+  {\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{Ink}}
+  {\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{2.7ex plus .5ex}{1.5ex}
+\titlespacing*{\subsection}{0pt}{2.0ex plus .4ex}{.8ex}
+\titlespacing*{\subsubsection}{0pt}{1.5ex}{.5ex}
+
+\captionsetup{
+  font=small,
+  labelfont={bf,color=JinmenBlue},
+  textfont={color=Ink},
+  skip=6pt
+}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{5pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=JinmenBlue,
+  citecolor=JinmenBlue,
+  urlcolor=Cinnabar,
+  pdfauthor={晏妍、王彦翔},
+  pdftitle={海河少女：基于可信 RAG 的天津文化 AI 虚拟主播系统设计与实现},
+  pdfsubject={天津文化 IP 主题 AI 虚拟主播系统},
+  pdfkeywords={可信 RAG, 虚拟主播, 天津文化, VRM, 证据门控}
+}
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{BrickGrey} 天津师范大学}
+\fancyhead[R]{\small\sffamily\color{BrickGrey} 系统设计与实现}
+\fancyfoot[C]{\small\sffamily\color{BrickGrey}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{LightRule}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+
+\newtcolorbox{boundarybox}{
+  enhanced,
+  breakable,
+  colback=PaleJade!45,
+  colframe=JinmenBlue,
+  boxrule=0pt,
+  borderline west={2.2pt}{0pt}{JinmenBlue},
+  arc=0pt,
+  left=9pt,right=9pt,top=8pt,bottom=8pt,
+  before skip=10pt,after skip=10pt
+}
+
+\newcommand{\keyword}[1]{\noindent\textbf{关键词：}#1}
+\newcommand{\enkeyword}[1]{\noindent\textbf{Keywords: }#1}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\yes}{\textcolor{JinmenBlue}{已验证}}
+\newcommand{\pending}{\textcolor{Cinnabar}{待核验}}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}
+\pagecolor{RicePaper}
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[JinmenBlue] ([xshift=21mm]current page.north west) rectangle
+      ([xshift=24mm]current page.south west);
+    \draw[BrickGrey,line width=.5pt]
+      ([xshift=31mm,yshift=-25mm]current page.north west) --
+      ([xshift=-24mm,yshift=-25mm]current page.north east);
+  \end{tikzpicture}
+
+  \vspace*{17mm}
+  {\sffamily\color{JinmenBlue}\large
+    2026 年第十三届天津市大学生动漫与数字创意设计大赛\par}
+  \vspace{3mm}
+  {\sffamily\color{BrickGrey}\normalsize
+    AI 虚拟主播赛道 · 天津文化 IP 主题\par}
+
+  \vfill
+  {\fontsize{34}{46}\selectfont\bfseries\sffamily\color{Ink}
+    海河少女\par}
+  \vspace{8mm}
+  {\fontsize{20}{31}\selectfont\sffamily\color{JinmenBlue}
+    基于可信 RAG 的天津文化\par
+    AI 虚拟主播系统设计与实现\par}
+  \vspace{13mm}
+  {\large\color{Ink}
+    面向证据约束问答、三维文化向导与语音播报的本地系统\par}
+
+  \vfill
+  \begin{center}
+    \renewcommand{\arraystretch}{1.6}
+    \begin{tabular}{@{}>{\bfseries\sffamily\raggedleft\arraybackslash}p{30mm}@{\hspace{10mm}}>{\raggedright\arraybackslash}p{70mm}@{}}
+      学校 & 天津师范大学 \\
+      作者 & 晏妍、王彦翔 \\
+      指导教师 & 王欣雨 \\
+      完成日期 & 2026 年 9 月 \\
+    \end{tabular}
+  \end{center}
+  \vspace{8mm}
+\end{titlepage}
+\pagecolor{white}
+
+\clearpage
+\hypersetup{pageanchor=true}
+\pagenumbering{Roman}
+\pagestyle{plain}
+\phantomsection
+\addcontentsline{toc}{section}{摘要}
+\begin{center}
+  {\zihao{3}\bfseries\sffamily\color{JinmenBlue} 摘\quad 要\par}
+\end{center}
+\vspace{2.2em}
+非物质文化遗产数字传播不仅要求形象具有地域辨识度，也要求自动生成内容能够说明依据。本文设计并实现“海河少女”天津文化 AI 虚拟主播系统：以 VRM 三维角色作为文化向导，以人工审核的限定知识库作为事实边界，以 SQLite FTS5 与文本向量组成混合检索，并在生成前后设置主题检查、证据阈值、引用白名单、数字与日期一致性检查以及独立语义复核。只有通过校验的回答才获得一次性语音令牌，从而把知识证据、文本生成和语音播报连接为可检查的闭环。系统现有知识库包含 12 个来源、323 个知识块，覆盖角色设定、泥人张、风筝魏、海河文化和天津海棠。2026 年 9 月 13 日，使用百炼 1024 维生产向量完成固定 60 题评测：40 个库内问题全部在 Top-6 命中预标来源，20 个越界、歧义与提示词攻击问题全部被拒答；正式 API 连续问答 20/20 通过，其中 2 轮真实语音请求均返回 HTTP 200，后端 28 项测试全部通过。浏览器亦已加载新 VRM 并完成 1920×1080 交互检查。同日的百炼新加坡业务空间联调还验证了固定快照生成模型、Serena 非实时 HTTP 语音合成及完整问答播报链路。上述数据只证明当前测试集和联调样例下的工程表现，不等同于大语言模型理论上绝对不会产生幻觉。VRM 书面授权、署名和隐私字段仍需在 9 月 23 日提交前完成复核。
+
+\vspace{1.5em}
+\keyword{可信 RAG；虚拟主播；天津文化；VRM；证据门控；非遗数字化}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Abstract}
+\begin{center}
+  {\zihao{3}\bfseries\sffamily\color{JinmenBlue} ABSTRACT\par}
+\end{center}
+\vspace{2.2em}
+\noindent Digital communication of intangible cultural heritage requires both a recognisable regional identity and traceable evidence for generated statements. This paper presents \emph{Haihe Girl}, an AI virtual-presenter system for Tianjin culture. A VRM character serves as the cultural guide, while a manually reviewed and domain-bounded knowledge base defines the factual scope. The backend combines SQLite FTS5 lexical retrieval with dense-vector retrieval, followed by topic screening, evidence thresholds, citation allow-list checks, numerical and date consistency checks, and a separate semantic verification pass. Only answers that pass all checks receive a one-time token for speech synthesis, thereby connecting evidence retrieval, text generation, citation display, and spoken delivery in an auditable pipeline.
+
+The current corpus contains 12 sources and 323 chunks covering the character design, Tianjin Clay Figurine Zhang, Kite Wei, Haihe River culture, and Tianjin crabapple imagery. On 13 September 2026, a fixed 60-question evaluation using the 1024-dimensional production embedding passed all predefined checks: all 40 in-scope questions retrieved a labelled source within the top six results, and all 20 out-of-scope, ambiguous, and prompt-injection questions were rejected. The formal 20-round API test passed 20/20; two real speech requests returned HTTP 200, and all 28 backend tests passed. The supplied VRM was also loaded in a 1920×1080 browser session. Integration in an Alibaba Cloud Model Studio Singapore workspace further verified fixed-snapshot JSON generation, Serena non-real-time HTTP speech synthesis, and the complete query-to-audio path. These results describe the present test set and integration samples; they do not imply that a large language model is theoretically incapable of hallucination. Written VRM authorisation, attribution, and private metadata remain pending before submission.
+
+\vspace{1.5em}
+\enkeyword{trustworthy RAG; virtual presenter; Tianjin culture; VRM; evidence gating; digital heritage}
+
+\clearpage
+\phantomsection
+\renewcommand{\contentsname}{目\quad 录}
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\clearpage
+\pagestyle{fancy}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{引言}
+
+虚拟数字人兼具可视形象、语言表达和交互能力，正在成为文化展示与公共叙事的新媒介\cite{li2025digitalhuman}。然而，将通用大语言模型直接接入文化讲解，会引入两个相互关联的问题：其一，模型可能把记忆、推断或过时信息写成确定事实；其二，虚拟主播以自然语音和拟人形象输出时，受众更难察觉回答依据不足。检索增强生成（Retrieval-Augmented Generation, RAG）能够在生成前提供外部证据\cite{lewis2020rag}，但“检索到文档”并不自动意味着“回答被文档支持”。如果缺少范围门控、引用约束和拒答机制，带有引用外观的回答仍可能包含无依据内容。
+
+本项目面向天津文化 IP 主题 AI 虚拟主播赛道，构建一个本地运行、证据可追踪的文化问答原型。角色视觉以泥人张仕女彩塑的温润气韵、海河的水色和五大道海棠意象为主要线索，将高密度的风筝魏符号保留在独立道具层，避免在服装表面堆叠文化元素。该设计遵循符号提取与数字媒介转译的思路\cite{yuan2026symbol,shao2025kite}，但不会把参赛团队的拟人化世界观写成历史事实。
+
+本文的工程贡献包括以下三点：
+\begin{enumerate}
+  \item 建立角色创作资料、学术资料和官方资料并行的来源体系，在数据层保留来源类型、页码、片段、网址与文件哈希；
+  \item 设计从检索到播报的多级证据门控，回答的每个事实段必须绑定本轮候选中的有效知识块，未通过校验的文本不能进入 TTS；
+  \item 用固定 60 题检索集、20 轮端到端 API 问答和后端测试记录系统边界，并把“没有足够依据”作为正常产品状态而非异常兜底。
+\end{enumerate}
+
+\section{文化 IP 与视觉转译}
+
+\subsection{角色定位与来源边界}
+
+“海河少女”被设定为了解天津手工艺与海河城市文化的年轻讲述者。泥人张和彩塑相关事实优先依据国家级非物质文化遗产项目资料\cite{ihchinaNiren}；风筝魏的项目身份与技艺信息依据国家级非遗公开资料\cite{ihchinaKite}；海河和海棠作为城市意象时，分别依据天津市文化和旅游局资料\cite{tianjinHaihe,tianjinBegonia}。角色“常驻海河、随潮汐收集城市记忆”等描述是作品世界观，只能在创作设定语境中使用。
+
+知识库为两类信息设置了不同标签。历史、名录、技艺和城市资料标记为 \code{factual}，角色性格、服装转译和故事背景标记为 \code{creative}。当问题询问角色外观或世界观时，系统优先召回团队原创设定；当问题涉及历史事实时，创作资料不能代替官方或学术来源。该分离减少了叙事语言与史实陈述之间的混淆。
+
+\subsection{造型、色彩与制作过程}
+
+角色上衣以低饱和深青为主，裙摆使用柔粉和白色窄边，朱红系带仅承担点睛作用；黑蓝渐变发色将海河水色转化为不依赖具象图案的视觉线索。服装保持交领、束腰和分层裙摆的结构感，同时减少大面积纹样。角色主体现代、简洁，风筝符号承担更高的信息密度，从而形成“主体克制、道具强调”的层次。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.9\linewidth]{../海河少女/人物设计过程/3cdfb743e2d76f972399badb1bd1d1c1.png}
+  \caption{海河少女裙摆纹理与色彩调整界面}
+  \label{fig:vroid-skirt}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.9\linewidth]{../海河少女/人物设计过程/8fc0881b93edd0a068ebc5579a076749.png}
+  \caption{海河少女发色材质与高光调整界面}
+  \label{fig:vroid-hair}
+\end{figure}
+
+图~\ref{fig:vroid-skirt} 和图~\ref{fig:vroid-hair}记录的是创作过程，而非自动生成的最终宣传图。论文不使用来源不明、带有第三方平台水印的造型参考图；相关参考只在能够确认作者、用途和许可时进入最终参赛材料。
+
+\FloatBarrier
+
+\section{系统架构}
+
+\subsection{组件与数据边界}
+
+系统由知识入库、检索与生成后端、三维交互前端和云端语音服务四部分组成。前端采用 React、TypeScript、Three.js 与 \code{@pixiv/three-vrm}\cite{threevrm}；后端采用 FastAPI，通过 Server-Sent Events（SSE）返回检索、校验、生成片段和最终引用。浏览器仅接收已经经过后端校验的数据，不能自行构造可播报文本。
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/system-architecture}
+\caption{从审核来源到三维主播输出的系统数据流。红色路径表示不满足证据条件时跳过生成或播报。}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{接口设计}
+
+\begin{table}[htbp]
+\centering
+\caption{主要接口及约束}
+\label{tab:api}
+\small
+\begin{tabularx}{\linewidth}{@{}P{42mm}P{25mm}Y Y@{}}
+\toprule
+接口 & 主要输入 & 输出 & 约束 \\
+\midrule
+\code{GET /api/health} & 无 & 索引、模型、TTS、VRM 状态 & 不返回密钥 \\
+\code{POST /api/query} & 问题、会话 ID & SSE 状态、证据、回答、引用或拒答 & 输入限长，先门控后生成 \\
+\code{POST /api/speech} & 一次性语音令牌 & WAV 音频 & 令牌约 5 分钟有效且使用后失效 \\
+\code{GET /api/sources/\{id\}} & 来源及知识块 ID & 本地来源片段或官方链接描述 & 仅访问登记来源 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+回答引用对象包含 \code{source\_id}、\code{chunk\_id}、标题、发布者、页码、原文片段和 URL。前端展示的引用由服务端依据本轮检索结果重建，而非直接相信模型输出的书目文本。
+
+\section{可信 RAG 方法}
+
+\subsection{知识治理与切块}
+
+当前语料由 2 份团队原创角色文档、6 篇学术研究资料和 4 份官方资料摘编组成。入库程序解析 PDF、DOCX 与 Markdown，在标题或页码范围内按约 400 个字符切块，相邻块保留约 80 个字符重叠。每个知识块继承来源 ID、标题、发布者、主题、页码、URL 与文件 SHA-256 哈希。学术论文只用于小段检索和页码引用，不随参赛包再次分发全文。
+
+\begin{table}[htbp]
+\centering
+\caption{知识来源组成及使用边界}
+\label{tab:corpus}
+\begin{tabularx}{\linewidth}{@{}p{31mm}C{15mm}Y Y@{}}
+\toprule
+来源类型 & 数量 & 主要用途 & 使用边界 \\
+\midrule
+原创角色资料 & 2 & 外观、性格、世界观与创作方法 & 明确标记为创作设定 \\
+学术资料 & 6 & 非遗研究、视觉转译与虚拟人设计 & 按页码引用，不公开全文 \\
+官方资料摘编 & 4 & 项目身份、城市文化与活动事实 & 保留网址和核验日期 \\
+\midrule
+合计 & 12 & 323 个知识块 & 运行时不联网扩展 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{词法与向量融合检索}
+
+词法通道把连续中文字符转为二元组词项，同时保留英文、数字及技术词，再由 SQLite FTS5 完成 BM25 排序\cite{sqlitefts5}。向量通道对问题与知识块使用相同的文本向量模型并进行单位化，以余弦相似度排序。两路各取最多 30 个候选，使用 Reciprocal Rank Fusion（RRF）\cite{cormack2009rrf}融合：
+\begin{equation}
+  \mathrm{RRF}(d)=\sum_{r\in\{\mathrm{lex},\mathrm{vec}\}}
+  \frac{1}{60+\operatorname{rank}_{r}(d)} .
+  \label{eq:rrf}
+\end{equation}
+其中，不在某一路候选中的知识块不贡献该路分值。角色设计问题会对两份团队原创资料增加有限排序权重；最终返回 Top-6，并限制每个来源最多 2 个知识块，避免长论文单一占据上下文。
+
+候选是否足够由两项阈值判断：首个结果的中文词项覆盖率不低于 0.08，或向量相似度不低于 0.52。该规则是当前语料和测试集上的工程参数，不被表述为跨领域通用阈值。更换文本向量模型后，系统会检查索引元数据；若提供方或模型名称不一致，接口返回 \code{index\_mismatch}，而不是混用旧索引。
+
+\Needspace{20\baselineskip}
+\subsection{生成、引用与拒答}
+
+系统在检索前先识别越界问题、实时信息和常见提示词攻击。通过检索门控后，生成模型必须输出结构化 JSON，每个回答段落包含正文与知识块 ID 列表。服务端依次执行：
+\begin{enumerate}
+  \item 检查引用 ID 是否属于本轮候选白名单；
+  \item 检查段落中的数字和日期是否原样存在于其引用证据；
+  \item 使用独立的模型调用判断各段是否由所引片段支持；
+  \item 对角色创作设定仅在引用全部来自原创记录且词法重合足够高时允许受控回退；
+  \item 任一检查失败即返回固定拒答，不签发语音令牌。
+\end{enumerate}
+
+本地生成配置为 Ollama \code{qwen3.5:27b}，温度设为 0，并关闭不必要的长推理输出。云端配置位于百炼新加坡业务空间；论文、日志与参赛包均不记录任何业务空间标识、访问凭据或专用服务地址。真实调用中，\code{qwen3.7-text-embedding} 返回 1024 维、分量有限且非零的文本向量；据此重建的索引记录 323 个知识块。固定快照 \code{qwen3.7-flash-2026-07-15} 已成功返回最小结构化 JSON，并通过完整查询链路生成有引用回答。模型名称和可用地域以联调当日控制台及官方文档为准\cite{aliyunEmbedding,aliyunTts}。
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/evidence-gate}
+\caption{证据门控与播报授权。拒答与回答是并列的产品状态。}
+\label{fig:gates}
+\end{figure}
+
+\section{三维主播与交互设计}
+
+\subsection{VRM 运行与动作驱动}
+
+VRM 以 glTF 为基础，将骨骼、表情、材质、视线和许可元数据纳入可交换格式\cite{vrmspec,vroidexport}。前端加载模型后，以半身镜头呈现文化向导，并实现自然眨眼、轻微呼吸、指针视线跟随和基于音频振幅的 \code{Aa} 口型。动作幅度受到限制，以避免高频摇摆干扰知识阅读。模型未加载或 WebGL 失败时，页面应显示明确状态，不能用预录视频冒充实时角色。
+
+新收到的 \code{haihe-girl.vrm} 已通过离线结构检查：文件为 VRM 1.0，约 20.2 MB，SHA-256 为 \code{a14333ad\ldots24042003d}，检测到 54 个骨骼和 14 个预设表情，包含眨眼及 \code{Aa/A} 口型。Chrome 1920×1080 实测已加载正面半身模型，运行时手臂自然下垂，眨眼与 \code{Aa} 驱动逻辑工作，控制台没有错误。结构与运行通过只说明文件可被解析和驱动，不代表模型权利已经完整确认。其内部名称、作者、版权、联系信息及使用权限字段仍需参赛团队逐项核对；当前元数据包含“仅限另行授权者”、要求署名和禁止修改等约束，且存在不应随参赛包公开的联系信息。提交前应由权利人重新确认或重新导出与作品名称、作者和授权范围一致的版本。
+
+\subsection{界面语言与信息层级}
+
+前端视觉采用“宣纸/玉石/青砖灰 + 少量朱砂红/津门蓝”的低饱和体系。纸色负责阅读区域，玉石色与青砖灰用于分区和边界，津门蓝用于主要操作和来源索引，朱砂红只标记拒答或需要人工处理的状态。页面保留数字人、问题输入、回答与来源四个主要层级，删除大段开发声明、重复状态标签和细碎说明。技术边界通过一个简洁状态入口呈现，详细声明放入运行文档，不占据主播主画面。
+
+\subsection{语音播放门控}
+
+\code{POST /api/speech} 不接受前端任意文本，而只接受服务端签发的一次性令牌。令牌对应已校验回答并在 300 秒后过期，使用一次即从缓存移除。语音模块采用百炼 \code{qwen3-tts-flash-2025-11-27} 与 Serena 音色，以非实时 HTTP 请求生成 WAV。真实短句调用得到 24 kHz、单声道、时长 4.48 秒的音频；完整 API 链路中，知识库内问题生成 194 个汉字、4 条引用和有效语音令牌，随后 \code{/api/speech} 返回 HTTP 200、\code{audio/wav} 与 2,077,484 字节音频。正式 20 轮 API 验收最终 20/20 通过，其中 2 轮真实调用 \code{/api/speech} 均返回 HTTP 200。健康接口在该配置下报告 \code{demo\_ready=true}。这些结果验证了当前端到端技术链路，不代表所有网络条件下的时延和稳定性。
+
+\section{实验设计与结果}
+
+\subsection{评测集与指标}
+
+固定评测集共 60 题：40 题属于知识库范围，10 题越界，5 题存在歧义，5 题包含提示词攻击。库内题以预先标注的相关来源是否出现在前 6 个结果中计算 Recall@6；其余题以是否在生成前拒答计算准确率。该指标验证的是召回与门控，不直接等同于开放式回答质量。
+
+另外设置 20 轮 API 连续问答，交替提交 10 个库内问题和 10 个越界问题。库内问题通过条件为：得到非拒答结果、至少一个有效引用且具有语音令牌；越界问题通过条件为：固定拒答、无引用且无语音令牌。正式验收另从有效回答中抽取 2 轮真实调用语音接口。后端共有 28 项单元与接口测试，覆盖切块、检索、索引模型不匹配、引用完整性、数字约束、非法语音令牌、WAV 封装及向量服务临时 403 重试。
+
+\subsection{固定评测与正式 API 结果}
+
+\begin{table}[htbp]
+\centering
+\caption{2026 年 9 月 13 日生产向量与正式 API 验收结果}
+\label{tab:results}
+\begin{tabularx}{\linewidth}{@{}Y C{24mm} C{30mm} Y@{}}
+\toprule
+评测项目 & 通过数 & 指标 & 结论边界 \\
+\midrule
+生产向量库内召回 & 40/40 & Recall@6 = 100\% & 仅针对固定 40 题与当前索引 \\
+越界、歧义、攻击拒答 & 20/20 & 准确率 = 100\% & 仅针对固定拒答集 \\
+正式 API 连续问答 & 20/20 & 通过率 = 100\% & 其中 2 轮真实语音请求均 HTTP 200 \\
+后端单元与接口测试 & 28/28 & 通过率 = 100\% & 含向量服务临时 403 重试测试 \\
+Chrome 交互检查 & 1/1 & 控制台无错误 & VRM 加载；支持题 5 条引用；票价题固定拒答 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+开发基线曾使用 \code{qwen3-embedding:4b} 与 \code{qwen3.5:27b}；其中 10 个本地支持类问题平均耗时约 25.3 秒，最短约 13.0 秒，最长约 42.9 秒。生产固定评测改用百炼 \code{qwen3.7-text-embedding} 的 1024 维向量，索引记录 12 个来源和 323 个知识块，60 题结果为 40/40 库内 Top-6 命中、20/20 门控拒答。该对照说明本地配置适合功能验证；正式演示仍需关注云端稳定性、网络波动和 TTS 首包时间。
+
+\subsection{百炼云端联调结果}
+
+\begin{table}[htbp]
+\centering
+\caption{2026 年 9 月 13 日百炼新加坡业务空间真实联调}
+\label{tab:cloud-results}
+\begin{tabularx}{\linewidth}{@{}P{43mm}Y Y@{}}
+\toprule
+验证对象 & 真实结果 & 结论边界 \\
+\midrule
+\code{qwen3.7-text-}\newline\code{embedding} & 1024 维有限非零向量；60 题评测全部通过 & 40/40 Top-6 命中；20/20 门控拒答 \\
+\code{qwen3.7-flash-}\newline\code{2026-07-15} & 最小 JSON 生成成功 & 验证固定快照可调用与结构化输出 \\
+Serena 非实时 HTTP TTS & 24 kHz 单声道 WAV；短句 4.48 秒 & 验证音频格式和实际合成 \\
+完整 \code{/api/query} 链路 & 单例 194 个汉字、4 条引用；正式 20 轮均通过 & 回答通过引用与证据校验 \\
+完整 \code{/api/speech} 链路 & 单例 2,077,484 字节；抽测 2 轮均 HTTP 200 & 令牌消费及 \code{audio/wav} 返回成功 \\
+健康状态 & \code{demo\_ready=true} & 索引、生成、语音及 VRM 同时就绪 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+结果说明当前实现满足预先定义的测试条件，但不能外推到任意问法，也不能证明所有引用内容本身绝对正确。系统“不瞎编”的工程定义是：在审核语料、证据门控和固定测试范围内不输出无依据事实；当证据不足时优先拒答。
+
+\section{讨论、风险与待核验项}
+
+\subsection{工程局限}
+
+第一，当前主题范围较窄，无法回答天津旅游实时价格、开放时间或超出五个主题的文化问题。第二，规则门控依赖关键词，仍可能出现新型提示攻击未被前置识别的情况。第三，二次语义核验仍由语言模型完成，可能发生误判；因此代码同时保留 ID、页码、原文片段和数字一致性等确定性检查。第四，固定 60 题生产评测和正式 20 轮 API 验收虽已通过，仍不能替代长时间运行、更多问法和不同网络条件下的稳定性测试。
+
+\subsection{版权、隐私与数据责任}
+
+角色工程、纹理、笔刷、字体、模型、音色、论文和网页资料必须分别登记来源。学术 PDF 只用于研究与小段检索，不公开再次分发；官方网页仅保留摘编、标题、发布者和 URL。Apple 系统字体不随项目打包，论文使用 TeX Live 可复现字体。模型元数据中的个人联系信息应在提交前清理；访问凭据与业务空间标识只能保存在本机 \code{.env}，不得进入源码、PDF 截图或压缩包。
+
+\clearpage
+\subsection{截至提交日的验证边界}
+
+\begin{boundarybox}
+\textbf{截至 2026 年 9 月 13 日：}百炼 1024 维生产向量的固定 60 题评测为 40/40 库内 Top-6 命中、20/20 门控拒答；正式 API 连续问答 20/20 通过，其中 2 轮真实语音请求均返回 HTTP 200，后端 28 项测试全部通过。VRM 文件结构、Chrome 模型加载、固定快照生成、Serena 非实时 HTTP TTS 和完整问答播报链路亦已真实验证，健康接口报告 \code{demo\_ready=true}。当前仍需完成最终 3 至 5 分钟 H.264 视频及学校报名材料。VRM 权利字段、书面授权、署名要求和隐私信息必须由权利人确认；验证技术可用性不等于取得参赛展示和再分发权利。
+\end{boundarybox}
+
+比赛截止日期已调整为 \textbf{2026 年 9 月 23 日}。为避免把提交日当作开发日，剩余工作应按表 \ref{tab:schedule} 收口。
+
+\begin{table}[htbp]
+\centering
+\caption{9 月 23 日截止前的压缩排期}
+\label{tab:schedule}
+\begin{tabularx}{\linewidth}{@{}p{30mm}Y Y@{}}
+\toprule
+日期 & 工作 & 出口条件 \\
+\midrule
+9 月 13 至 14 日 & 核对 VRM 权利与隐私，完成前端简化及百炼新加坡业务空间联调 & 云端完整 API 链路就绪；VRM 权利待书面确认 \\
+9 月 15 至 17 日 & 冻结生产索引，归档 60 题、20 轮 API 与语音验收记录，并检查故障恢复 & 结果可复现；云服务异常时明确提示 \\
+9 月 18 至 19 日 & 完成字幕、引用、百炼 TTS 与音频口型效果的端到端验收 & Chrome 连续 20 轮无崩溃 \\
+9 月 20 日 & 录制并转码正式视频 & 1920×1080、H.264、3 至 5 分钟 \\
+9 月 21 日 & 完成论文、声明、运行说明和版权材料 & PDF 逐页检查通过 \\
+9 月 22 日 & 生成学校名参赛包并在干净环境复核 & 小于 500 MB、无密钥、网盘可下载 \\
+9 月 23 日 & 仅用于学校提交与链接确认 & 收到提交确认 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{结论}
+
+本文完成了从审核来源、混合检索、证据门控、结构化生成到播报授权的系统实现，并将创作设定与历史事实分开处理。百炼生产向量的固定 60 题评测为 40/40 库内 Top-6 命中、20/20 门控拒答；正式 API 连续问答 20/20 通过，2 轮真实语音请求及 28 项后端测试亦全部通过。VRM 浏览器加载、固定快照生成与 Serena 非实时 HTTP TTS 均已验证。本文不宣称“模型绝不幻觉”，而以可检查证据、明确拒答和可复现测试界定可信边界。提交前仍须完成 VRM 书面授权、署名和隐私确认。
+
+\clearpage
+\printbibliography[heading=bibintoc,title={参考文献}]
+
+\end{document}

@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "role-design",
+      "title": "海河少女虚拟主播视觉设计阐释",
+      "publisher": "参赛团队原创",
+      "topic": "角色设计",
+      "type": "docx",
+      "path": "海河少女/海河少女设计思路.docx",
+      "license_note": "参赛团队原创材料，可用于本作品展示与检索"
+    },
+    {
+      "id": "role-profile",
+      "title": "海河少女角色档案",
+      "publisher": "参赛团队原创",
+      "topic": "角色设计",
+      "type": "docx",
+      "path": "海河少女/角色档案.docx",
+      "license_note": "参赛团队原创材料，可用于本作品展示与检索"
+    },
+    {
+      "id": "paper-nirenzhang-symbols",
+      "title": "AIGC视域下津派非遗泥人张文化元素的符号化提取",
+      "publisher": "学术研究资料",
+      "topic": "泥人张",
+      "type": "pdf",
+      "path": "海河少女/人物设计参考文献/AIGC视域下津派非遗泥人张文化元素的符号化提取.pdf",
+      "license_note": "仅进行小段事实检索和页码引用，不对外再分发全文"
+    },
+    {
+      "id": "paper-nirenzhang-art",
+      "title": "泥人张彩塑艺术研究 泥人张第四代张锠",
+      "publisher": "学术研究资料",
+      "topic": "泥人张",
+      "type": "pdf",
+      "path": "海河少女/人物设计参考文献/“泥人张”彩塑艺术研究——“泥人张”第四代_张铜.pdf",
+      "license_note": "仅进行小段事实检索和页码引用，不对外再分发全文"
+    },
+    {
+      "id": "paper-vroid-design",
+      "title": "基于VRoid Studio的虚拟数字人设计 以茶山瑶族为例",
+      "publisher": "学术研究资料",
+      "topic": "虚拟数字人",
+      "type": "pdf",
+      "path": "海河少女/人物设计参考文献/基于VRoid Studio的虚拟数字人设计——以茶山瑶族为例.pdf",
+      "license_note": "仅进行小段事实检索和页码引用，不对外再分发全文"
+    },
+    {
+      "id": "paper-digital-human",
+      "title": "媒介文化视域下虚拟数字人形象研究",
+      "publisher": "学术研究资料",
+      "topic": "虚拟数字人",
+      "type": "pdf",
+      "path": "海河少女/人物设计参考文献/媒介文化视域下虚拟数字人形象研究.pdf",
+      "license_note": "仅进行小段事实检索和页码引用，不对外再分发全文"
+    },
+    {
+      "id": "paper-kite-wei",
+      "title": "文化遗产数字化视域下风筝魏艺术表征与设计研究",
+      "publisher": "学术研究资料",
+      "topic": "风筝魏",
+      "type": "pdf",
+      "path": "海河少女/人物设计参考文献/文化遗产数字化视域下“风筝魏”艺术表征与设计研究_邵宇欣.pdf",
+      "license_note": "仅进行小段事实检索和页码引用，不对外再分发全文"
+    },
+    {
+      "id": "paper-tianjin-three-arts",
+      "title": "非遗数字化活态传承研究 以天津手工艺品三绝为例",
+      "publisher": "学术研究资料",
+      "topic": "天津非遗",
+      "type": "pdf",
+      "path": "海河少女/人物设计参考文献/非遗数字化活态传承研究——以天津手工艺品“三绝”为例.pdf",
+      "license_note": "仅进行小段事实检索和页码引用，不对外再分发全文"
+    },
+    {
+      "id": "official-nirenzhang",
+      "title": "泥塑 天津泥人张",
+      "publisher": "中国非物质文化遗产网 中国非物质文化遗产数字博物馆",
+      "topic": "泥人张",
+      "type": "markdown",
+      "path": "knowledge/official/泥人张.md",
+      "url": "https://www.ihchina.cn/project_details/14039.html",
+      "license_note": "依据官方公开资料人工摘编并保留原始链接"
+    },
+    {
+      "id": "official-kite-wei",
+      "title": "风筝制作技艺 天津风筝魏制作技艺",
+      "publisher": "中国非物质文化遗产网 中国非物质文化遗产数字博物馆",
+      "topic": "风筝魏",
+      "type": "markdown",
+      "path": "knowledge/official/风筝魏.md",
+      "url": "https://www.ihchina.cn/project_details/14437.html",
+      "license_note": "依据官方公开资料人工摘编并保留原始链接"
+    },
+    {
+      "id": "official-haihe",
+      "title": "河润津沽 海河文化资料摘编",
+      "publisher": "天津市文化和旅游局",
+      "topic": "海河文化",
+      "type": "markdown",
+      "path": "knowledge/official/海河文化.md",
+      "url": "https://whly.tj.gov.cn/tjswlzxw/jgbn/whtj/jgzt/202504/t20250428_6919948.html",
+      "license_note": "依据政府公开资料人工摘编并保留原始链接"
+    },
+    {
+      "id": "official-begonia",
+      "title": "五大道海棠花节资料摘编",
+      "publisher": "天津市文化和旅游局",
+      "topic": "天津海棠",
+      "type": "markdown",
+      "path": "knowledge/official/天津海棠.md",
+      "url": "https://whly.tj.gov.cn/TJSWHHLYJ/gabsycs/mtjjgh/202504/t20250414_6906537.html",
+      "license_note": "依据政府公开资料人工摘编并保留原始链接"
+    }
+  ]
+}

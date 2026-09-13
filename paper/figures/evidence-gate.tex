@@ -1,0 +1,91 @@
+% 海河少女证据门控图
+% 接口：主文已定义 Ink、JinmenBlue、BrickGrey、Cinnabar、PaleJade、RicePaper。
+% 在 figure 环境中直接使用 \input{figures/evidence-gate}。
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \path[use as bounding box] (0,0) rectangle (158,78);
+
+  \tikzset{
+    hhGateStep/.style={
+      draw=JinmenBlue,
+      fill=PaleJade!52,
+      line width=.72pt,
+      rounded corners=1mm,
+      minimum width=84mm,
+      minimum height=10.5mm,
+      text width=79mm,
+      inner sep=1.2mm,
+      align=center,
+      font=\small\sffamily,
+      text=Ink
+    },
+    hhGateTerminal/.style={
+      hhGateStep,
+      draw=JinmenBlue,
+      fill=JinmenBlue,
+      text=white,
+      line width=.8pt
+    },
+    hhGateReject/.style={
+      draw=Cinnabar,
+      fill=RicePaper,
+      line width=.85pt,
+      rounded corners=1.2mm,
+      minimum width=55mm,
+      minimum height=22mm,
+      text width=49mm,
+      inner sep=2mm,
+      align=center,
+      font=\small\sffamily,
+      text=Ink
+    },
+    hhGatePass/.style={
+      -{Latex[length=2mm,width=1.35mm]},
+      draw=JinmenBlue,
+      line width=.72pt,
+      line cap=round
+    },
+    hhGateFail/.style={
+      draw=Cinnabar,
+      line width=.72pt,
+      line cap=round,
+      line join=round
+    }
+  }
+
+  \node[hhGateStep] (scope) at (46,70)
+    {{\color{JinmenBlue}\bfseries 01}\quad 问题范围与提示词攻击检查};
+  \node[hhGateStep] (recall) at (46,54.5)
+    {{\color{JinmenBlue}\bfseries 02}\quad 混合召回与相关度阈值检查};
+  \node[hhGateStep] (generate) at (46,39)
+    {{\color{JinmenBlue}\bfseries 03}\quad 仅依据本轮证据的结构化生成};
+  \node[hhGateStep] (validate) at (46,23.5)
+    {{\color{JinmenBlue}\bfseries 04}\quad 引用白名单、数字日期与语义一致性检查};
+  \node[hhGateTerminal] (speech) at (46,8)
+    {\textbf{05}\quad 校验通过：签发一次性语音令牌};
+
+  \draw[hhGatePass] (scope.south) -- (recall.north);
+  \draw[hhGatePass] (recall.south) -- (generate.north);
+  \draw[hhGatePass] (generate.south) -- (validate.north);
+  \draw[hhGatePass] (validate.south) -- (speech.north);
+
+  % 所有失败出口先汇入明确的红色总线，避免多条箭头交叉或穿过节点。
+  \coordinate (failTop) at (96,70);
+  \coordinate (failMid) at (96,39);
+  \coordinate (failBottom) at (96,23.5);
+  \draw[hhGateFail] (failTop) -- (failBottom);
+  \draw[hhGateFail] (scope.east) -- (failTop);
+  \draw[hhGateFail] (recall.east) -- (96,54.5);
+  \draw[hhGateFail] (validate.east) -- (failBottom);
+  \fill[Cinnabar] (failTop) circle[radius=.85mm];
+  \fill[Cinnabar] (96,54.5) circle[radius=.85mm];
+  \fill[Cinnabar] (failMid) circle[radius=.85mm];
+  \fill[Cinnabar] (failBottom) circle[radius=.85mm];
+  \node[font=\scriptsize\sffamily\bfseries,text=Cinnabar,anchor=south]
+    at (96,73.5) {任一未通过};
+
+  \node[hhGateReject] (reject) at (130,39)
+    {\textbf{固定拒答}\\[.5ex]
+     \footnotesize 范围外・证据弱・校验失败\\[.7ex]
+     {\color{Cinnabar}\bfseries 不签发令牌，不进入 TTS}};
+  \draw[-{Latex[length=2mm,width=1.35mm]},hhGateFail] (failMid) -- (reject.west);
+\end{tikzpicture}

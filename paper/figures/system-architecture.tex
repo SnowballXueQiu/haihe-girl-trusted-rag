@@ -1,0 +1,82 @@
+% 海河少女系统架构图
+% 接口：主文已定义 Ink、JinmenBlue、BrickGrey、Cinnabar、PaleJade、RicePaper。
+% 在 figure 环境中直接使用 \input{figures/system-architecture}。
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \path[use as bounding box] (0,0) rectangle (158,60);
+
+  \tikzset{
+    hhArchBase/.style={
+      draw=BrickGrey,
+      fill=white,
+      line width=.55pt,
+      rounded corners=1.2mm,
+      minimum width=31mm,
+      minimum height=14mm,
+      text width=27mm,
+      inner sep=1.5mm,
+      align=center,
+      font=\small\sffamily,
+      text=Ink
+    },
+    hhArchCore/.style={
+      hhArchBase,
+      draw=JinmenBlue,
+      line width=.8pt,
+      fill=PaleJade!62
+    },
+    hhArchGuard/.style={
+      hhArchBase,
+      draw=Cinnabar,
+      line width=.8pt,
+      fill=RicePaper
+    },
+    hhArchFlow/.style={
+      -{Latex[length=2.1mm,width=1.45mm]},
+      draw=JinmenBlue,
+      line width=.75pt,
+      line cap=round,
+      line join=round
+    },
+    hhArchReject/.style={
+      -{Latex[length=2.1mm,width=1.45mm]},
+      draw=Cinnabar,
+      line width=.75pt,
+      line cap=round,
+      line join=round
+    }
+  }
+
+  % 上层：从受控来源到带引用的结构化回答。
+  \node[hhArchBase]  (source) at (16,50)
+    {\textbf{审核来源}\\[-.2ex]\scriptsize PDF\,/\,DOCX\,/\,MD};
+  \node[hhArchCore]  (index)  at (57,50)
+    {\textbf{混合索引}\\[-.2ex]\footnotesize FTS5 + 向量};
+  \node[hhArchGuard] (gate)   at (98,50)
+    {\textbf{证据门控}\\[-.2ex]\footnotesize 范围・阈值・来源};
+  \node[hhArchCore]  (gen)    at (139,50)
+    {\textbf{结构化生成}\\[-.2ex]\footnotesize 事实段绑定引用};
+
+  % 下层反向回流：复核、授权、流式传输与数字人呈现。
+  \node[hhArchBase] (front)  at (16,8)
+    {\textbf{文化向导}\\[-.2ex]\footnotesize React + VRM};
+  \node[hhArchCore] (sse)    at (57,8)
+    {\textbf{流式传输}\\[-.2ex]\footnotesize 字幕・引用・状态};
+  \node[hhArchCore] (token)  at (98,8)
+    {\textbf{播报授权}\\[-.2ex]\footnotesize 一次性语音令牌};
+  \node[hhArchGuard] (verify) at (139,8)
+    {\textbf{回答复核}\\[-.2ex]\footnotesize 引用・数字・语义};
+
+  \draw[hhArchFlow] (source.east) -- (index.west);
+  \draw[hhArchFlow] (index.east)  -- (gate.west);
+  \draw[hhArchFlow] (gate.east)   -- (gen.west);
+  \draw[hhArchFlow] (gen.south)   -- (verify.north);
+  \draw[hhArchFlow] (verify.west) -- (token.east);
+  \draw[hhArchFlow] (token.west)  -- (sse.east);
+  \draw[hhArchFlow] (sse.west)    -- (front.east);
+
+  % 证据不足时不进入生成与语音授权，但仍经 SSE 向前端返回可见状态。
+  \node[hhArchGuard,minimum width=27mm,minimum height=11mm,text width=23mm]
+    (reject) at (98,29) {\textbf{固定拒答}\\[-.2ex]\footnotesize 不进入 TTS};
+  \draw[hhArchReject] (gate.south) -- (reject.north);
+  \draw[hhArchReject] (reject.west) -- ++(-8mm,0) -| (sse.north);
+\end{tikzpicture}
