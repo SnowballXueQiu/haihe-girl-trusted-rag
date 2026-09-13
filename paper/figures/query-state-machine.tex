@@ -4,8 +4,8 @@
   \tikzset{
     hhState/.style={
       draw=JinmenBlue, fill=PaleJade!52, line width=.72pt,
-      rounded corners=1.2mm, minimum width=27mm, minimum height=14mm,
-      text width=23mm, align=center, inner sep=1.2mm,
+      rounded corners=1.2mm, minimum width=22mm, minimum height=14mm,
+      text width=18.5mm, align=center, inner sep=1.1mm,
       font=\small\sffamily, text=Ink
     },
     hhStateGuard/.style={hhState,draw=Cinnabar,fill=RicePaper},
@@ -19,33 +19,34 @@
     }
   }
 
-  \node[hhState] (idle) at (14,48) {\textbf{待机}\\[-.2ex]\footnotesize 接收问题};
-  \node[hhState] (retrieve) at (46,48) {\textbf{检索}\\[-.2ex]\footnotesize 返回候选证据};
-  \node[hhState] (generate) at (78,48) {\textbf{生成}\\[-.2ex]\footnotesize 结构化事实段};
-  \node[hhState] (verify) at (110,48) {\textbf{复核}\\[-.2ex]\footnotesize 引用・数字・语义};
-  \node[hhState] (speech) at (144,48) {\textbf{播报}\\[-.2ex]\footnotesize 一次性令牌};
+  \node[hhState] (idle) at (11,48) {\textbf{待机}\\[-.2ex]\footnotesize 接收问题};
+  \node[hhState] (retrieve) at (38,48) {\textbf{检索}\\[-.2ex]\footnotesize 候选证据};
+  \node[hhStateGuard] (gate) at (65,48) {\textbf{证据门控}\\[-.2ex]\footnotesize 范围・相关度};
+  \node[hhState] (generate) at (92,48) {\textbf{生成}\\[-.2ex]\footnotesize 事实段};
+  \node[hhState] (verify) at (119,48) {\textbf{引用复核}\\[-.2ex]\footnotesize ID・数字・语义};
+  \node[hhState] (speech) at (146,48) {\textbf{播报}\\[-.2ex]\footnotesize 一次性令牌};
 
-  \node[hhStateGuard,minimum width=42mm,text width=37mm] (refuse) at (55,11)
-    {\textbf{固定拒答}\\[-.2ex]\footnotesize 越界、证据弱或校验失败};
-  \node[hhStateGuard,minimum width=42mm,text width=37mm] (error) at (111,11)
-    {\textbf{可见错误}\\[-.2ex]\footnotesize 云服务不可用，不伪造结果};
+  \node[hhStateGuard,minimum width=30mm,text width=26mm] (scopeRefuse) at (65,9)
+    {\textbf{范围拒答}\\[-.2ex]\scriptsize 越界或证据不足};
+  \node[hhStateGuard,minimum width=30mm,text width=26mm] (checkRefuse) at (119,9)
+    {\textbf{校验拒答}\\[-.2ex]\scriptsize 引用或语义不通过};
+  \node[hhStateGuard,minimum width=22mm,text width=18mm] (error) at (146,9)
+    {\textbf{可见错误}\\[-.2ex]\scriptsize 不伪造结果};
 
   \draw[hhStateFlow] (idle.east) -- (retrieve.west);
-  \draw[hhStateFlow] (retrieve.east) -- (generate.west);
+  \draw[hhStateFlow] (retrieve.east) -- (gate.west);
+  \draw[hhStateFlow] (gate.east) -- node[above,font=\tiny\sffamily,text=BrickGrey] {是} (generate.west);
   \draw[hhStateFlow] (generate.east) -- (verify.west);
-  \draw[hhStateFlow] (verify.east) -- (speech.west);
-  % 所有异常线先落到框体下方的独立轨道，再向下分流；不穿越任何节点。
-  \draw[draw=Cinnabar,line width=.72pt,line cap=round]
-    (retrieve.south) -- (46,29)
-    (generate.south) -- (78,29)
-    (verify.south) -- (110,29)
-    (speech.south) -- (144,29)
-    (46,29) -- (144,29);
-  \foreach \x in {46,78,110,144}{\fill[Cinnabar] (\x,29) circle (0.65mm);}
-  \draw[hhStateFail] (55,29) -- (refuse.north);
-  \draw[hhStateFail] (111,29) -- (error.north);
-  \node[font=\scriptsize\sffamily,text=Cinnabar,fill=RicePaper,inner sep=.6mm]
-    at (99,29) {异常分流};
+  \draw[hhStateFlow] (verify.east) -- node[above,font=\tiny\sffamily,text=BrickGrey] {通过} (speech.west);
+
+  % 两条拒答分支均垂直进入各自终止状态，不交叉、不共用轨道。
+  \draw[hhStateFail] (gate.south) -- node[right,font=\tiny\sffamily,text=Cinnabar] {否} (scopeRefuse.north);
+  \draw[hhStateFail] (verify.south) -- node[right,font=\tiny\sffamily,text=Cinnabar] {否} (checkRefuse.north);
+
+  % 云端异常是任一云调用均可能触发的独立终止条件，不错误归属于某一步。
+  \node[font=\tiny\sffamily,text=Cinnabar,align=center] (cloudFail) at (146,27)
+    {任一云调用失败};
+  \draw[hhStateFail] (cloudFail.south) -- (error.north);
 
   \node[font=\scriptsize\sffamily,text=BrickGrey,anchor=south]
     at (80,59) {SSE 仅用于传输当前服务端状态；新问题会取消旧请求};
