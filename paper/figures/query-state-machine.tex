@@ -25,19 +25,27 @@
   \node[hhState] (verify) at (110,48) {\textbf{复核}\\[-.2ex]\footnotesize 引用・数字・语义};
   \node[hhState] (speech) at (144,48) {\textbf{播报}\\[-.2ex]\footnotesize 一次性令牌};
 
-  \node[hhStateGuard,minimum width=42mm,text width=37mm] (refuse) at (55,13)
+  \node[hhStateGuard,minimum width=42mm,text width=37mm] (refuse) at (55,11)
     {\textbf{固定拒答}\\[-.2ex]\footnotesize 越界、证据弱或校验失败};
-  \node[hhStateGuard,minimum width=42mm,text width=37mm] (error) at (111,13)
+  \node[hhStateGuard,minimum width=42mm,text width=37mm] (error) at (111,11)
     {\textbf{可见错误}\\[-.2ex]\footnotesize 云服务不可用，不伪造结果};
 
   \draw[hhStateFlow] (idle.east) -- (retrieve.west);
   \draw[hhStateFlow] (retrieve.east) -- (generate.west);
   \draw[hhStateFlow] (generate.east) -- (verify.west);
   \draw[hhStateFlow] (verify.east) -- (speech.west);
-  \draw[hhStateFail] (retrieve.south) |- (refuse.west);
-  \draw[hhStateFail] (verify.south) |- (refuse.east);
-  \draw[hhStateFail] (generate.south) |- (error.north);
-  \draw[hhStateFail] (speech.south) -- (error.north east);
+  % 所有异常线先落到框体下方的独立轨道，再向下分流；不穿越任何节点。
+  \draw[draw=Cinnabar,line width=.72pt,line cap=round]
+    (retrieve.south) -- (46,29)
+    (generate.south) -- (78,29)
+    (verify.south) -- (110,29)
+    (speech.south) -- (144,29)
+    (46,29) -- (144,29);
+  \foreach \x in {46,78,110,144}{\fill[Cinnabar] (\x,29) circle (0.65mm);}
+  \draw[hhStateFail] (55,29) -- (refuse.north);
+  \draw[hhStateFail] (111,29) -- (error.north);
+  \node[font=\scriptsize\sffamily,text=Cinnabar,fill=RicePaper,inner sep=.6mm]
+    at (99,29) {异常分流};
 
   \node[font=\scriptsize\sffamily,text=BrickGrey,anchor=south]
     at (80,59) {SSE 仅用于传输当前服务端状态；新问题会取消旧请求};
