@@ -1,0 +1,48 @@
+% 审核语料的入库与溯源生命周期
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \path[use as bounding box] (0,0) rectangle (158,63);
+  \tikzset{
+    hhSource/.style={
+      draw=JinmenBlue, fill=PaleJade!55, line width=.72pt,
+      rounded corners=1.1mm, minimum width=32mm, minimum height=15mm,
+      text width=28mm, align=center, inner sep=1.4mm,
+      font=\small\sffamily, text=Ink
+    },
+    hhSourceGuard/.style={
+      hhSource, draw=Cinnabar, fill=RicePaper
+    },
+    hhSourceFlow/.style={
+      -{Latex[length=2mm,width=1.35mm]}, draw=JinmenBlue,
+      line width=.72pt, line cap=round, line join=round
+    }
+  }
+
+  \node[hhSource] (register) at (17,51)
+    {\textbf{来源登记}\\[-.2ex]\footnotesize 标题・发布者・权限};
+  \node[hhSource] (hash) at (58,51)
+    {\textbf{原件固化}\\[-.2ex]\footnotesize SHA-256・页数};
+  \node[hhSourceGuard] (review) at (99,51)
+    {\textbf{页面审核}\\[-.2ex]\footnotesize 渲染・转写・复核};
+  \node[hhSource] (chunk) at (140,51)
+    {\textbf{切块标注}\\[-.2ex]\footnotesize 页码・主题・类型};
+
+  \node[hhSource] (index) at (140,12)
+    {\textbf{索引生成}\\[-.2ex]\footnotesize FTS5 + 1024 维向量};
+  \node[hhSourceGuard] (gate) at (99,12)
+    {\textbf{证据门控}\\[-.2ex]\footnotesize 范围・阈值・引用};
+  \node[hhSource] (citation) at (58,12)
+    {\textbf{引用重建}\\[-.2ex]\footnotesize 片段・页码・URL};
+  \node[hhSource] (audit) at (17,12)
+    {\textbf{审计输出}\\[-.2ex]\footnotesize 回答或明确拒答};
+
+  \draw[hhSourceFlow] (register.east) -- (hash.west);
+  \draw[hhSourceFlow] (hash.east) -- (review.west);
+  \draw[hhSourceFlow] (review.east) -- (chunk.west);
+  \draw[hhSourceFlow] (chunk.south) -- (index.north);
+  \draw[hhSourceFlow] (index.west) -- (gate.east);
+  \draw[hhSourceFlow] (gate.west) -- (citation.east);
+  \draw[hhSourceFlow] (citation.west) -- (audit.east);
+
+  \node[font=\scriptsize\sffamily,text=BrickGrey,align=center]
+    at (79,31.5) {任何更换文件或模型都必须重建索引；原 PDF 不随参赛包再分发};
+\end{tikzpicture}
