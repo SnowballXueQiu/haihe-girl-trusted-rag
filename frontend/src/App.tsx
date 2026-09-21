@@ -304,11 +304,7 @@ export default function App() {
           </div>
           <div className="stage-frame">
             <div className="stage-backdrop" aria-hidden="true" />
-            <AvatarStage
-              motion={busy ? "thinking" : "idle"}
-              speakingLevel={level}
-              vrmExpected={Boolean(health?.vrm_ready)}
-            />
+            <AvatarStage speakingLevel={level} vrmExpected={Boolean(health?.vrm_ready)} />
             <div className="water-mark" aria-hidden="true">海河</div>
           </div>
         </aside>

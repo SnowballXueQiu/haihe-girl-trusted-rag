@@ -4,48 +4,92 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import {
   VRM,
   VRMExpressionPresetName,
+  VRMHumanBoneName,
   VRMLoaderPlugin,
   VRMUtils,
 } from "@pixiv/three-vrm";
-import {
-  createVRMAnimationClip,
-  VRMAnimation,
-  VRMAnimationLoaderPlugin,
-  VRMLookAtQuaternionProxy,
-} from "@pixiv/three-vrm-animation";
-
-export type AvatarMotion = "idle" | "thinking";
 
 type Props = {
-  motion: AvatarMotion;
   speakingLevel: number;
   vrmExpected: boolean;
 };
 
-const animationUrls: Record<AvatarMotion, string> = {
-  idle: "/animations/haihegirl_idle_6s.vrma",
-  thinking: "/animations/haihegirl_thinking_4s.vrma",
+const idleBones = [
+  VRMHumanBoneName.Hips,
+  VRMHumanBoneName.Spine,
+  VRMHumanBoneName.Chest,
+  VRMHumanBoneName.Neck,
+  VRMHumanBoneName.Head,
+  VRMHumanBoneName.LeftUpperArm,
+  VRMHumanBoneName.LeftLowerArm,
+  VRMHumanBoneName.LeftHand,
+  VRMHumanBoneName.RightUpperArm,
+  VRMHumanBoneName.RightLowerArm,
+  VRMHumanBoneName.RightHand,
+  VRMHumanBoneName.LeftUpperLeg,
+  VRMHumanBoneName.RightUpperLeg,
+] as const;
+
+type IdleBone = (typeof idleBones)[number];
+type EulerTuple = readonly [x: number, y: number, z: number];
+type IdlePose = Record<IdleBone, EulerTuple>;
+
+// “Standby 7”：双手轻收于身后，重心稳定，适合作为文化讲解的主待机姿态。
+const standbySeven: IdlePose = {
+  [VRMHumanBoneName.Hips]: [0, 0, 0],
+  [VRMHumanBoneName.Spine]: [0.018, 0, -0.015],
+  [VRMHumanBoneName.Chest]: [-0.012, 0, 0.018],
+  [VRMHumanBoneName.Neck]: [0, 0.015, -0.018],
+  [VRMHumanBoneName.Head]: [0, -0.018, 0.018],
+  [VRMHumanBoneName.LeftUpperArm]: [0.1, 0.22, -0.84],
+  [VRMHumanBoneName.LeftLowerArm]: [0.03, 0.12, -1.12],
+  [VRMHumanBoneName.LeftHand]: [0.02, 0, -0.12],
+  [VRMHumanBoneName.RightUpperArm]: [-0.1, -0.22, 0.84],
+  [VRMHumanBoneName.RightLowerArm]: [-0.03, -0.12, 1.12],
+  [VRMHumanBoneName.RightHand]: [-0.02, 0, 0.12],
+  [VRMHumanBoneName.LeftUpperLeg]: [0, 0, -0.018],
+  [VRMHumanBoneName.RightUpperLeg]: [0, 0, 0.018],
 };
 
-const getVRMAnimation = (userData: Record<string, unknown>) => {
-  const animations = userData.vrmAnimations as VRMAnimation[] | undefined;
-  if (!animations?.[0]) throw new Error("VRMA 文件未包含可播放动画");
-  return animations[0];
+// “Standby 5”：侧身歪头并抬手致意，保留截图中更活泼的轮廓。
+const standbyFive: IdlePose = {
+  [VRMHumanBoneName.Hips]: [0, -0.02, 0.085],
+  [VRMHumanBoneName.Spine]: [0.025, -0.025, 0.105],
+  [VRMHumanBoneName.Chest]: [0.025, -0.045, 0.14],
+  [VRMHumanBoneName.Neck]: [-0.025, 0.045, 0.12],
+  [VRMHumanBoneName.Head]: [-0.035, 0.07, 0.17],
+  [VRMHumanBoneName.LeftUpperArm]: [0.04, 0.1, -0.92],
+  [VRMHumanBoneName.LeftLowerArm]: [0.02, 0.04, -0.35],
+  [VRMHumanBoneName.LeftHand]: [0.02, 0, -0.08],
+  [VRMHumanBoneName.RightUpperArm]: [-0.12, 0.2, -0.82],
+  [VRMHumanBoneName.RightLowerArm]: [-0.08, -0.16, -2.06],
+  [VRMHumanBoneName.RightHand]: [0.03, 0.08, 0.2],
+  [VRMHumanBoneName.LeftUpperLeg]: [0, 0, 0.035],
+  [VRMHumanBoneName.RightUpperLeg]: [0, 0, 0.075],
 };
 
-export function AvatarStage({ motion, speakingLevel, vrmExpected }: Props) {
+const smoothstep = (value: number) => {
+  const t = THREE.MathUtils.clamp(value, 0, 1);
+  return t * t * (3 - 2 * t);
+};
+
+const standbyBlendAt = (elapsed: number) => {
+  const phase = elapsed % 15.8;
+  if (phase < 5.2) return 0;
+  if (phase < 6.6) return smoothstep((phase - 5.2) / 1.4);
+  if (phase < 12) return 1;
+  if (phase < 13.4) return 1 - smoothstep((phase - 12) / 1.4);
+  return 0;
+};
+
+export function AvatarStage({ speakingLevel, vrmExpected }: Props) {
   const mountRef = useRef<HTMLDivElement>(null);
   const levelRef = useRef(speakingLevel);
-  const motionRef = useRef(motion);
   const [state, setState] = useState<"loading" | "ready" | "placeholder">("loading");
 
   useEffect(() => {
     levelRef.current = speakingLevel;
   }, [speakingLevel]);
-
-  useEffect(() => {
-    motionRef.current = motion;
-  }, [motion]);
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -79,79 +123,38 @@ export function AvatarStage({ motion, speakingLevel, vrmExpected }: Props) {
     scene.add(lookTarget);
 
     let vrm: VRM | null = null;
-    let mixer: THREE.AnimationMixer | null = null;
-    let activeMotion: AvatarMotion | null = null;
-    let actions: Partial<Record<AvatarMotion, THREE.AnimationAction>> = {};
+    let idleBoneNodes: Partial<Record<IdleBone, THREE.Object3D>> = {};
+    let hipsRestPosition: THREE.Vector3 | null = null;
     let disposed = false;
-
-    const activateMotion = (nextMotion: AvatarMotion, fadeDuration = 0.45) => {
-      if (activeMotion === nextMotion) return;
-      const nextAction = actions[nextMotion];
-      if (!nextAction) return;
-
-      const previousAction = activeMotion ? actions[activeMotion] : undefined;
-      nextAction
-        .reset()
-        .setLoop(THREE.LoopRepeat, Infinity)
-        .setEffectiveTimeScale(1)
-        .setEffectiveWeight(1)
-        .play();
-      if (previousAction) previousAction.crossFadeTo(nextAction, fadeDuration, false);
-      activeMotion = nextMotion;
-    };
-
-    const modelLoader = new GLTFLoader();
-    modelLoader.register((parser) => new VRMLoaderPlugin(parser));
-    const animationLoader = new GLTFLoader();
-    animationLoader.register((parser) => new VRMAnimationLoaderPlugin(parser));
-
-    const loadAvatar = async () => {
-      try {
-        const gltf = await modelLoader.loadAsync("/models/haihe-girl.vrm");
-        const loadedVrm = gltf.userData.vrm as VRM;
-        if (disposed) {
-          VRMUtils.deepDispose(loadedVrm.scene);
-          return;
-        }
-
-        if (loadedVrm.meta.metaVersion === "0") VRMUtils.rotateVRM0(loadedVrm);
+    const loader = new GLTFLoader();
+    loader.register((parser) => new VRMLoaderPlugin(parser));
+    loader.load(
+      "/models/haihe-girl.vrm",
+      (gltf) => {
+        if (disposed) return;
+        vrm = gltf.userData.vrm as VRM;
+        if (vrm.meta.metaVersion === "0") VRMUtils.rotateVRM0(vrm);
         VRMUtils.removeUnnecessaryVertices(gltf.scene);
         VRMUtils.combineSkeletons(gltf.scene);
-        // VRM 1.0 avatars face +Z. The camera is on +Z, and the source model remains untouched.
-        loadedVrm.scene.rotation.y = 0;
-        if (loadedVrm.lookAt) {
-          loadedVrm.lookAt.target = lookTarget;
-          const lookAtProxy = new VRMLookAtQuaternionProxy(loadedVrm.lookAt);
-          lookAtProxy.name = "VRMLookAtQuaternionProxy";
-          loadedVrm.scene.add(lookAtProxy);
-        }
-        scene.add(loadedVrm.scene);
-        vrm = loadedVrm;
-
-        const loadedAnimations = await Promise.all(
-          (Object.entries(animationUrls) as [AvatarMotion, string][]).map(
-            async ([name, url]) => {
-              const animationGltf = await animationLoader.loadAsync(url);
-              return [name, getVRMAnimation(animationGltf.userData)] as const;
-            },
-          ),
-        );
-        if (disposed) return;
-
-        mixer = new THREE.AnimationMixer(loadedVrm.scene);
-        actions = Object.fromEntries(
-          loadedAnimations.map(([name, animation]) => [
-            name,
-            mixer?.clipAction(createVRMAnimationClip(animation, loadedVrm)),
+        // VRM 1.0 avatars face +Z. The camera is placed on +Z, so no 180° turn is needed.
+        // Keep animation in runtime only; the supplied VRM file is never rewritten.
+        vrm.scene.rotation.y = 0;
+        idleBoneNodes = Object.fromEntries(
+          idleBones.map((boneName) => [
+            boneName,
+            vrm?.humanoid.getNormalizedBoneNode(boneName) ?? undefined,
           ]),
-        );
-        activateMotion(motionRef.current, 0);
+        ) as Partial<Record<IdleBone, THREE.Object3D>>;
+        hipsRestPosition = idleBoneNodes[VRMHumanBoneName.Hips]?.position.clone() ?? null;
+        if (vrm.lookAt) vrm.lookAt.target = lookTarget;
+        scene.add(vrm.scene);
         setState("ready");
-      } catch {
+      },
+      undefined,
+      () => {
         if (!disposed) setState("placeholder");
-      }
-    };
-    void loadAvatar();
+      },
+    );
 
     const pointer = new THREE.Vector2();
     const onPointerMove = (event: PointerEvent) => {
@@ -163,13 +166,42 @@ export function AvatarStage({ motion, speakingLevel, vrmExpected }: Props) {
     mount.addEventListener("pointermove", onPointerMove);
 
     const clock = new THREE.Clock();
-    let animationFrame = 0;
+    let animation = 0;
     const render = () => {
-      animationFrame = requestAnimationFrame(render);
+      animation = requestAnimationFrame(render);
       const delta = Math.min(clock.getDelta(), 0.05);
+      const elapsed = clock.elapsedTime;
       if (vrm) {
-        activateMotion(motionRef.current);
-        mixer?.update(delta);
+        const standbyBlend = standbyBlendAt(elapsed);
+        camera.position.z = THREE.MathUtils.lerp(2.05, 2.23, standbyBlend);
+        for (const boneName of idleBones) {
+          const bone = idleBoneNodes[boneName];
+          if (!bone) continue;
+          const from = standbySeven[boneName];
+          const to = standbyFive[boneName];
+          bone.rotation.set(
+            THREE.MathUtils.lerp(from[0], to[0], standbyBlend),
+            THREE.MathUtils.lerp(from[1], to[1], standbyBlend),
+            THREE.MathUtils.lerp(from[2], to[2], standbyBlend),
+          );
+        }
+
+        const hips = idleBoneNodes[VRMHumanBoneName.Hips];
+        if (hips && hipsRestPosition) {
+          hips.position.set(
+            hipsRestPosition.x + standbyBlend * 0.045,
+            hipsRestPosition.y + Math.sin(elapsed * 1.15) * 0.004,
+            hipsRestPosition.z,
+          );
+        }
+
+        const spine = idleBoneNodes[VRMHumanBoneName.Spine];
+        const chest = idleBoneNodes[VRMHumanBoneName.Chest];
+        if (spine) spine.rotation.z += Math.sin(elapsed * 0.62) * 0.01;
+        if (chest) chest.rotation.x += Math.sin(elapsed * 1.35) * 0.009;
+        const blinkCycle = elapsed % 4.8;
+        const blink = blinkCycle > 4.48 ? Math.sin(((blinkCycle - 4.48) / 0.32) * Math.PI) : 0;
+        vrm.expressionManager?.setValue(VRMExpressionPresetName.Blink, blink);
         vrm.expressionManager?.setValue(
           VRMExpressionPresetName.Aa,
           Math.min(0.88, levelRef.current * 0.92),
@@ -194,10 +226,8 @@ export function AvatarStage({ motion, speakingLevel, vrmExpected }: Props) {
     return () => {
       disposed = true;
       observer.disconnect();
-      cancelAnimationFrame(animationFrame);
+      cancelAnimationFrame(animation);
       mount.removeEventListener("pointermove", onPointerMove);
-      mixer?.stopAllAction();
-      actions = {};
       renderer.dispose();
       renderer.domElement.remove();
       if (vrm) VRMUtils.deepDispose(vrm.scene);
@@ -212,7 +242,7 @@ export function AvatarStage({ motion, speakingLevel, vrmExpected }: Props) {
           <img src="/avatar-placeholder.jpg" alt="海河少女角色参考形象" />
           <div className={`placeholder-mouth ${speakingLevel > 0.08 ? "is-speaking" : ""}`} />
           <div className="model-note">
-            <span>{state === "loading" ? "正在载入模型与动作" : "模型暂未载入"}</span>
+            <span>{state === "loading" ? "正在载入模型" : "模型暂未载入"}</span>
           </div>
         </div>
       )}
