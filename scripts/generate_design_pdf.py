@@ -1,8 +1,9 @@
 """旧版系统说明书及配套材料生成器。
 
 正式参赛论文以 ``paper/main.tex`` 和 ``scripts/build_paper.sh`` 的 LaTeX
-编译结果为准。本脚本保留用于生成归档版说明书、AI 声明和运行说明，
+编译结果为准。本脚本保留用于生成归档版说明书和运行说明，
 不得用旧版说明书替代正式论文。
+正式 AI 工具使用声明由 ``scripts/build_ai_statement.sh`` 单独构建。
 """
 
 from __future__ import annotations
@@ -87,13 +88,20 @@ WHITE_SUB = ParagraphStyle(
     "white-sub", parent=BODY, fontSize=11.5, leading=19, textColor=colors.HexColor("#D8E4EF"),
 )
 SUPPORT_BODY = ParagraphStyle(
-    "support-body", parent=BODY, fontSize=9.1, leading=14.2, spaceAfter=2.4,
+    "support-body", parent=BODY, fontSize=10.2, leading=16.6, spaceAfter=3.6,
+)
+SUPPORT_PARAGRAPH = ParagraphStyle(
+    "support-paragraph", parent=SUPPORT_BODY, firstLineIndent=20.4,
+)
+SUPPORT_LIST = ParagraphStyle(
+    "support-list", parent=SUPPORT_BODY, leftIndent=14, firstLineIndent=-14,
+    spaceAfter=3.2,
 )
 SUPPORT_H2 = ParagraphStyle(
-    "support-h2", parent=H2, fontSize=14.2, leading=19, spaceBefore=5, spaceAfter=6,
+    "support-h2", parent=H2, fontSize=15.2, leading=21, spaceBefore=8, spaceAfter=7,
 )
 SUPPORT_H3 = ParagraphStyle(
-    "support-h3", parent=H3, fontSize=10.2, leading=14, spaceBefore=4, spaceAfter=3,
+    "support-h3", parent=H3, fontSize=11.5, leading=16.5, spaceBefore=6, spaceAfter=4,
 )
 SUPPORT_CODE = ParagraphStyle(
     "support-code", parent=SMALL, fontSize=7.8, leading=11.2, textColor=NAVY,
@@ -459,11 +467,11 @@ def markdown_lines_to_story(path: Path, title: str, intro: str) -> list[Flowable
         elif line.startswith("### "):
             story.append(p(_markdown_inline(line[4:]), SUPPORT_H3))
         elif line.startswith("- "):
-            story.append(p("•&nbsp;&nbsp;" + _markdown_inline(line[2:]), SUPPORT_BODY))
+            story.append(p("•&nbsp;&nbsp;" + _markdown_inline(line[2:]), SUPPORT_LIST))
         elif re.match(r"\d+\.\s", line):
-            story.append(p(_markdown_inline(line), SUPPORT_BODY))
+            story.append(p(_markdown_inline(line), SUPPORT_LIST))
         else:
-            story.append(p(_markdown_inline(line), SUPPORT_BODY))
+            story.append(p(_markdown_inline(line), SUPPORT_PARAGRAPH))
     if code_lines:
         story.append(_code_table(code_lines))
     return story
@@ -480,7 +488,6 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     outputs = [
         build_design_pdf(),
-        build_supporting_pdf("docs/AI工具使用声明.md", "AI工具使用声明.pdf", "AI 工具使用声明", "本文档记录作品中 AI 的实际用途、人机协作边界、数据隐私和技术局限。"),
         build_supporting_pdf("docs/人机协作过程说明.md", "人机协作过程说明.pdf", "人机协作过程说明", "记录参赛团队和 AI 工具在需求、开发、资料审核和验收中的分工。"),
         build_supporting_pdf("docs/运行与操作说明.md", "运行与操作说明.pdf", "运行与操作说明", "用于评审和复现演示的本地部署、配置、操作与故障处理指南。"),
     ]

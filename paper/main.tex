@@ -1,6 +1,6 @@
-\documentclass[UTF8,zihao=-4,fontset=none]{ctexart}
+\documentclass[UTF8,zihao=-4,fontset=none,twoside]{ctexart}
 
-\usepackage[a4paper,left=25mm,right=25mm,top=27mm,bottom=24mm,headheight=24pt]{geometry}
+\usepackage[a4paper,top=37mm,bottom=35mm,left=28mm,right=26mm,footskip=18mm]{geometry}
 \usepackage{fontspec}
 \usepackage{xeCJK}
 \usepackage{amsmath,amssymb}
@@ -10,6 +10,7 @@
 \usepackage{caption}
 \usepackage{enumitem}
 \usepackage{setspace}
+\usepackage{indentfirst}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{tikz}
@@ -29,22 +30,19 @@
 
 \usetikzlibrary{arrows.meta,positioning,fit,calc}
 \addbibresource{references.bib}
-\renewcommand*{\bibfont}{\footnotesize\setstretch{1.08}}
+\renewcommand*{\bibfont}{\fangsong\zihao{3}\fontsize{16pt}{28pt}\selectfont}
 
-\setmainfont{texgyretermes-regular.otf}[
-  BoldFont=texgyretermes-bold.otf,
-  ItalicFont=texgyretermes-italic.otf,
-  BoldItalicFont=texgyretermes-bolditalic.otf
-]
-\setsansfont{texgyreheros-regular.otf}[
-  BoldFont=texgyreheros-bold.otf,
-  ItalicFont=texgyreheros-italic.otf,
-  BoldItalicFont=texgyreheros-bolditalic.otf
-]
-\setmonofont{lmmono10-regular.otf}
-\setCJKmainfont{Songti SC}[AutoFakeBold=2.2]
-\setCJKsansfont{PingFang SC}[AutoFakeBold=2.2]
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setmonofont{Times New Roman}
+\setCJKmainfont{STFangsong}
+\setCJKsansfont{PingFang SC}[AutoFakeBold=2]
 \setCJKmonofont{STFangsong}
+\newCJKfontfamily\titlefont{Songti SC}[BoldFont={Songti SC Bold},AutoFakeBold=2]
+\newCJKfontfamily\heiti{STHeiti}[AutoFakeBold=2]
+\newCJKfontfamily\kaiti{Kaiti SC}[AutoFakeBold=2]
+\newCJKfontfamily\fangsong{STFangsong}[AutoFakeBold=2]
+\newfontfamily\pagefont{Songti SC}
 
 \definecolor{Ink}{HTML}{2D3436}
 \definecolor{JinmenBlue}{HTML}{244C66}
@@ -54,33 +52,42 @@
 \definecolor{RicePaper}{HTML}{F7F3E8}
 \definecolor{LightRule}{HTML}{D8DDD9}
 
-\color{Ink}
-\linespread{1.36}
+\color{black}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt minus 0.1pt
+\xeCJKsetup{CJKecglue=\nobreak\hskip 0.25em plus 0.08em minus 0.04em}
+\AtBeginDocument{\fangsong\zihao{3}\fontsize{16pt}{28pt}\selectfont}
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0pt}
-\setlength{\emergencystretch}{2em}
+\setlength{\emergencystretch}{3em}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\raggedbottom
 \setlist{nosep,leftmargin=2.2em,labelsep=.6em}
-\setlist[itemize]{label=\textcolor{JinmenBlue}{\small\textbullet}}
-\setlist[enumerate]{label=\textcolor{JinmenBlue}{\arabic*.}}
+\setlist[itemize]{label=\textbullet}
+\setlist[enumerate]{label=\arabic*.}
 
+\renewcommand{\thesection}{\chinese{section}}
+\renewcommand{\thesubsection}{\chinese{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}}
 \titleformat{\section}
-  {\Large\bfseries\sffamily\color{JinmenBlue}}
-  {\thesection}{0.75em}{}
-  [\vspace{0.2em}\color{LightRule}\titlerule]
+  {\heiti\zihao{3}\fontsize{16pt}{35pt}\selectfont}
+  {\thesection、}{0pt}{}
 \titleformat{\subsection}
-  {\large\bfseries\sffamily\color{Ink}}
-  {\thesubsection}{0.7em}{}
+  {\kaiti\zihao{3}\fontsize{16pt}{34pt}\selectfont}
+  {（\thesubsection）}{0pt}{}
 \titleformat{\subsubsection}
-  {\normalsize\bfseries\sffamily\color{Ink}}
-  {\thesubsubsection}{0.6em}{}
-\titlespacing*{\section}{0pt}{2.7ex plus .5ex}{1.5ex}
-\titlespacing*{\subsection}{0pt}{2.0ex plus .4ex}{.8ex}
-\titlespacing*{\subsubsection}{0pt}{1.5ex}{.5ex}
+  {\fangsong\zihao{3}\fontsize{16pt}{28pt}\selectfont}
+  {\thesubsubsection.}{0.5em}{}
+\titlespacing{\section}{0pt}{12pt}{6pt}
+\titlespacing{\subsection}{0pt}{8pt}{2pt}
+\titlespacing{\subsubsection}{0pt}{4pt}{0pt}
 
+\DeclareCaptionFont{govcaption}{\fangsong\zihao{3}\fontsize{16pt}{28pt}\selectfont}
 \captionsetup{
-  font=small,
-  labelfont={bf,color=JinmenBlue},
-  textfont={color=Ink},
+  font=govcaption,
+  labelfont=normalfont,
+  textfont=normalfont,
   skip=6pt
 }
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
@@ -90,10 +97,7 @@
 \setlength{\tabcolsep}{5pt}
 
 \hypersetup{
-  colorlinks=true,
-  linkcolor=JinmenBlue,
-  citecolor=JinmenBlue,
-  urlcolor=Cinnabar,
+  hidelinks,
   pdfauthor={晏妍、王彦翔},
   pdftitle={海河少女：基于可信 RAG 的天津文化 AI 虚拟主播系统设计与实现},
   pdfsubject={天津文化 IP 主题 AI 虚拟主播系统},
@@ -105,12 +109,17 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\sffamily\color{BrickGrey} 天津师范大学}
-\fancyhead[R]{\small\sffamily\color{BrickGrey} 系统设计与实现}
-\fancyfoot[C]{\small\sffamily\color{BrickGrey}\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\headrule}{\hbox to\headwidth{\color{LightRule}\leaders\hrule height \headrulewidth\hfill}}
+\fancyfoot[RO]{{\pagefont\zihao{4}\thepage\hspace*{1em}}}
+\fancyfoot[LE]{{\pagefont\zihao{4}\hspace*{1em}\thepage}}
+\renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[RO]{{\pagefont\zihao{4}\thepage\hspace*{1em}}}
+  \fancyfoot[LE]{{\pagefont\zihao{4}\hspace*{1em}\thepage}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
 
 \newtcolorbox{boundarybox}{
   enhanced,
@@ -124,16 +133,17 @@
   before skip=10pt,after skip=10pt
 }
 
-\newcommand{\keyword}[1]{\noindent\textbf{关键词：}#1}
+\newcommand{\keyword}[1]{\noindent{\heiti 关键词：}#1}
 \newcommand{\enkeyword}[1]{\noindent\textbf{Keywords: }#1}
-\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\abstractpara}{\noindent\hspace*{2\ccwd}}
+\newcommand{\code}[1]{\mbox{\texttt{#1}}\nobreak}
 \newcommand{\yes}{\textcolor{JinmenBlue}{已验证}}
 \newcommand{\pending}{\textcolor{Cinnabar}{待核验}}
 
 \begin{document}
 
 \hypersetup{pageanchor=false}
-\pagecolor{RicePaper}
+\pagecolor{white}
 \begin{titlepage}
   \thispagestyle{empty}
   \begin{tikzpicture}[remember picture,overlay]
@@ -145,27 +155,27 @@
   \end{tikzpicture}
 
   \vspace*{17mm}
-  {\sffamily\color{JinmenBlue}\large
+  {\fangsong\zihao{3}\fontsize{16pt}{28pt}\selectfont
     2026 年第十三届天津市大学生动漫与数字创意设计大赛\par}
   \vspace{3mm}
-  {\sffamily\color{BrickGrey}\normalsize
+  {\fangsong\zihao{3}\fontsize{16pt}{28pt}\selectfont
     AI 虚拟主播赛道 · 天津文化 IP 主题\par}
 
   \vfill
-  {\fontsize{34}{46}\selectfont\bfseries\sffamily\color{Ink}
+  {\titlefont\bfseries\fontsize{22pt}{35pt}\selectfont
     海河少女\par}
-  \vspace{8mm}
-  {\fontsize{20}{31}\selectfont\sffamily\color{JinmenBlue}
+  \vspace{5mm}
+  {\titlefont\bfseries\fontsize{22pt}{35pt}\selectfont
     基于可信 RAG 的天津文化\par
     AI 虚拟主播系统设计与实现\par}
-  \vspace{13mm}
-  {\large\color{Ink}
+  \vspace{10mm}
+  {\fangsong\zihao{3}\fontsize{16pt}{28pt}\selectfont
     面向证据约束问答、三维文化向导与语音播报的本地系统\par}
 
   \vfill
   \begin{center}
     \renewcommand{\arraystretch}{1.6}
-    \begin{tabular}{@{}>{\bfseries\sffamily\raggedleft\arraybackslash}p{30mm}@{\hspace{10mm}}>{\raggedright\arraybackslash}p{70mm}@{}}
+    \begin{tabular}{@{}>{\fangsong\raggedleft\arraybackslash}p{30mm}@{\hspace{10mm}}>{\fangsong\raggedright\arraybackslash}p{70mm}@{}}
       学校 & 天津师范大学 \\
       作者 & 晏妍、王彦翔 \\
       指导教师 & 王欣雨 \\
@@ -178,15 +188,19 @@
 
 \clearpage
 \hypersetup{pageanchor=true}
-\pagenumbering{Roman}
+\pagenumbering{arabic}
 \pagestyle{plain}
 \phantomsection
 \addcontentsline{toc}{section}{摘要}
 \begin{center}
-  {\zihao{3}\bfseries\sffamily\color{JinmenBlue} 摘\quad 要\par}
+  {\heiti\zihao{3}\fontsize{16pt}{35pt}\selectfont 摘\quad 要\par}
 \end{center}
 \vspace{2.2em}
-非物质文化遗产数字传播不仅要求形象具有地域辨识度，也要求自动生成内容能够说明依据。本文设计并实现“海河少女”天津文化 AI 虚拟主播系统：以 VRM 三维角色作为文化向导，以人工审核的限定知识库作为事实边界，以 SQLite FTS5 与文本向量组成混合检索，并在生成前后设置主题检查、证据阈值、引用白名单、数字与日期一致性检查以及独立语义复核。只有通过校验的回答才获得一次性语音令牌，从而把知识证据、文本生成和语音播报连接为可检查的闭环。系统现有知识库包含 22 个来源、347 个知识块，覆盖角色设定、泥人张、风筝魏、海河文化和天津海棠。2026 年 9 月 13 日，使用百炼 1024 维生产向量完成固定 60 题评测：40 个库内问题全部在 Top-6 命中预标来源，20 个越界、歧义与提示词攻击问题全部被拒答；正式 API 连续问答 20/20 通过，其中 2 轮真实语音请求均返回 HTTP 200，后端 30 项测试全部通过。浏览器亦已加载新 VRM 并完成 1920×1080 交互检查。同日的百炼新加坡业务空间联调还验证了固定快照生成模型、Momo 非实时 HTTP 语音合成及新增风筝魏问题的完整问答播报链路。上述数据只证明当前测试集和联调样例下的工程表现，不等同于大语言模型理论上绝对不会产生幻觉。VRM 书面授权、署名和隐私字段仍需在 9 月 23 日提交前完成复核。
+\abstractpara 非物质文化遗产数字传播不仅要求形象具有地域辨识度，也要求自动生成内容能够说明依据。本文设计并实现“海河少女”天津文化 AI 虚拟主播系统：以 VRM 三维角色作为文化向导，以人工审核的限定知识库作为事实边界，以 SQLite FTS5 与文本向量组成混合检索，并在生成前后设置主题检查、证据阈值、引用白名单、数字与日期一致性检查以及独立语义复核。只有通过校验的回答才获得一次性语音令牌，从而把知识证据、文本生成和语音播报连接为可检查的闭环。
+
+\abstractpara 系统现有知识库包含 22 个来源、347 个知识块，覆盖角色设定、泥人张、风筝魏、海河文化和天津海棠。\mbox{2026 年 9 月 13 日}，使用百炼 1024 维生产向量完成固定 60 题评测：40 个库内问题全部在 Top-6 命中预标来源，20 个越界、歧义与提示词攻击问题全部被拒答；正式 API 连续问答 20/20 通过，其中 2 轮真实语音请求均返回 HTTP 200，后端 30 项测试全部通过。浏览器亦已加载团队原创 VRM 并完成 1920×1080 交互检查。同日的百炼新加坡业务空间联调还验证了固定快照生成模型、Momo 非实时 HTTP 语音合成及新增风筝魏问题的完整问答播报链路。
+
+\abstractpara 上述数据只证明当前测试集和联调样例下的工程表现，不等同于大语言模型理论上绝对不会产生幻觉。
 
 \vspace{1.5em}
 \keyword{可信 RAG；虚拟主播；天津文化；VRM；证据门控；非遗数字化}
@@ -195,12 +209,14 @@
 \phantomsection
 \addcontentsline{toc}{section}{Abstract}
 \begin{center}
-  {\zihao{3}\bfseries\sffamily\color{JinmenBlue} ABSTRACT\par}
+  {\heiti\zihao{3}\fontsize{16pt}{35pt}\selectfont ABSTRACT\par}
 \end{center}
 \vspace{2.2em}
-\noindent Digital communication of intangible cultural heritage requires both a recognisable regional identity and traceable evidence for generated statements. This paper presents \emph{Haihe Girl}, an AI virtual-presenter system for Tianjin culture. A VRM character serves as the cultural guide, while a manually reviewed and domain-bounded knowledge base defines the factual scope. The backend combines SQLite FTS5 lexical retrieval with dense-vector retrieval, followed by topic screening, evidence thresholds, citation allow-list checks, numerical and date consistency checks, and a separate semantic verification pass. Only answers that pass all checks receive a one-time token for speech synthesis, thereby connecting evidence retrieval, text generation, citation display, and spoken delivery in an auditable pipeline.
+\abstractpara Digital communication of intangible cultural heritage requires both a recognisable regional identity and traceable evidence for generated statements. This paper presents \emph{Haihe Girl}, an AI virtual-presenter system for Tianjin culture. A VRM character serves as the cultural guide, while a manually reviewed and domain-bounded knowledge base defines the factual scope. The backend combines SQLite FTS5 lexical retrieval with dense-vector retrieval, followed by topic screening, evidence thresholds, citation allow-list checks, numerical and date consistency checks, and a separate semantic verification pass. Only answers that pass all checks receive a one-time token for speech synthesis, thereby connecting evidence retrieval, text generation, citation display, and spoken delivery in an auditable pipeline.
 
-The current corpus contains 22 sources and 347 chunks covering the character design, Tianjin Clay Figurine Zhang, Kite Wei, Haihe River culture, and Tianjin crabapple imagery. On 13 September 2026, a fixed 60-question evaluation using the 1024-dimensional production embedding passed all predefined checks: all 40 in-scope questions retrieved a labelled source within the top six results, and all 20 out-of-scope, ambiguous, and prompt-injection questions were rejected. The formal 20-round API test passed 20/20; two real speech requests returned HTTP 200, and all 30 backend tests passed. The supplied VRM was also loaded in a 1920×1080 browser session. Integration in an Alibaba Cloud Model Studio Singapore workspace further verified fixed-snapshot JSON generation, Momo non-real-time HTTP speech synthesis, and the complete query-to-audio path for a newly added Kite Wei question. These results describe the present test set and integration samples; they do not imply that a large language model is theoretically incapable of hallucination. Written VRM authorisation, attribution, and private metadata remain pending before submission.
+\abstractpara The current corpus contains 22 sources and 347 chunks covering the character design, Tianjin Clay Figurine Zhang, Kite Wei, Haihe River culture, and Tianjin crabapple imagery. On 13 September 2026, a fixed 60-question evaluation using the 1024-dimensional production embedding passed all predefined checks: all 40 in-scope questions retrieved a labelled source within the top six results, and all 20 out-of-scope, ambiguous, and prompt-injection questions were rejected. The formal 20-round API test passed 20/20; two real speech requests returned HTTP 200, and all 30 backend tests passed. The team's original VRM character was also loaded in a 1920×1080 browser session. Integration in an Alibaba Cloud Model Studio Singapore workspace further verified fixed-snapshot JSON generation, Momo non-real-time HTTP speech synthesis, and the complete query-to-audio path for a newly added Kite Wei question.
+
+\abstractpara These results describe the present test set and integration samples; they do not imply that a large language model is theoretically incapable of hallucination.
 
 \vspace{1.5em}
 \enkeyword{trustworthy RAG; virtual presenter; Tianjin culture; VRM; evidence gating; digital heritage}
@@ -213,19 +229,56 @@ The current corpus contains 22 sources and 347 chunks covering the character des
 
 \clearpage
 \pagestyle{fancy}
-\pagenumbering{arabic}
-\setcounter{page}{1}
 
 \section{引言}
 
+\subsection{研究背景与创作动机}
+
 虚拟数字人兼具可视形象、语言表达和交互能力，正在成为文化展示与公共叙事的新媒介\cite{li2025digitalhuman}。然而，将通用大语言模型直接接入文化讲解，会引入两个相互关联的问题：其一，模型可能把记忆、推断或过时信息写成确定事实；其二，虚拟主播以自然语音和拟人形象输出时，受众更难察觉回答依据不足。检索增强生成（Retrieval-Augmented Generation, RAG）能够在生成前提供外部证据\cite{lewis2020rag}，但“检索到文档”并不自动意味着“回答被文档支持”。如果缺少范围门控、引用约束和拒答机制，带有引用外观的回答仍可能包含无依据内容。
+
+天津拥有泥人张彩塑、风筝魏制作技艺等具有鲜明地域辨识度的非物质文化遗产，也具有海河、五大道等能够连接城市历史与当代生活的公共文化意象。传统图文展板适合稳定陈列，却较难按照观众的具体疑问组织信息；通用搜索可以扩大信息入口，但结果来源、时效性与内容质量不一；普通生成式问答能够快速形成连贯表达，却可能模糊官方资料、学术观点、媒体叙事和创作设定之间的差别。对非遗传播而言，这种差别并非技术细节：项目类别、传承谱系、历史年代和工艺特征一旦被混写，流畅的讲解反而会放大错误。
+
+年轻受众已经习惯通过短视频、虚拟角色和对话界面接触文化内容。相比单向阅读，他们更容易从“提出一个问题并立即得到回应”的方式进入主题；相比纯文字机器人，具有形象、动作和语音的虚拟主播也更容易形成连续的角色记忆。但拟人化并不能替代资料核验。角色越亲切、语音越自然，观众越可能降低对内容来源的警惕。因此，本项目把“吸引用户开口提问”和“提醒用户查看依据”视为同一交互目标的两个方面：前者由角色形象、动作反馈与语音完成，后者由限定知识库、引用卡片、拒答状态和播报门控完成。
+
+项目选择以本地审核语料为事实边界，而不是在运行时自动搜索全网。这样做牺牲了对最新票价、活动排期和临时政策的覆盖，却换来了可枚举的来源、可重复的索引和可复查的回答链路。对于竞赛展示、校园文化讲解和小型数字展陈而言，“知道哪些问题不能回答”与“能够回答多少问题”同样重要。系统遇到资料外问题时明确说明知识边界，不用模型常识补齐，也不以预录语音掩盖服务失败。
 
 本项目面向天津文化 IP 主题 AI 虚拟主播赛道，构建一个本地运行、证据可追踪的文化问答原型。角色视觉以泥人张仕女彩塑的温润气韵、海河的水色和五大道海棠意象为主要线索，将高密度的风筝魏符号保留在独立道具层，避免在服装表面堆叠文化元素。该设计遵循符号提取与数字媒介转译的思路\cite{yuan2026symbol,shao2025kite}，但不会把参赛团队的拟人化世界观写成历史事实。
 
-本文的工程贡献包括以下三点：
+\subsection{相关工作与现有方案不足}
+
+现有虚拟数字人研究关注形象建构、媒介身份与互动表达，说明数字角色并非简单的人物贴图，而是视觉风格、行为反馈和内容人格共同构成的媒介主体\cite{li2025digitalhuman}。在非遗数字化方向，研究者通常从造型、色彩、纹饰、工艺和文化寓意中提取符号，再将其重新组合到新的媒介与产品中\cite{yuan2026symbol,shao2025kite,jiang2024kite}。这些研究为“海河少女”的视觉方法提供了依据，也提示创作者不能把传统元素机械叠加，更不能把当代设计方案倒写成传统工艺原貌。
+
+在知识问答方向，RAG 通过检索外部文档为生成模型提供上下文，能够降低回答完全依赖模型参数记忆的程度\cite{lewis2020rag}。但基础 RAG 流程通常以“检索若干文档并生成文本”为终点，尚不能自然保证三件事：检索结果确实与问题相关、生成段落只使用了检索证据、展示给用户的引用确实对应本轮文本。文化讲解还需要区分创作设定与历史事实，并对实时信息、歧义问法和提示词攻击做前置处理。由此，本项目把 RAG 视为一条需要校验的证据加工链，而不是给语言模型附加搜索框。
+
+表~\ref{tab:solution-comparison}概括了几类常见文化传播方案与本项目的关注点。这里的比较不是宣称一种形式替代所有其他形式，而是说明不同媒介分别解决什么问题。静态展陈适合稳定、策展式叙事；传统数字展馆适合浏览大量藏品；普通聊天机器人适合开放交流；一般虚拟主播适合形成持续的视听表达。本项目面向的是更窄的交集：在有限主题内，让虚拟主播的每次事实讲解都能够回到审核证据，并让拒答也成为完整的交互结果。
+
+\begin{table}[htbp]
+\centering
+\caption{常见文化传播方案与本项目的功能侧重}
+\label{tab:solution-comparison}
+\small
+\begin{tabularx}{\linewidth}{@{}P{28mm}Y Y Y@{}}
+\toprule
+方案 & 主要优势 & 典型不足 & 本项目的处理 \\
+\midrule
+静态图文展陈 & 内容稳定、审核路径清楚 & 难以按观众问题动态组织信息 & 保留审核语料，同时增加对话入口 \\
+传统数字展馆 & 适合分类浏览与多媒体陈列 & 交互常以菜单和页面跳转为主 & 用自然语言连接角色、非遗与城市意象 \\
+通用聊天机器人 & 问法自由、表达流畅 & 来源边界与引用一致性难以确认 & 限定五类主题，证据不足时拒答 \\
+一般虚拟主播 & 形象鲜明、语音呈现连贯 & 自然表达可能放大无依据内容的可信感 & 校验通过后才允许 TTS 播报 \\
+本项目 & 形象、问答、引用和播报形成闭环 & 覆盖范围受审核知识库限制 & 以可追溯性换取可解释的边界 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{研究问题与主要工作}
+
+围绕上述矛盾，本文提出三个工程问题：第一，如何把来源性质不同的天津文化资料组织为可追溯、可更新且不会混淆史实与创作设定的知识库；第二，如何保证生成回答、页面引用与语音播报使用同一份已经核验的文本；第三，如何让三维角色的视觉表现服务于知识理解，而不遮挡证据或制造“系统无所不知”的印象。研究过程相应分为资料准入、视觉转译、系统实现和固定评测四条线，并在最终界面中汇合。
+
+本文的工程贡献包括以下四点：
 \begin{enumerate}
   \item 建立角色创作资料、学术资料和官方资料并行的来源体系，在数据层保留来源类型、页码、片段、网址与文件哈希；
   \item 设计从检索到播报的多级证据门控，回答的每个事实段必须绑定本轮候选中的有效知识块，未通过校验的文本不能进入 TTS；
+  \item 将待机、思考、播报、拒答和错误组织为可辨认的交互状态，使动作、字幕、引用与音频状态保持一致；
   \item 用固定 60 题检索集、20 轮端到端 API 问答和后端测试记录系统边界，并把“没有足够依据”作为正常产品状态而非异常兜底。
 \end{enumerate}
 
@@ -233,9 +286,37 @@ The current corpus contains 22 sources and 347 chunks covering the character des
 
 \subsection{使用场景与核心矛盾}
 
-本作品面向竞赛演示和校园文化展示两类场景。用户以中文文字询问天津非遗、海河文化或角色设计，系统在本地审核语料中检索，展示答案和证据，再由三维角色播报。该场景的核心矛盾不是“能否生成一段流畅文字”，而是“拟人化表达如何不超过证据能力”。语气越自然，受众越容易将其当作权威讲解；因此产品必须在视觉吸引力和事实克制之间建立可验证的约束。
+本作品首先面向竞赛演示和校园文化展示，也可迁移到小型非遗展览与博物馆辅助导览。用户以中文文字询问天津非遗、海河文化或角色设计，系统在本地审核语料中检索，展示答案和证据，再由三维角色播报。该场景的核心矛盾不是“能否生成一段流畅文字”，而是“拟人化表达如何不超过证据能力”。语气越自然，受众越容易将其当作权威讲解；因此产品必须在视觉吸引力和事实克制之间建立可验证的约束。
 
 本文将一次查询记为 $q$，检索到的候选知识块集合记为 $C_q$，生成回答的事实段集合记为 $P_q$。系统需要保证：每个 $p\in P_q$ 所声明的引用都来自 $C_q$，段落中的关键数字和日期能在证据中找到，并且语义复核判定证据能支持该段。若任一条件不成立，系统应返回拒答而不是补写看似合理的内容。
+
+\subsection{参与角色与典型任务}
+
+系统不只服务提问者。内容审核者需要知道知识从哪里进入、何时更新以及哪些片段应当停用；演示人员需要在录屏或现场展示前确认索引、模型、语音和 VRM 均已就绪；普通观众则需要在较短时间内区分“回答内容”“回答依据”和“当前状态”。三类角色对同一功能的判断标准不同，因而系统不能只以回答文字是否通顺作为完成条件。
+
+\begin{table}[htbp]
+\centering
+\caption{参与角色、核心任务与系统响应}
+\label{tab:stakeholders}
+\begin{tabularx}{\linewidth}{@{}P{25mm}Y Y@{}}
+\toprule
+参与角色 & 典型任务 & 需要看到的结果 \\
+\midrule
+普通观众 & 询问非遗类别、工艺特点、城市意象或角色设定 & 简洁回答、可展开引用、明确的可播报或拒答状态 \\
+内容审核者 & 增补资料、核对页码、修正扫描文本、停用争议来源 & 来源清单、原文件哈希、知识块元数据和评测记录 \\
+演示人员 & 启动服务、检查模型与音频、连续展示多个问题 & 健康状态、可恢复错误、不会被旧请求覆盖的新答案 \\
+项目维护者 & 更换嵌入模型、扩展主题、重建索引 & 模型与索引一致性检查、固定题集回归结果 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+典型交互可以分为四类。第一类是明确的库内事实问题，例如询问泥人张所属的非遗类别，系统应找到官方资料、形成带引用的回答并允许播报。第二类是角色创作问题，例如询问头发为何采用黑蓝渐变，系统应引用团队原创设定，并避免把审美解释写成天津历史事实。第三类是资料相关但要求实时信息的问题，例如询问当日活动票价或最新交通安排；即使知识库含有往年活动资料，也应在生成前拒答。第四类是攻击或诱导问题，例如要求忽略引用规则编写故事，系统应把它识别为边界测试，而不是把服从用户指令置于资料约束之上。
+
+从展览体验看，一次完整任务不止包含“提问--回答”。用户需要先确认系统正在检索而非卡住，再看到回答与来源，最后自主决定是否播放语音；若问题无法回答，也应知道是资料范围不足、实时信息不可用还是系统故障。状态可见性因此构成可信性的一部分，它使用户能够区分“系统不知道”和“系统暂时不可用”，也使演示人员能够采取不同的恢复动作。
+
+\subsection{需求分层与验收原则}
+
+需求被分为内容可信、系统功能、交互呈现和交付复现四层。内容可信层决定回答是否允许出现；系统功能层保证检索、生成、引用和语音的接口闭环；交互呈现层负责让用户理解处理进度与证据关系；交付复现层保证源码、索引、文档和 PDF 对应同一版本。四层具有先后关系：若内容校验失败，后续的自然语音和角色动作不能把失败结果包装成成功回答。
 
 \subsection{功能、可信与展示目标}
 
@@ -260,17 +341,87 @@ The current corpus contains 22 sources and 347 chunks covering the character des
 
 为在 9 月 23 日前交付一条可靠主链，项目不建设公网服务，不开放用户上传文档，不在运行时联网搜索，不接入麦克风语音识别，也不在云服务失败时播放预录音频冒充实时回答。这些限制使系统能够对资料范围、版本和错误状态做出明确说明。“不瞎编”因而是一个由数据治理、证据门控和固定评测共同支撑的工程目标，而非对模型本体的绝对能力声明。
 
-\section{文化 IP 与视觉转译}
+明确非目标也用于控制论文结论的外推范围。本项目没有进行大规模用户研究，因而不声称角色设计已经得到特定年龄群体的统计偏好验证；没有进行跨模型消融实验，因而不把当前混合检索阈值解释为普适最优参数；没有持续在线运行，因而不以一次联调结果推断长期服务可用性。本文只报告已经执行并留有记录的工程测试。
 
-\subsection{角色定位与来源边界}
+\clearpage
+\section{海河少女视觉设计阐释}
 
-“海河少女”被设定为了解天津手工艺与海河城市文化的年轻讲述者。泥人张和彩塑相关事实优先依据国家级非物质文化遗产项目资料\cite{ihchinaNiren}；风筝魏的项目身份与技艺信息依据国家级非遗公开资料\cite{ihchinaKite}；海河和海棠作为城市意象时，分别依据天津市文化和旅游局资料\cite{tianjinHaihe,tianjinBegonia}。角色“常驻海河、随潮汐收集城市记忆”等描述是作品世界观，只能在创作设定语境中使用。
+\subsection{设计立意与创作内核}
 
-知识库为两类信息设置了不同标签。历史、名录、技艺和城市资料标记为 \code{factual}，角色性格、服装转译和故事背景标记为 \code{creative}。当问题询问角色外观或世界观时，系统优先召回团队原创设定；当问题涉及历史事实时，创作资料不能代替官方或学术来源。该分离减少了叙事语言与史实陈述之间的混淆。
+团队在前期形成的《海河少女设计思路》把角色设计放在天津非遗数字传播的具体场景中考虑。角色首先要让观众在较短时间内建立天津地域联想，其次要在浏览器半身镜头和直播界面中保持清楚的轮廓，最后还要与论文的事实边界一致，即所有文化关联都能说明来源，创作设定不替代历史事实。由此，设计目标不是把尽可能多的地方元素贴到人物表面，而是建立一套能够解释、能够删减、也能够在数字媒介中稳定呈现的视觉秩序。
 
-\subsection{造型、色彩与制作过程}
+泥人张仕女彩塑提供人物气质与服装结构的主要启发，海河和五大道海棠提供色彩与城市意象，风筝魏则承担高辨识度的工艺符号。泥人张在此并非某件具体作品的复制模板，而是温润、生活化、重视人物神态的审美参照；海河也不被直接画成大面积水纹，而被转化为黑蓝色阶、发梢渐变和低幅度动态；海棠的粉白色被控制在发饰、裙摆与局部纹理；风筝魏的复杂造型被保留在独立道具与后续内容入口。该方法与非遗符号提取、重组和数字媒介转译的研究思路一致\cite{yuan2026symbol,shao2025kite,jiang2024kite}。
 
-角色上衣以低饱和深青为主，裙摆使用柔粉和白色窄边，朱红系带仅承担点睛作用；黑蓝渐变发色将海河水色转化为不依赖具象图案的视觉线索。服装保持交领、束腰和分层裙摆的结构感，同时减少大面积纹样。角色主体现代、简洁，风筝符号承担更高的信息密度，从而形成“主体克制、道具强调”的层次。
+早期草图曾同时尝试海河、水母式流动感、海棠花饰和风筝魏道具。进入三维阶段后，团队没有把草图中的每个想法等量保留，而是以角色正面轮廓、面部可读性和界面占比为依据逐步收敛。图~\ref{fig:concept-to-model}呈现了从手绘构思到最终模型的变化：天津文化线索仍然存在，但由直接注释和集中陈列转为服装结构、配色、发型与道具层之间的分工。
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[t]{.48\linewidth}
+    \centering
+    \includegraphics[width=.96\linewidth]{figures/design/concept-sketch.jpeg}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{.43\linewidth}
+    \centering
+    \includegraphics[height=.96\linewidth]{figures/design/final-model.png}
+  \end{minipage}
+  \caption{海河少女团队原创早期构思草图与最终三维模型}
+  \label{fig:concept-to-model}
+\end{figure}
+
+\subsection{造型溯源与形制改良}
+
+人物体态以端正、舒展和低攻击性的正面站姿为基础。团队参考泥人张仕女彩塑中温和内敛的人物观感，并从公开项目资料和相关研究中理解其民间人物塑造的生活感\cite{ihchinaNiren,yuan2026symbol}。论文不把角色服装认定为某一历史时期的标准服制，也不声称模型复原了某件彩塑；设计吸收的是交领或斜襟带来的方向性、束腰形成的比例变化、分层裙摆的垂直节奏和细系带的线性强调。
+
+形制改良分为“保留结构”和“降低装饰密度”两个步骤。保留部分包括上身收束、腰部节点、裙摆分层以及柔和的肩颈关系，这些结构在不依赖复杂纹样时仍能维持人物识别。删减部分主要是大面积连续花纹、多个强对比饰件和重复的高饱和色块。删减并非否定传统彩塑的装饰价值，而是针对网页主播画面所作的媒介适配：角色需要与问题输入、答案、字幕和引用卡同时出现，服装表面的每个细节都必须考虑实际显示尺寸。
+
+模型比例也围绕虚拟主播的常用镜头调整。腰线适度提高，使半身画面仍能看出上衣与裙装的分界；袖口和肩部避免过大的横向外扩，防止在动作驱动时侵入文字区域；发型保留纵向下垂的长线条，让黑蓝渐变能够形成稳定色块。最终模型仍可切换到全身展示，但主要判断标准来自正面半身与中景，而不是静态设定图中的全身细节数量。
+
+面部表现采用柔和眉眼、较低的妆容对比和清晰的眼部高光。这样处理一方面延续仕女题材温润克制的气质，另一方面确保眨眼、视线跟随和口型驱动在浏览器中容易辨认。角色的“亲切”不是依靠持续夸张表情实现，而是由稳定正面姿态、低幅动作和清楚的语音状态共同形成。
+
+\subsection{文化符号的层级组织}
+
+多种文化来源同时进入角色时，最容易出现的问题是每个元素都可单独解释，但整体失去主次。团队因此采用“资料核验--语义提取--视觉映射--边界复核”的四步流程：先确认元素与天津文化的关系，再提取适合角色表达的形态、色彩或气质，随后决定它应进入人物本体、服装局部、独立道具还是故事背景，最后检查这种映射是否会被误读为传统原型的直接复制。
+
+人物本体承担低密度、长时间可见的信息。泥人张对应气质与服装结构，海河对应发色与流动感，海棠对应局部粉白色和细小花形。风筝魏的纹样、色彩、骨架和造型信息更密集，若继续铺到衣身会打破大色块关系，因此被移到独立道具层。道具可以在特定讲述中出现，也可作为后续交互内容入口；即使道具暂时不出现在主画面，人物主体仍能保持完整。
+
+\begin{table}[htbp]
+\centering
+\caption{文化来源、视觉映射与表述边界}
+\label{tab:visual-translation}
+\small
+\begin{tabularx}{\linewidth}{@{}P{25mm}P{34mm}Y Y@{}}
+\toprule
+文化来源 & 提取内容 & 在角色中的映射 & 不作出的声明 \\
+\midrule
+泥人张彩塑 & 温润气质、人物神态与生活感 & 柔和面部观感、克制的传统服装结构 & 不复刻或冒称某件具体藏品 \\
+海河文化 & 水色、流动感与城市记忆 & 黑蓝渐变发色、低幅度动态与叙事背景 & 不把拟人世界观写成历史事实 \\
+五大道海棠 & 春季城市景观、粉白花色 & 发饰、裙摆与低对比花形意象 & 不声称海棠是天津市花 \\
+风筝魏 & 造型、纹饰、折叠结构与高辨识色彩 & 独立道具及后续互动内容入口 & 不将创新设计方案说成传统工序 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+这种层级还决定观众看到元素的顺序。远距离或小尺寸画面首先呈现深蓝上衣、粉色裙摆和黑蓝长发构成的整体轮廓；进入中景后，白色镶边、朱红系带和海棠纹理才逐步出现；高密度的风筝魏符号则需要在道具展示或专题讲述中单独阅读。视觉信息由整体到局部展开，避免每个符号在同一时刻争夺注意力。
+
+所有映射均被表述为团队的设计选择。泥人张、风筝魏、海河和海棠的事实身份分别依据官方或审核资料\cite{ihchinaNiren,ihchinaKite,tianjinHaihe,tianjinBegonia}，但“某种发色代表海河”“某处粉色代表海棠”属于创作者建立的对应关系。把事实来源与视觉解释分开，既保留设计表达空间，也便于问答系统在回答角色设计问题时说明依据。
+
+\subsection{色彩系统与城市意象}
+
+角色配色由主色、辅色、点缀色和渐变色四个层次组成。低饱和深青与深蓝承担最大面积，覆盖上衣和靠近面部的主要轮廓，建立安静、稳定的视觉基调。柔粉用于裙摆和发饰，白色窄边用于提亮结构转折；二者共同抬高下半身明度，同时避免粉色扩展到全身。朱红只出现在细系带和少量局部，以很小面积建立视线停留点。
+
+黑蓝渐变发色是海河意象的主要抽象转译。发根保持接近黑色，使头部轮廓在浅色背景和纸色界面中稳定；发梢向青蓝过渡，在角色移动和光照变化时产生轻微的水色联想。团队没有把波浪、河道或城市剪影直接铺满头发，而是利用颜色深浅和材质高光形成流动感，降低具象图案对面部表情的干扰。
+
+粉白色的海棠关联同样采用局部表达。花形主要停留在发饰和裙摆低对比纹理中，不承担官方城市标志的功能。这样的处理使观众可以把它理解为春季城市景观的创作联想，而不会把角色配色误读为天津市花或传统服饰固定色谱。论文中的文化事实与设计解释因此保持不同语气：前者由资料支持，后者说明团队为何这样选择。
+
+配色还要与应用界面共同校准。界面使用纸色、玉石色、津门蓝和少量朱砂红，角色则增加更深的蓝黑与更柔和的粉白，保证人物不会融入背景。拒答状态所用的红色也不能与角色腰部点缀形成大面积混淆。设计阶段通过实际页面截图反复检查人物、字幕和来源卡的同时可读性，而不是只在纯色建模背景中判断颜色。
+
+\subsection{服饰肌理与数字镜头适配}
+
+服装材质以哑光纯色基底为主，避免大面积镜面高光随相机变化遮蔽轮廓。裙摆和局部衣身叠加低透明度的海棠与水纹肌理，使远观时仍保持完整色块，近看时才出现细节。该“双层阅读”方式适合虚拟主播的镜头变化：默认中景不因细纹过多而显得杂乱，切换到近景或角色展示时又能看出团队绘制的纹理。
+
+衣褶的处理服务于三维体积而不是平面装饰。腰部向下的纵向褶皱用于说明布料垂坠方向，裙摆下缘通过明暗变化表现层次，袖口和腰侧则减少无依据的锐利折线。由于 VRoid 服装网格会在骨骼运动中产生形变，纹理不能只在静态正面成立，还要观察轻微转身、呼吸和手臂动作时是否拉伸、错位或形成过强闪烁。
+
+制作流程采用 VRoid Studio 完成体型、面部、发型、服装和材质绘制，再导出 VRM 交由浏览器中的 Three.js 与 \code{@pixiv/three-vrm}驱动。服装和发型不是在完成后一次性导出，而是在“纹理修改--模型预览--浏览器检查”之间迭代。图~\ref{fig:vroid-skirt} 和图~\ref{fig:vroid-hair}分别记录裙摆纹理、发色材质与高光的调整过程。
 
 \begin{figure}[htbp]
   \centering
@@ -286,7 +437,27 @@ The current corpus contains 22 sources and 347 chunks covering the character des
   \label{fig:vroid-hair}
 \end{figure}
 
-图~\ref{fig:vroid-skirt} 和图~\ref{fig:vroid-hair}记录的是创作过程，而非自动生成的最终宣传图。论文不使用来源不明、带有第三方平台水印的造型参考图；相关参考只在能够确认作者、用途和许可时进入最终参赛材料。
+这些图像记录的是团队实际创作过程，而非自动生成的最终宣传图。论文不使用来源不明、带有第三方平台水印的造型参考图。过程图的作用是说明设计如何落到可编辑纹理、材质参数和模型预览上，使“传统意象转译”能够对应到具体制作步骤。
+
+\subsection{人物气质与角色叙事}
+
+团队把人物风格概括为“津派民俗仕女与极简国风的结合”。这一表述是内部设计定位，不是既有艺术史分类。它强调三项可观察的选择：人物神态温和写实，构图和服饰保留适度留白，数字模型减少不利于小尺寸阅读的装饰。最终形象有意降低幼态甜美、浓烈仙侠和舞台化华服的比重，使角色在较长时间的文化讲解中保持稳定、克制的视觉语气。
+
+“海河少女”被设定为了解天津手工艺与海河城市文化的年轻讲述者。她可以用第一人称介绍自己的发色、服装和创作使命，因为这些内容来自团队原创设定；涉及非遗项目类别、历史年代、传承人物或官方名称时，则必须切换为由资料支持的客观表述。涉及“我住在海河上”“我收集潮汐中的城市记忆”等内容时，回答需要明确其拟人化世界观属性，不能让角色经历替代城市史实。
+
+知识库为这两类信息设置不同标签。历史、名录、技艺和城市资料标记为 \code{factual}，角色性格、服装转译和故事背景标记为 \code{creative}。当问题询问外观或世界观时，系统优先召回团队原创角色资料；当问题涉及历史事实时，创作资料不能代替官方或学术来源。视觉设计与知识分类由此形成对应关系：前者说明角色为何如此呈现，后者限制角色可以用何种语气陈述。
+
+人物气质也延伸到动作设计。待机状态使用呼吸、眨眼和很小幅度的身体变化，思考状态只调整头部、躯干和视线，避免连续摇摆破坏沉静观感。音频播放时才驱动口型，拒答或错误状态不让角色继续做出正在讲解的表现。动作不是附加表演，而是让视觉气质与系统状态保持一致。
+
+\subsection{设计创新与边界}
+
+本角色的设计价值主要体现在可追溯的转译过程。每个文化线索都要经过来源确认、语义提取、视觉分配和边界检查，设计者能够说明它为何出现、出现在哪里以及为何没有继续增加。该过程比简单罗列天津元素更适合论文复查，也使后续迭代可以有依据地增加或删除内容。
+
+第二项特点是以视觉层级解决多元素融合。人物本体承担低密度的整体气质，服装局部承担色彩和纹理，道具层承担高密度工艺符号，角色叙事承担不能直接画在服装上的城市记忆。不同内容不再被压缩到同一平面，最终模型因而能够同时保留地域线索和清楚轮廓。
+
+第三项特点是从数字媒介条件反向调整美术方案。半身镜头、字幕、引用卡、WebGL 光照、骨骼形变和连续问答都直接影响服装比例、纹理透明度、动作幅度与配色对比。角色不只是一张独立立绘，而是问答、引用和语音界面中的持续视觉主体。模型制作与前端展示必须在同一画面中校准。
+
+上述创新均限定在本项目的设计过程和当前展示效果内。论文不据此声称某种风格代表全部津派美学，也不把团队的色彩映射写成传统工艺规范。海河少女三维模型、角色设定、服装纹理、发型配色、早期草图和相关视觉素材均由参赛团队原创绘制与制作；外部资料只用于核验文化事实和理解相关研究，来源不清或带第三方平台水印的参考图不进入参赛论文。
 
 \FloatBarrier
 
@@ -294,14 +465,46 @@ The current corpus contains 22 sources and 347 chunks covering the character des
 
 \subsection{组件与数据边界}
 
-系统由知识入库、检索与生成后端、三维交互前端和云端语音服务四部分组成。前端采用 React、TypeScript、Three.js 与 \code{@pixiv/three-vrm}\cite{threevrm}；后端采用 FastAPI，通过 Server-Sent Events（SSE）返回检索、校验、生成片段和最终引用。浏览器仅接收已经经过后端校验的数据，不能自行构造可播报文本。
+系统由知识入库、检索与生成后端、三维交互前端和云端语音服务四部分组成。前端采用 React、TypeScript、Three.js 与 \code{@pixiv/three-vrm}\cite{threevrm}；后端采用 FastAPI，通过 \mbox{Server-Sent Events（SSE）} 返回检索、校验、生成片段和最终引用。浏览器仅接收已经经过后端校验的数据，不能自行构造可播报文本。
+
+整体部署采用“本地应用承载状态、云端模型提供能力”的组合。来源清单、审核文本、SQLite 索引、请求状态和语音令牌均由本地后端管理；文本向量、固定快照生成和语音合成可调用已配置的云端服务。这样既避免把完整资料治理逻辑分散到多个外部平台，也不要求参赛设备承担所有模型推理。云端响应在进入界面前仍需经过本地校验，服务提供方返回成功并不等同于内容已经获得展示许可。
+
+一次成功查询依次跨越四个数据边界。首先，入库工具把已登记来源转换为带元数据的知识块，未登记文件停留在证据边界之外；其次，检索器只从当前索引取得候选，不允许生成模型自行寻找资料；再次，生成模型返回结构化段落及知识块 ID，后端据此完成白名单和内容支持检查；最后，前端接收服务端重建的引用和一次性语音令牌。任何阶段失败都会缩短链路，而不是绕开该阶段继续向下执行。
 
 \begin{figure}[htbp]
   \centering
-  \input{figures/system-architecture}
+  \resizebox{\linewidth}{!}{\input{figures/system-architecture}}
 \caption{从审核来源到三维主播输出的系统数据流。红色路径表示不满足证据条件时跳过生成或播报。}
 \label{fig:architecture}
 \end{figure}
+
+\subsection{关键技术选型与取舍}
+
+技术选型围绕三个原则展开：数据边界应当清楚，演示链路应当可观察，提交材料应当能够复现。表~\ref{tab:technology-choice}列出主要选择及其代价。选择某项技术并不意味着其在所有项目中最优，而是它与本项目的规模、展示环境和可信目标更匹配。
+
+\begin{table}[htbp]
+\centering
+\caption{关键技术选择、理由与代价}
+\label{tab:technology-choice}
+\small
+\begin{tabularx}{\linewidth}{@{}P{28mm}Y Y@{}}
+\toprule
+选择 & 采用理由 & 明确代价 \\
+\midrule
+限定知识库 & 来源可枚举、可人工审核，回答可回到具体页码或网址 & 无法覆盖最新动态与资料外主题 \\
+FTS5 与向量混合检索 & 同时处理专名、编号匹配与自然语言改写 & 需要维护两类索引信号及阈值 \\
+RRF 排名融合 & 避免直接相加不同尺度的 BM25 与余弦分数 & 只利用名次，不利用原始分值间距 \\
+SSE 单向事件流 & 便于逐步显示检索、生成、复核和终止状态 & 不承担复杂双向实时通信 \\
+FastAPI 本地后端 & 集中保存密钥、索引、校验与令牌状态 & 展示设备需要先启动本地服务 \\
+一次性 TTS 令牌 & 保证语音只来自已校验的服务端文本 & 令牌过期或消费后需重新请求 \\
+VRM 与 Three.js & 浏览器内统一骨骼、表情、视线与材质驱动 & 受 WebGL 性能及模型资源体量约束 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+选择 SSE 而非等待完整 JSON，主要是为了让处理过程对用户可见。检索、生成和复核可能跨越多个模型调用，如果界面只保留一个旋转图标，用户难以区分系统正在工作、已经拒答还是网络失败。SSE 允许后端按固定事件类型报告进度，同时保持“最终引用只在 \code{final} 事件确认”的规则。由于用户输入仍通过普通 HTTP 提交，当前系统不需要 WebSocket 的持续双向连接与额外状态复杂度。
+
+选择一次性语音令牌则是为了封闭文字与声音之间的最后一个接口。若 TTS 接口直接接受任意文本，前端脚本、浏览器控制台或错误状态都可能让角色朗读未经校验的内容；一旦虚拟形象开口，这些内容在体验上很容易被理解为系统正式回答。令牌把“可以播报”变为服务端授权结果，并在短期缓存中绑定原始校验文本，使前端无法通过修改请求体替换内容。
 
 \subsection{信任边界与责任分层}
 
@@ -353,7 +556,7 @@ The current corpus contains 22 sources and 347 chunks covering the character des
 
 \begin{figure}[htbp]
   \centering
-  \input{figures/query-state-machine}
+  \resizebox{\linewidth}{!}{\input{figures/query-state-machine}}
   \caption{查询、拒答、错误与播报的前后端状态机}
   \label{fig:query-state}
 \end{figure}
@@ -364,7 +567,11 @@ The current corpus contains 22 sources and 347 chunks covering the character des
 
 \subsection{知识治理与切块}
 
-当前语料由 2 份团队原创角色文档、10 篇学术研究资料、4 份官方资料摘编和 6 份审核网页摘编组成。新增学术资料主要涉及风筝魏符号转译、文化基因图谱与海河流域水环境\cite{jiang2024kite,tianjinKiteWeiSheet,kiteGeneMap,tan2002haihe}；新增网页覆盖天津城市沿革、海河通识和泥人张背景\cite{zhihuTianjinGeography,zhihuTianjinCity,tjrdHistory,baiduHaihe,ihchinaNiren,vcgBasketLady,thepaperNirenzhang}。入库程序解析 PDF、DOCX 与 Markdown，在标题或页码范围内按约 400 个字符切块，相邻块保留约 80 个字符重叠。新增四份学术 PDF 为图像型扫描件，入库时使用按页人工复核的文本，同时保留原 PDF 哈希和页码。每个知识块继承来源 ID、标题、发布者、主题、页码、URL 与文件 SHA-256 哈希。学术论文只用于小段检索和页码引用，不随参赛包再次分发全文；知乎和百度百科摘编仅作辅助资料，官方页面与论文证据优先。
+当前语料由 \mbox{2 份}团队原创角色文档、\mbox{10 篇}学术研究资料、\mbox{4 份}官方资料摘编和\mbox{6 份}审核网页摘编组成。新增学术资料主要涉及风筝魏符号转译、文化基因图谱与海河流域水环境\cite{jiang2024kite,kiteGeneMap,tan2002haihe}；新增网页覆盖天津城市沿革、海河通识和泥人张背景\cite{zhihuTianjinGeography,zhihuTianjinCity,tjrdHistory,baiduHaihe,ihchinaNiren,vcgBasketLady,thepaperNirenzhang}。入库程序解析 PDF、DOCX 与 Markdown，在标题或页码范围内按约 400 个字符切块，相邻块保留约 80 个字符重叠。新增四份学术 PDF 为图像型扫描件，入库时使用按页人工复核的文本，同时保留原 PDF 哈希和页码。每个知识块继承来源 ID、标题、发布者、主题、页码、URL 与文件 SHA-256 哈希。学术论文只用于小段检索和页码引用，不随参赛包再次分发全文；知乎和百度百科摘编仅作辅助资料，官方页面与论文证据优先。
+
+限定知识库的价值不仅是“文档数量较少”，而是每份资料在进入系统前都要回答四个问题：它解决哪个主题的问题，事实责任由谁承担，允许保存和展示到什么程度，发生冲突时应当让位于哪类来源。官方非遗项目页面适合确认项目类别、编号和申报地区；学术研究适合说明符号分析与设计方法；新闻和百科可用于补充通识背景，但不单独承担争议性结论；团队文档只负责角色创作。来源层级不直接改变所有排名，而是在入库说明、问题路由和人工审核时形成约束。
+
+约 400 个字符的切块长度是在语义完整与引用精度之间的折中。片段过短时，年代、人物和结论可能失去上下文，独立复核也难以判断支持关系；片段过长时，召回结果会混入多个论点，页面引用难以指向真正支撑回答的句子。80 个字符的重叠用于保留跨切分边界的句意，但系统仍限制同一来源进入最终候选的数量，避免相邻重叠块重复占位。扫描资料则必须先按页校对再切块，否则 OCR 错误会同时污染检索和生成。
 
 \begin{table}[htbp]
 \centering
@@ -390,9 +597,11 @@ The current corpus contains 22 sources and 347 chunks covering the character des
 
 原始 PDF 在解析前计算 SHA-256。对具有文本层的 PDF，系统保留页码结构后切块；对新增的图像型扫描件，OCR 只用于产生待校对初稿，最终入库文本按页人工复核。字序、专名、年份和“申报”与“入选”等语义差异优先核对，避免将 OCR 错字转化为系统事实。审核文本与原文件分开存放，引用仍指向原 PDF 的真实页码。
 
+当同一事实在多个来源中出现时，系统并不简单地把“重复次数”当作可信度。多个网页可能转述同一篇原始报道，数量增加并不等于独立证据增加；相反，一个明确的官方项目页面往往比若干无出处转载更适合确认名录信息。当前实现通过来源类型、发布者和人工用途说明保留这种差异，前端引用卡也展示发布者与原文片段，便于观众自行判断来源性质。
+
 \begin{figure}[htbp]
   \centering
-  \input{figures/source-lifecycle}
+  \resizebox{\linewidth}{!}{\input{figures/source-lifecycle}}
   \caption{从来源登记到回答引用的语料生命周期}
   \label{fig:source-lifecycle}
 \end{figure}
@@ -425,6 +634,8 @@ The current corpus contains 22 sources and 347 chunks covering the character des
   \label{eq:rrf}
 \end{equation}
 其中，不在某一路候选中的知识块不贡献该路分值。角色设计问题会对两份团队原创资料增加有限排序权重；最终返回 Top-6，并限制每个来源最多 2 个知识块，避免长论文单一占据上下文。
+
+两类检索信号在天津文化语料中具有互补性。项目编号“VIII-88”、专名“魏元泰”和标题中的固定措辞适合词法匹配；“为什么把传统纹样放在道具而不是衣服上”这类表达与资料原句可能没有完全相同的词，却能通过语义向量找到设计说明。只使用向量可能弱化精确编号和少见人名，只使用词法则容易漏掉同义改写。融合结果仍只是候选，必须继续经过主题、证据充分性与回答后校验。
 
 候选是否足够由两项阈值判断：首个结果的中文词项覆盖率不低于 0.08，或向量相似度不低于 0.52。该规则是当前语料和测试集上的工程参数，不被表述为跨领域通用阈值。更换文本向量模型后，系统会检查索引元数据；若提供方或模型名称不一致，接口返回 \code{index\_mismatch}，而不是混用旧索引。
 
@@ -460,10 +671,11 @@ The current corpus contains 22 sources and 347 chunks covering the character des
 
 整个回答的语音许可可表示为
 \begin{equation}
-  A_{\mathrm{speech}}(q)=G_{\mathrm{retrieve}}(q)\land
-  \bigwedge_{p_j\in P_q}
-  \left[S_j\neq\varnothing\land S_j\subseteq C_q\land
-  N(p_j)\subseteq N(E(S_j))\land H(p_j,E(S_j))\right].
+  \begin{aligned}
+    A_{\mathrm{speech}}(q)&=G_{\mathrm{retrieve}}(q)\land
+    \bigwedge_{p_j\in P_q}\Bigl[S_j\neq\varnothing\land S_j\subseteq C_q\\
+    &\qquad\land N(p_j)\subseteq N(E(S_j))\land H(p_j,E(S_j))\Bigr].
+  \end{aligned}
   \label{eq:speech-authorisation}
 \end{equation}
 只有 $A_{\mathrm{speech}}(q)=1$ 时，服务端才把已校验回答写入短期缓存并签发不可猜测的一次性令牌。前端获得的令牌不包含明文回答，TTS 接口使用服务端缓存中的已校验文本，因此篡改前端请求体无法绕过引用检查。
@@ -488,24 +700,53 @@ The current corpus contains 22 sources and 347 chunks covering the character des
 
 \begin{figure}[htbp]
   \centering
-  \input{figures/evidence-gate}
+  \resizebox{\linewidth}{!}{\input{figures/evidence-gate}}
 \caption{证据门控与播报授权。拒答与回答是并列的产品状态。}
 \label{fig:gates}
 \end{figure}
+
+\subsection{三类问答的证据链案例}
+
+为了说明门控规则在真实交互中的含义，本文选取库内事实、角色设定和实时越界三类典型问题进行流程分析。案例只描述系统已有规则与已登记资料，不把示例当作新增评测数据。
+
+第一类问题为“泥人张属于传统技艺还是传统美术”。问题包含明确专名与类别对比，词法通道能够命中官方泥人张资料，向量通道补充相关说明；候选片段明确给出项目类别为传统美术。生成段落必须引用该候选 ID，若出现项目编号或年份，还要在所引片段中找到完全一致的数字。全部通过后，前端显示答案和官方来源，并获得可消费一次的语音令牌。
+
+第二类问题为“海河少女的头发为什么是黑蓝渐变”。它询问的是团队设计选择，不应由城市历史网页替代原创记录。检索器对角色设计资料施加有限权重，生成结果可以解释水色与夜色的视觉意象，但必须把这种联系写成“设计转译”而非“天津传统规定”。引用卡显示原创角色档案或设计阐释，使用户知道该回答属于作品说明。
+
+第三类问题为“今天五大道海棠花节门票多少钱”。知识库虽然含有 2025 年活动资料，但“今天”和“票价”要求实时信息，前置门控在检索或生成前终止链路。系统返回固定边界说明，不展示旧活动资料作为当前依据，也不签发语音令牌。这样的拒答并非系统崩溃，而是避免用历史片段回答实时问题。
+
+\begin{table}[htbp]
+\centering
+\caption{典型问答案例的处理差异}
+\label{tab:query-cases}
+\small
+\begin{tabularx}{\linewidth}{@{}P{36mm}P{27mm}Y Y@{}}
+\toprule
+问题类型 & 首要证据 & 关键检查 & 最终状态 \\
+\midrule
+非遗类别事实 & 官方泥人张资料 & 类别表述、引用 ID 与可能出现的数字一致 & 带官方引用回答，可播报 \\
+角色视觉设定 & 原创角色档案与设计阐释 & 仅解释创作选择，不转写为历史事实 & 带原创来源回答，可播报 \\
+当日票价 & 无可用实时证据 & 命中实时信息规则，在生成前终止 & 固定拒答，无引用、无令牌 \\
+提示词攻击 & 不进入知识回答 & 识别绕过引用或要求编造的意图 & 固定拒答，无引用、无令牌 \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \section{三维主播与交互设计}
 
 \subsection{VRM 运行与动作驱动}
 
-VRM 以 glTF 为基础，将骨骼、表情、材质、视线和许可元数据纳入可交换格式\cite{vrmspec,vroidexport}。前端加载模型后，以半身镜头呈现文化向导，并实现自然眨眼、轻微呼吸、指针视线跟随和基于音频振幅的 \code{Aa} 口型。动作幅度受到限制，以避免高频摇摆干扰知识阅读。模型未加载或 WebGL 失败时，页面应显示明确状态，不能用预录视频冒充实时角色。
+VRM 以 glTF 为基础，将骨骼、表情、材质和视线控制纳入可交换格式\cite{vrmspec,vroidexport}。前端加载模型后，以半身镜头呈现文化向导，并实现自然眨眼、轻微呼吸、指针视线跟随和基于音频振幅的 \code{Aa} 口型。动作幅度受到限制，以避免高频摇摆干扰知识阅读。模型未加载或 WebGL 失败时，页面应显示明确状态，不能用预录视频冒充实时角色。
 
-新收到的 \code{haihe-girl.vrm} 已通过离线结构检查：文件为 VRM 1.0，约 20.2 MB，SHA-256 为 \code{a14333ad\ldots24042003d}，检测到 54 个骨骼和 14 个预设表情，包含眨眼及 \code{Aa/A} 口型。Chrome 1920×1080 实测已加载正面半身模型，运行时手臂自然下垂，眨眼与 \code{Aa} 驱动逻辑工作，控制台没有错误。结构与运行通过只说明文件可被解析和驱动，不代表模型权利已经完整确认。其内部名称、作者、版权、联系信息及使用权限字段仍需参赛团队逐项核对；当前元数据包含“仅限另行授权者”、要求署名和禁止修改等约束，且存在不应随参赛包公开的联系信息。提交前应由权利人重新确认或重新导出与作品名称、作者和授权范围一致的版本。
+团队原创制作的 \code{haihe-girl.vrm} 已通过离线结构与浏览器运行检查。该三维人物的角色造型、服装纹理、发型配色和整体视觉设计均由团队原创绘制与制作。文件采用 VRM 1.0 格式，约 20.2 MB，SHA-256 为 \code{a14333ad\ldots24042003d}，检测到 54 个骨骼和 14 个预设表情，包含眨眼及 \code{Aa/A} 口型。\mbox{Chrome 1920×1080 实测} 已加载正面半身模型，运行时手臂自然下垂，眨眼与 \code{Aa} 驱动逻辑工作，控制台没有错误。上述检查说明团队制作的角色资产能够被当前 WebGL 运行环境正确解析和驱动。
 
-\subsection{待机姿态、眨眼与口型驱动}
+\subsection{待机、思考、眨眼与口型驱动}
 
-待机系统不依赖外部动作文件，而是对 VRM 规范化骨骼应用两组受控姿态。\code{Standby 7} 以双手轻收、重心稳定作为主讲解姿态；\code{Standby 5} 使角色轻微侧身、歪头并抬手致意，作为较活泼的轮廓变化。周期为 15.8 秒，在两组姿态之间各使用 1.4 秒的 smoothstep 插值，并在每个稳定姿态上保留约 5.2 至 5.4 秒停留。相机距离随姿态做小幅调整，避免抬手时超出画面。
+角色动作不依赖外部 VRMA 文件，而是在浏览器运行时对 VRM 规范化骨骼定义一组简化待机姿态和一组思考姿态。待机姿态让双臂自然收于身前，脊柱、胸部、颈部和头部只保留很小的错位，使人物在半身镜头中稳定面对用户。思考姿态沿用手臂位置，仅让髋部、躯干、颈部和头部轻微侧转、前倾并抬高视线目标，表达“正在处理问题”，避免大幅手势干扰答案区域。
 
-呼吸层只在髋骨纵向、脊柱侧倾和胸部俯仰上叠加小振幅正弦变化，不改写模型文件。眨眼以 4.8 秒为一个周期，其中闭眼曲线仅占 0.32 秒，使用半周期正弦函数避免瞬时开关。浏览器视线目标只在有限的水平和垂直范围内响应指针，不会使头部追随突然大幅跳转。
+当用户提交问题后，前端以 \code{queryPending} 将动作状态从 \mbox{\code{idle} 切换为 \code{thinking}}；无论查询最终成功、拒答还是报错，请求结束后都会回到待机。两组姿态不是瞬间跳变，而是用阻尼系数 5.5 逐帧插值。实现只修改运行时骨骼节点，不重写\mbox{原始 VRM 文件}，因此便于控制动作幅度，也避免引入额外动作文件和资源加载。
+
+呼吸层只在髋骨纵向、脊柱侧倾和胸部俯仰上叠加小振幅正弦变化，不改写模型文件。髋骨纵向振幅约为 0.004 个场景单位，思考状态额外加入极小的水平重心变化；眨眼以 4.8 秒为一个周期，其中闭眼曲线仅占 0.32 秒，使用半周期正弦函数避免瞬时开关。浏览器视线目标只在有限的水平和垂直范围内响应指针，思考时再向右上方增加轻微偏移，不会使头部追随突然大幅跳转。
 
 语音播放时，Web Audio API 的频谱分析节点取第 2 至 41 个频带的平均值 $\bar{x}_t$，去除静音基线后归一化为
 \begin{equation}
@@ -523,7 +764,8 @@ VRM 以 glTF 为基础，将骨骼、表情、材质、视线和许可元数据�
 \toprule
 动作层 & 周期或范围 & 设计目的 \\
 \midrule
-双待机姿态 & 15.8 秒循环；1.4 秒插值 & 在稳定讲解和活泼致意之间平滑切换 \\
+待机姿态 & 固定骨骼基准叠加低幅微动 & 保持正面、稳定的文化讲解轮廓 \\
+思考姿态 & 阻尼系数 5.5；躯干与头部小角度偏转 & 表达查询进行中，避免突然跳姿态 \\
 呼吸微动 & 髋骨约 0.004 单位纵向变化 & 避免完全静止，不干扰文字阅读 \\
 自然眨眼 & 4.8 秒周期；0.32 秒闭眼窗口 & 保留生命感并避免高频闪烁 \\
 视线跟随 & 水平 0.34、垂直 0.20 的限幅 & 让角色与指针有轻微互动，不出现大角度转头 \\
@@ -532,21 +774,53 @@ VRM 以 glTF 为基础，将骨骼、表情、材质、视线和许可元数据�
 \end{tabularx}
 \end{table}
 
+\subsection{交互状态与信任表达}
+
+虚拟主播的动作不是独立表演，而是系统状态的辅助表达。待机表示可以提问，思考表示查询仍在进行，回答通过校验后页面转为已验证状态，语音播放时口型才随实际音频变化。拒答和错误不使用口型假装播报成功，也不会继续保留上一轮答案的引用。这样的对应关系使用户能够通过人物、状态条和答案区三个位置获得一致反馈。
+
+\begin{table}[htbp]
+\centering
+\caption{系统状态、角色表现与信息反馈}
+\label{tab:interaction-states}
+\small
+\begin{tabularx}{\linewidth}{@{}P{22mm}P{30mm}Y Y@{}}
+\toprule
+系统状态 & 角色表现 & 页面反馈 & 用户可执行操作 \\
+\midrule
+待机 & 简化待机姿态、呼吸与眨眼 & 显示可提问入口和系统就绪状态 & 输入问题或选择示例 \\
+检索与生成 & 平滑过渡到思考姿态 & 状态条说明正在检索、生成或复核 & 可提交新问题以取消旧请求 \\
+已验证 & 回到待机；音频播放时驱动口型 & 显示最终回答、引用与语音状态 & 展开来源、停止或重播语音 \\
+已拒答 & 回到待机，不生成播报口型 & 显示固定边界说明，无引用和令牌 & 改问限定主题内的问题 \\
+错误 & 回到待机，口型复位 & 区分问答错误与仅语音错误 & 重新提问；已验证文字仍可保留 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+思考动作刻意保持简单，因为该状态可能持续数秒至数十秒。循环幅度过大会让用户将注意力从处理状态和候选来源移向角色表演，也可能在等待较长时产生机械重复感。当前实现使用小角度姿态差和连续插值，只承担“状态已经改变”的提示作用。拒答时同样不设计沮丧或夸张动作，以免把资料边界表现为情绪化失败。
+
 \subsection{界面语言与信息层级}
 
 前端视觉采用“宣纸/玉石/青砖灰 + 少量朱砂红/津门蓝”的低饱和体系。纸色负责阅读区域，玉石色与青砖灰用于分区和边界，津门蓝用于主要操作和来源索引，朱砂红只标记拒答或需要人工处理的状态。页面保留数字人、问题输入、回答与来源四个主要层级，删除大段开发声明、重复状态标签和细碎说明。技术边界通过一个简洁状态入口呈现，详细声明放入运行文档，不占据主播主画面。
 
 三维舞台使用独立层叠上下文：宣纸与玉石渐变位于 $z=0$，水印和地平线位于 $z=1$，VRM WebGL 画布位于 $z=3$，播放状态与可操作控件位于更高层级。背景层禁用指针事件，角色因而不会被径向渐变或水印遮盖，指针交互也不会被装饰元素截断。该分层在透明 WebGL 画布下仍保持角色位于最上层，同时允许背景色透过模型边缘形成轻量空间感。
 
+回答区把正文与来源卡分开：正文优先保证连续阅读，来源卡提供标题、发布者、页码或网址和原文摘录。检索过程中的候选可以帮助用户理解系统正在工作，但只有最终事件中的引用才标记为回答依据。页面不以“AI 置信度百分比”制造精确感，而是使用“正在处理、校验通过、证据不足、服务错误”等可解释状态。用户能够停止或重播语音，文字和引用不因语音失败而消失。
+
 \subsection{语音播放门控}
 
-\code{POST /api/speech} 不接受前端任意文本，而只接受服务端签发的一次性令牌。令牌对应已校验回答并在 300 秒后过期，使用一次即从缓存移除。语音模块采用百炼 \code{qwen3-tts-flash-2025-11-27} 与 Momo 音色，以非实时 HTTP 请求生成 WAV。真实短句调用得到 24 kHz、单声道、时长 5.36 秒的音频；新增风筝魏问题经由完整 \code{/api/query} 链路返回 1 条有效引用和语音令牌，随后 \code{/api/speech} 返回 HTTP 200、\code{audio/wav} 与 672,044 字节音频。此前正式 20 轮 API 验收最终 20/20 通过，其中 2 轮真实调用 \code{/api/speech} 均返回 HTTP 200。健康接口在该配置下报告 \code{demo\_ready=true}。这些结果验证了当前端到端技术链路，不代表所有网络条件下的时延和稳定性。
+\code{POST /api/speech} 不接受前端任意文本，而只接受服务端签发的一次性令牌。令牌对应已校验回答并在 \mbox{300 秒}后过期，使用一次即从缓存移除。
+
+语音模块采用百炼 \code{qwen3-tts-flash-2025-11-27} 与 Momo 音色，以非实时 \mbox{HTTP 请求} 生成 WAV。真实短句调用得到 24 kHz、单声道、时长 \mbox{5.36 秒} 的音频；新增风筝魏问题经由完整 \code{/api/query} 链路返回 1 条有效引用和语音令牌，随后 \code{/api/speech} 返回 \mbox{HTTP 200}、\code{audio/wav} 与 672,044 字节音频。此前正式 20 轮 API 验收最终 \mbox{20/20 通过}，其中 2 轮真实调用 \code{/api/speech} 均返回 \mbox{HTTP 200}。健康接口在该配置下报告 \code{demo\_ready=true}。这些结果验证了当前端到端技术链路，不代表所有网络条件下的时延和稳定性。
 
 \section{实验设计与结果}
 
 \subsection{评测集与指标}
 
 固定评测集共 60 题：40 题属于知识库范围，10 题越界，5 题存在歧义，5 题包含提示词攻击。库内题以预先标注的相关来源是否出现在前 6 个结果中计算 Recall@6；其余题以是否在生成前拒答计算准确率。该指标验证的是召回与门控，不直接等同于开放式回答质量。
+
+选择 Recall@6 而非只看首位命中，是因为生成阶段需要同时获得足以回答问题的片段和必要的上下文。某些问题可以由官方短文直接回答，另一些设计类问题则需要角色档案与设计阐释共同支持。Top-6 为后续模型提供有限但具有一定来源多样性的上下文，同时通过“每个来源最多两个知识块”控制重复。该指标只判断预标来源是否进入候选，不评价候选顺序的每一个位置，也不意味着候选中的全部片段都应被最终引用。
+
+拒答准确率关注的是生成前边界，而不是让模型先写出答案再由人工判断是否合理。越界题检查主题范围，歧义题检查系统是否擅自补全指代，攻击题检查用户指令能否绕过引用要求。三类问题被合并报告为 20 题门控结果，同时仍保留题目类别和逐题记录，便于后续发现某一类规则单独退化。
 
 另外设置 20 轮 API 连续问答，交替提交 10 个库内问题和 10 个越界问题。库内问题通过条件为：得到非拒答结果、至少一个有效引用且具有语音令牌；越界问题通过条件为：固定拒答、无引用且无语音令牌。正式验收另从有效回答中抽取 2 轮真实调用语音接口。后端共有 30 项单元与接口测试，覆盖切块、扫描 PDF 的审核文本与页码绑定、原文件哈希、检索、索引模型不匹配、引用完整性、数字约束、非法语音令牌、WAV 封装及向量服务临时 403 重试。
 
@@ -572,6 +846,10 @@ VRM 以 glTF 为基础，将骨骼、表情、材质、视线和许可元数据�
 
 每次生产评测都从索引元数据读取向量提供方、模型名称、维度、来源数和知识块数，并将时间、通过数与每题候选来源写入 JSON 报告。报告不保存 API Key、业务空间 ID 或专属接入地址。评测的可复现对象是“题目、语料、模型标识和门控代码的组合”，而不是保证云端服务的每次运行时延完全相同。
 
+固定题集在运行前确定，新增资料的定向问题另行报告，不在看到结果后加入原有 60 题分母。这样可以避免通过不断补充容易通过的问题抬高指标，也避免把“为了某道题修改资料后再次通过”误写成独立泛化能力。若后续改动语料、嵌入模型或门控规则，应保留旧报告并生成新的时间戳记录，而不是覆盖历史结果。
+
+端到端 API 验收与检索评测解决不同问题。前者验证请求取消、SSE 解析、生成后校验、最终引用和语音令牌能否串联，后者验证候选来源与拒答入口。后端 30 项测试则覆盖更小的确定性单元和错误分支。三类测试互相补充：只跑单元测试无法证明真实模型配置可调用，只跑端到端样例又难以稳定覆盖非法引用、过期令牌和索引不匹配等边界。
+
 \subsection{固定评测与正式 API 结果}
 
 \begin{table}[htbp]
@@ -591,7 +869,21 @@ Chrome 交互检查 & 1/1 & 控制台无错误 & VRM 加载；支持题 5 条引
 \end{tabularx}
 \end{table}
 
-开发基线曾使用 \code{qwen3-embedding:4b} 与 \code{qwen3.5:27b}；其中 10 个本地支持类问题平均耗时约 25.3 秒，最短约 13.0 秒，最长约 42.9 秒。生产固定评测改用百炼 \code{qwen3.7-text-embedding} 的 1024 维向量，索引记录 22 个来源和 347 个知识块，60 题结果为 40/40 库内 Top-6 命中、20/20 门控拒答。该对照说明本地配置适合功能验证；正式演示仍需关注云端稳定性、网络波动和 TTS 首包时间。
+开发基线曾使用 \code{qwen3-embedding:4b} 与 \code{qwen3.5:27b}；其中 10 个本地支持类问题平均耗时约 25.3 秒，最短约 13.0 秒，最长约 42.9 秒。生产固定评测改用百炼 \code{qwen3.7-text-embedding} 的 1024 维向量，索引记录 22 个来源和 347 个知识块，60 题结果为 \mbox{40/40 库内 Top-6 命中}、\mbox{20/20 门控拒答}。该对照说明本地配置适合功能验证；正式演示仍需关注云端稳定性、网络波动和 TTS 首包时间。
+
+表~\ref{tab:results}中的 100\% 结果必须结合样本规模理解。\mbox{40/40 说明}当前固定库内问法均能在前六个候选中找到预标来源，不能推出对任意同义改写、复杂多跳问题或新主题仍有相同召回率；\mbox{20/20 说明}已设计的越界、歧义和攻击样例被正确门控，不能推出规则覆盖所有未来攻击；\mbox{20/20 API 与 30/30 后端测试}说明已列出的主链和错误分支通过，不等于系统已经承受长期并发或断网恢复测试。论文保留分子与分母，正是为了避免只写“准确率 100\%”造成过度概括。
+
+当前结果能够支持三项较谨慎的判断。其一，来源登记、切块和生产向量索引在固定语料版本上是连通的，因为五类主题均有问题命中预标来源。其二，拒答不只是提示词中的一句要求，而是在接口结果中体现为无引用、无语音令牌的独立状态。其三，从查询到 WAV 返回的完整链路已经在少量真实语音请求上成功运行。结果尚不能回答哪一种融合策略贡献最大，因为本项目没有执行并归档词法单路、向量单路与混合检索的正式消融实验；本文因此不虚构相应数值。
+
+\subsection{结果解释、误差来源与效度边界}
+
+检索结果可能受到三类误差影响。第一类来自资料本身：网页更新、扫描页字序错误或摘要遗漏都会使正确答案无法被可靠索引。第二类来自表示与切块：专名、古今异名和跨页论述可能在切分后失去联系，向量模型也可能把主题相近但不能直接支持结论的片段排在前列。第三类来自问题表达：指代不明、多意图拼接或把实时要求隐藏在长问题中，都会增加门控难度。当前系统通过来源审核、重叠切块、混合检索和歧义拒答缓解这些风险，但没有消除它们。
+
+生成后校验同样存在误差边界。数字与日期原样检查具有确定性，却无法识别所有同义改写中的事实偏差；语义复核能处理自然语言支持关系，却仍由模型执行，可能出现误拒或漏过。保守拒答会降低可回答率，但在文化讲解场景中，其代价通常小于把未经支持的信息交给角色播报。未来若扩大知识库，应分别统计误拒与错误放行，而不是只汇总一个通过率。
+
+内部效度方面，固定题目、预标来源和索引元数据使本次结果可以回到具体版本复查；但研发者同时参与语料和题集设计，题目不可避免地更贴近已知资料结构。外部效度方面，当前语料集中于泥人张、风筝魏、海河文化、天津海棠和角色设计，不能代表全部天津文化知识。生态效度方面，真实展览中的噪声、网络波动、不同屏幕比例和观众连续追问尚未被系统性覆盖。上述限制决定了本次评测更接近工程验收，而非面向开放人群的最终效果研究。
+
+为降低展示阶段的偶然性，正式演示应优先选用能覆盖不同路径的问题：一个官方事实问题、一个角色设计问题、一个具有多来源解释的问题和一个实时越界问题。演示不应只选择所有都能回答的样例，因为拒答路径本身是系统设计的重要结果。若某次云端调用失败，应保留错误提示并重试，不把先前录制音频作为本轮实时生成结果。
 
 \subsection{新增资料的代表性检索案例}
 
@@ -664,57 +956,99 @@ VRM 或 WebGL 加载失败 & 显示模型未载入占位状态 & 保留可读文
 
 健康接口分别报告生成、向量、语音、VRM 和索引状态，只有五项同时就绪时 \code{demo\_ready} 才为真。该状态不对外返回密钥、业务空间 ID 或专属主机名。因此演示者能在开始录屏前判断主链是否完整，而不需把敏感配置显示在画面中。
 
-\section{讨论、风险与待核验项}
+\section{讨论、局限与应用展望}
 
 \subsection{工程局限}
 
 第一，当前主题范围较窄，无法回答天津旅游实时价格、开放时间或超出五个主题的文化问题。第二，规则门控依赖关键词，仍可能出现新型提示攻击未被前置识别的情况。第三，二次语义核验仍由语言模型完成，可能发生误判；因此代码同时保留 ID、页码、原文片段和数字一致性等确定性检查。第四，固定 60 题生产评测和正式 20 轮 API 验收虽已通过，仍不能替代长时间运行、更多问法和不同网络条件下的稳定性测试。
 
-\subsection{版权、隐私与数据责任}
+第五，当前系统以单轮问题为主要单位，没有让历史对话自动补全歧义指代。这会使部分自然追问需要用户重新说出对象，但能够避免上一轮话题错误地污染下一轮证据边界。第六，口型只依据音频振幅驱动单一 \code{Aa} 表情，不是音素级唇形同步；其目标是让播报状态可见，而非达到影视级口型精度。第七，待机与思考动作为代码内简化骨骼插值，尚未经过动作捕捉或用户感知实验，其结论仅限于当前展示中的低干扰状态反馈。
 
-角色工程、纹理、笔刷、字体、模型、音色、论文和网页资料必须分别登记来源。学术 PDF 只用于研究与小段检索，不公开再次分发；官方网页仅保留摘编、标题、发布者和 URL。Apple 系统字体不随项目打包，论文使用 TeX Live 可复现字体。模型元数据中的个人联系信息应在提交前清理；访问凭据与业务空间标识只能保存在本机 \code{.env}，不得进入源码、PDF 截图或压缩包。
+\subsection{原创资产、隐私与数据责任}
+
+海河少女三维角色模型、角色设定、服装纹理、发型配色和相关视觉素材均由参赛团队原创绘制与制作。开发过程中使用的软件工具、字体、云端模型服务、论文和网页资料分别记录名称与用途，使团队原创资产、技术依赖和研究参考保持清晰边界。学术 PDF 只用于研究与小段检索，不在参赛包中再次分发全文；官方网页仅保留摘编、标题、发布者和 URL；论文使用 TeX Live 可复现字体完成排版。
+
+资料能够被技术解析，不等于应当把原文完整公开。知识库只保存回答所需的审核片段及其可追溯信息，页面引用用于说明事实依据，不替代原出版物。百炼生成模型、文本向量和语音合成用于系统运行，其中生成内容仍须通过本地证据校验；访问凭据与业务空间标识只保存在本机 \code{.env}，不得进入源码、PDF 截图或压缩包。
+
+对于人物、传承人和作者信息，界面只展示回答所需的公开资料，不收集观众身份或录音。本次系统没有接入麦克风，也没有用户账户体系，减少了生物特征与个人信息处理范围。若未来增加语音输入、访问日志或公网服务，则需重新说明数据保存期限、删除方式和第三方模型处理路径，不能沿用当前“本地文字输入”的隐私结论。
 
 \subsection{可复现性与人工责任}
 
 系统将“知识是否可信”拆分为可复查的工程步骤：来源清单记录准入理由和文件哈希，切块结果保留页码与原文，索引清单记录向量模型、维数和构建时间，评测报告记录题目、检索候选、门控结论与最终引用。更换嵌入模型或修改文档后必须重建索引并重新执行固定题集，不能沿用旧结果。论文中的通过率只对应已归档的语料版本、配置和测试集，不外推为任意问题上的理论保证。
 
-人工审核仍是链路中不可替代的一环。团队成员负责确认来源权威性、扫描文本校对、创作设定与史实分类、引用片段是否支持回答，以及参赛展示素材的授权状态；模型只承担候选召回、受约束生成和语音合成。最终演示中若发现来源表述含混，应先暂停该知识块而不是调整提示词强行作答。这样的责任划分使错误能够定位到具体来源、处理步骤或软件版本，也避免用“AI 自动完成”掩盖内容判断责任。
+人工审核仍是链路中不可替代的一环。团队成员负责确认来源权威性、扫描文本校对、创作设定与史实分类、引用片段是否支持回答，以及参赛展示素材与论文叙述是否一致；模型只承担候选召回、受约束生成和语音合成。最终演示中若发现来源表述含混，应先暂停该知识块而不是调整提示词强行作答。这样的责任划分使错误能够定位到具体来源、处理步骤或软件版本，也避免用“AI 自动完成”掩盖内容判断责任。
 
-\subsection{后续扩展边界}
+\subsection{AI 工具使用小结}
 
-后续可以增加天津曲艺、建筑与饮食等主题，但每个新主题仍须完成来源准入、人工核验及定向与越界测试。若增加麦克风或公网访问，还需处理录音授权、识别置信度、访问控制、日志脱敏、内容安全与并发成本。上述能力不属于本次提交范围，以保持文化讲解与证据展示这一主线。
+本项目在需求分析、代码开发、知识问答和论文整理中使用了多种 AI 工具，但不同工具承担的角色彼此分离。OpenAI ChatGPT 用于早期方案讨论、功能边界梳理、论文提纲组织以及中英文表述辅助；OpenAI Codex 使用 \code{gpt-5.6-sol} 模型参与仓库文件分析、前后端代码协作、测试与构建命令执行、LaTeX 内容修改和 PDF 版式检查。团队成员持续提供设计目标、资料范围和修改意见，并对代码差异、论文事实、最终界面与导出文件进行确认，AI 输出不直接作为文化事实来源。
 
-\clearpage
-\subsection{截至提交日的验证边界}
-
-\begin{boundarybox}
-\textbf{截至 2026 年 9 月 13 日：}百炼 1024 维生产向量的固定 60 题评测为 40/40 库内 Top-6 命中、20/20 门控拒答；正式 API 连续问答 20/20 通过，其中 2 轮真实语音请求均返回 HTTP 200，后端 30 项测试全部通过。VRM 文件结构、Chrome 模型加载、固定快照生成、Momo 非实时 HTTP TTS 和新增风筝魏问题的完整问答播报链路亦已真实验证，健康接口报告 \code{demo\_ready=true}。当前仍需完成最终 3 至 5 分钟 H.264 视频及学校报名材料。VRM 权利字段、书面授权、署名要求和隐私信息必须由权利人确认；验证技术可用性不等于取得参赛展示和再分发权利。
-\end{boundarybox}
-
-比赛截止日期已调整为 \textbf{2026 年 9 月 23 日}。为避免把提交日当作开发日，剩余工作应按表 \ref{tab:schedule} 收口。
+系统运行阶段使用阿里云百炼承担文本向量、受约束对话生成、语义复核和语音合成。\code{qwen3.7-text-embedding} 将问题与知识块转换为 1024 维向量，参与混合检索；固定快照 \code{qwen3.7-flash-2026-07-15} 根据 Top-6 候选输出结构化回答，并在独立调用中判断回答段落是否被引用片段支持；\code{qwen3-tts-flash-2025-11-27} 使用 Momo 音色把已经通过校验的回答转换为 WAV。早期本地开发还使用 Ollama 的 \code{qwen3-embedding:4b} 与 \code{qwen3.5:27b} 验证离线检索和生成流程，正式评测结果则以论文记录的百炼生产配置为准。
 
 \begin{table}[htbp]
 \centering
-\caption{9 月 23 日截止前的压缩排期}
-\label{tab:schedule}
-\begin{tabularx}{\linewidth}{@{}p{30mm}Y Y@{}}
+\caption{AI 工具在项目中的使用环节与责任边界}
+\label{tab:ai-tools}
+\small
+\begin{tabularx}{\linewidth}{@{}P{30mm}P{34mm}Y Y@{}}
 \toprule
-日期 & 工作 & 出口条件 \\
+工具或模型 & 使用环节 & 具体作用 & 人工与程序控制 \\
 \midrule
-9 月 13 至 14 日 & 核对 VRM 权利与隐私，完成前端简化及百炼新加坡业务空间联调 & 云端完整 API 链路就绪；VRM 权利待书面确认 \\
-9 月 15 至 17 日 & 冻结生产索引，归档 60 题、20 轮 API 与语音验收记录，并检查故障恢复 & 结果可复现；云服务异常时明确提示 \\
-9 月 18 至 19 日 & 完成字幕、引用、百炼 TTS 与音频口型效果的端到端验收 & Chrome 连续 20 轮无崩溃 \\
-9 月 20 日 & 录制并转码正式视频 & 1920×1080、H.264、3 至 5 分钟 \\
-9 月 21 日 & 完成论文、声明、运行说明和版权材料 & PDF 逐页检查通过 \\
-9 月 22 日 & 生成学校名参赛包并在干净环境复核 & 小于 500 MB、无密钥、网盘可下载 \\
-9 月 23 日 & 仅用于学校提交与链接确认 & 收到提交确认 \\
+OpenAI ChatGPT & 方案与文稿协作 & 讨论功能边界、整理提纲、辅助中英文表述 & 团队决定内容取舍并逐项核对事实 \\
+OpenAI Codex \code{gpt-5.6-sol} & 软件与论文开发 & 分析仓库、协作修改代码、运行测试、编译并检查 PDF & 团队提出要求、审阅差异并确认交付文件 \\
+百炼 \code{qwen3.7-text-}\newline\code{embedding} & 生产检索 & 生成问题和知识块的 1024 维向量 & 只参与召回，来源范围由人工清单限定 \\
+百炼 \code{qwen3.7-flash-}\newline\code{2026-07-15} & 对话生成与语义复核 & 根据候选证据输出 JSON，并独立检查段落支持关系 & 后端执行引用、数字日期和语音门控 \\
+百炼 \code{qwen3-tts-}\newline\code{flash-}\newline\code{2025-11-27} & 角色语音 & 使用 Momo 音色合成 24 kHz 单声道 WAV & 只接收一次性令牌绑定的已校验文本 \\
+Ollama 本地模型 & 开发基线 & 验证本地向量检索和受约束生成链路 & 不计入百炼生产评测结果 \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
+AI 协作主要提高了迭代速度和跨环节一致性：代码修改能够立即配合测试，论文描述能够回到实现核对，英文摘要也能与中文结果同步更新。与此同时，来源选择、扫描文本校对、视觉设计、问题标注、实验结果记录和最终内容判断仍由团队完成。对于 AI 提出的代码或文字，只有在通过测试、编译、证据检查和人工复核后才进入作品；无法确认的内容不写入知识库，也不作为论文结论。
+
+\subsection{应用价值与推广路径}
+
+在校园文化教育中，系统可以作为课程展示或社团活动的互动入口。教师或学生先围绕一个城市文化主题建立审核资料，再让虚拟角色回答限定问题。其教学价值不仅在于最终形象，也在于展示资料选择、证据引用和创作转译之间的关系。学生能够看到同一元素如何从官方事实、学术分析转化为角色设计，同时理解创作设定不能反向替代史实。
+
+在非遗展览和博物馆辅助导览中，系统适合承担“展签之外的补充问答”，而不替代策展说明和专业讲解员。展方可以只导入与当前展览相关的审核内容，让引用卡指向展品说明、馆方文章或研究资料；遇到票务、开放时间和安全规定等实时信息时，则交给独立的实时数据接口或人工服务。这样能够保持知识职责分离，避免一个生成模型同时承担历史解释和运营通知。
+
+在地方文化 IP 的持续运营中，VRM 角色、知识库和交互界面可以分别演进。角色可以在保持核心识别的前提下增加节日服装或道具，知识库可以按主题增加曲艺、建筑和饮食资料，界面可以适配触摸屏或移动端。三者不能只靠更换素材直接上线：每次主题扩展都必须重新登记来源、检查资料使用边界、校准门控并执行回归评测。
+
+\begin{table}[htbp]
+\centering
+\caption{面向不同应用场景的迁移要求}
+\label{tab:application-paths}
+\small
+\begin{tabularx}{\linewidth}{@{}P{28mm}Y Y@{}}
+\toprule
+应用场景 & 可复用部分 & 新增工作 \\
+\midrule
+校园文化展示 & 本地部署、限定问答、引用卡和 VRM 舞台 & 按课程核对资料，准备教师可复查的来源清单 \\
+非遗专题展览 & 来源准入、页码引用、拒答与语音门控 & 接入馆方权威资料，适配展项编号与现场设备 \\
+博物馆辅助导览 & 状态机、字幕、停止与重播交互 & 无障碍设计、多语言审核及人流环境测试 \\
+地方文化 IP 运营 & 角色与知识分层、创作设定标签 & 新主题资料核验、内容维护责任与版本发布流程 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+推广的关键不是复制一个通用“文化数字人”，而是复制一套有责任边界的生产流程：确定主题和受众，建立来源清单，区分事实与创作，生成并人工复核知识块，重建索引，执行库内与越界测试，最后检查界面和版本材料。只有这些步骤同时完成，新角色才继承本项目所强调的可信性；单独复用外观或提示词无法得到同样结果。
+
+\subsection{后续扩展边界}
+
+后续可以增加天津曲艺、建筑与饮食等主题，但每个新主题仍须完成来源准入、人工核验及定向与越界测试。若增加麦克风或公网访问，还需处理录音告知与同意、识别置信度、访问控制、日志脱敏、内容安全与并发成本。上述能力不属于本次提交范围，以保持文化讲解与证据展示这一主线。
+
+技术上还可继续探索三条路径。第一，将数字与日期检查扩展为实体、单位和否定关系检查，减少“文字大致相关但结论方向相反”的风险。第二，在保留来源层级的前提下建立更细的证据冲突记录，使系统遇到不同资料表述时能够提示人工复核，而非自动选择多数。第三，开展面向真实观众的可用性研究，分别观察引用卡是否被阅读、拒答是否被理解以及动作幅度是否影响注意力。只有取得真实实验数据后，才适合对交互效果作统计结论。
+
+\FloatBarrier
+
 \section{结论}
 
-本文完成了从审核来源、混合检索、证据门控、结构化生成到播报授权的系统实现，并将创作设定与历史事实分开处理。百炼生产向量的固定 60 题评测为 40/40 库内 Top-6 命中、20/20 门控拒答；正式 API 连续问答 20/20 通过，2 轮真实语音请求及 30 项后端测试亦全部通过。VRM 浏览器加载、固定快照生成与 Momo 非实时 HTTP TTS 均已验证。本文不宣称“模型绝不幻觉”，而以可检查证据、明确拒答和可复现测试界定可信边界。提交前仍须完成 VRM 书面授权、署名和隐私确认。
+本文围绕“拟人化文化讲解如何不超过证据能力”这一问题，完成了海河少女 AI 虚拟主播的视觉设计、知识治理、可信问答、三维交互和语音播报链路。角色从泥人张、海河、五大道海棠和风筝魏中提取不同层级的文化线索，以主体克制、道具强调的方式避免符号堆叠；知识系统则把官方事实、学术观点、辅助网页与团队创作设定分开登记，使角色叙事能够保持亲切，同时不把世界观冒充历史事实。
+
+技术实现以限定知识库为边界，使用 FTS5 与文本向量形成混合检索，通过主题与实时性门控、引用白名单、数字日期一致性和独立语义复核决定回答是否成立。只有全部段落通过检查，服务端才签发一次性语音令牌。前端使用 SSE 呈现检索、生成、复核、拒答和错误状态，VRM 角色通过代码内简化待机与思考姿态、自然眨眼和音频振幅口型参与反馈。由此，形象、文字、引用和声音不再是相互独立的展示部件，而是围绕同一份已校验回答建立联系。
+
+百炼生产向量的固定 60 题评测为 40/40 库内 Top-6 命中、20/20 门控拒答；正式 API 连续问答 20/20 通过，2 轮真实语音请求及 30 项后端测试亦全部通过。VRM 浏览器加载、固定快照生成与 Momo 非实时 HTTP TTS 均已验证。这些结果证明当前语料、题集和配置下的工程主链可用，不证明模型对任意问题绝不幻觉，也不替代更大规模用户研究、长期运行测试与跨模型比较。
+
+本项目最终形成的不是一个追求无边界回答的通用助手，而是一种适用于文化展示的克制型虚拟主播方案：能够回答时给出可复查证据，不能回答时明确停下，语音只播报已经通过校验的文字。后续扩展到新的天津文化主题时，应继续遵循来源准入、人工审核、索引重建、边界评测和版本复核流程。
 
 \clearpage
 \printbibliography[heading=bibintoc,title={参考文献}]
